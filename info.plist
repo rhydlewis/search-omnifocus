@@ -23,7 +23,7 @@
 	<key>createdby</key>
 	<string>Rhyd Lewis</string>
 	<key>description</key>
-	<string></string>
+	<string>Search for OmniFocus tasks from Alfred</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -55,7 +55,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>keyword</key>
-				<string>search</string>
+				<string>so</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -68,8 +68,10 @@
 				<string>Searching...</string>
 				<key>script</key>
 				<string>python search.py "{query}"</string>
+				<key>subtext</key>
+				<string>Search OmniFocus for "{query}"</string>
 				<key>title</key>
-				<string>Search OmniFocus Tasks</string>
+				<string>Search OmniFocus</string>
 				<key>type</key>
 				<integer>0</integer>
 				<key>withspace</key>
