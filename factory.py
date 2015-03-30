@@ -10,13 +10,25 @@ ICON_COMPLETED = os.path.join(OF_ICON_ROOT, 'completed@2x.png')
 ICON_CONTEXT = os.path.join(OF_ICON_ROOT, 'quickopen-context@2x.png')
 ICON_INBOX = os.path.join(OF_ICON_ROOT, 'tab-inbox-selected@2x.png')
 
+PROJECT_ICONS = {'active': ICON_ACTIVE, 'done': ICON_COMPLETED, 'dropped': ICON_DROPPED, 'inactive': ICON_ON_HOLD}
+
+
+def create_project(raw_data):
+    pid = raw_data[0]
+    name = raw_data[1]
+    status = raw_data[2]
+    folder = raw_data[6]
+    icon = PROJECT_ICONS[status]
+
+    return Project(persistent_id=pid, name=name, status=status, icon=icon, folder=folder)
+
 
 def create_task(raw_data):
     pid = raw_data[0]
     completed = raw_data[2] == 1
     blocked = raw_data[3] == 1
-    name = raw_data[1]  # .encode('utf8', 'ignore')
-    project = raw_data[5]  # .encode('utf8', 'ignore')
+    name = raw_data[1]
+    project = raw_data[5]
     inbox = (raw_data[8] == 1 or raw_data[9] == 1)
 
     icon = ICON_ACTIVE
@@ -28,6 +40,14 @@ def create_task(raw_data):
 
     return Task(persistent_id=pid, name=name, is_complete=completed, is_blocked=blocked,
                 context=raw_data[4], project=project, in_inbox=inbox, icon=icon)
+
+
+class Project(object):
+    def __init__(self, **kwds):
+        self.__dict__.update(kwds)
+
+    def __repr__(self):
+        return "Project {0}, '{1}' [{2}]".format(self.persistent_id, self.name, self.status)
 
 
 class Task(object):
