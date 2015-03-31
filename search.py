@@ -28,30 +28,16 @@ def main(workflow):
         log.debug('Searching for tasks...')
         sql = queries.search_for_tasks(args)
 
-    results = run_query(sql)
-
-    if args.type == PROJECT:
-        handle_projects(results, workflow)
-    else:
-        handle_tasks(results, workflow)
+    for result in run_query(sql):
+        log.debug(result)
+        if args.type == PROJECT:
+            item = factory.create_project(result)
+        else:
+            item = factory.create_task(result)
+        log.debug(item)
+        workflow.add_item(title=item.name, subtitle=item.subtitle, icon=item.icon, arg=item.persistent_id, valid=True)
 
     wf.send_feedback()
-
-
-def handle_tasks(results, workflow):
-    for result in results:
-        log.debug(result)
-        t = factory.create_task(result)
-        log.debug(t)
-        workflow.add_item(title=t.name, subtitle=t.project, icon=t.icon, arg=t.persistent_id, valid=True)
-
-
-def handle_projects(results, workflow):
-    for result in results:
-        log.debug(result)
-        p = factory.create_project(result)
-        log.debug(p)
-        workflow.add_item(title=p.name, subtitle=p.folder, icon=p.icon, arg=p.persistent_id, valid=True)
 
 
 def parse_args():

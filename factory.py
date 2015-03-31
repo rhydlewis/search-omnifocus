@@ -20,7 +20,7 @@ def create_project(raw_data):
     folder = raw_data[6]
     icon = PROJECT_ICONS[status]
 
-    return Project(persistent_id=pid, name=name, status=status, icon=icon, folder=folder)
+    return Project(persistent_id=pid, name=name, status=status, icon=icon, subtitle=folder)
 
 
 def create_task(raw_data):
@@ -39,7 +39,7 @@ def create_task(raw_data):
         icon = ICON_INBOX
 
     return Task(persistent_id=pid, name=name, is_complete=completed, is_blocked=blocked,
-                context=raw_data[4], project=project, in_inbox=inbox, icon=icon)
+                context=raw_data[4], subtitle=project, in_inbox=inbox, icon=icon)
 
 
 class Project(object):
@@ -56,4 +56,4 @@ class Task(object):
 
     def __repr__(self):
         return "Task {0}, '{1}' (@{2}) in project '{3}' [{4}]".format(self.persistent_id, self.name, self.context,
-                                                                      self.project, self.is_blocked)
+                                                                      self.subtitle, self.is_blocked)

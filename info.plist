@@ -34,7 +34,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>3597AA64-3F41-4E83-A833-AE8F13F1B072</string>
+				<string>D43529C9-5BC5-4DCA-A1F7-9EB2E48F2E68</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -114,40 +114,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>plusspaces</key>
-				<false/>
-				<key>url</key>
-				<string>omnifocus:///task/{query}</string>
-				<key>utf8</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>D43529C9-5BC5-4DCA-A1F7-9EB2E48F2E68</string>
-			<key>version</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>plusspaces</key>
-				<false/>
-				<key>url</key>
-				<string>omnifocus:///project/{query}</string>
-				<key>utf8</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>3597AA64-3F41-4E83-A833-AE8F13F1B072</string>
-			<key>version</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>escaping</key>
@@ -179,6 +145,23 @@
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>461FFE94-0E33-42ED-8022-74FB582C3AA7</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>plusspaces</key>
+				<false/>
+				<key>url</key>
+				<string>omnifocus:///task/{query}</string>
+				<key>utf8</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>D43529C9-5BC5-4DCA-A1F7-9EB2E48F2E68</string>
 			<key>version</key>
 			<integer>0</integer>
 		</dict>
@@ -298,11 +281,6 @@
 	<string></string>
 	<key>uidata</key>
 	<dict>
-		<key>3597AA64-3F41-4E83-A833-AE8F13F1B072</key>
-		<dict>
-			<key>ypos</key>
-			<real>130</real>
-		</dict>
 		<key>461FFE94-0E33-42ED-8022-74FB582C3AA7</key>
 		<dict>
 			<key>ypos</key>
@@ -321,7 +299,7 @@
 		<key>D43529C9-5BC5-4DCA-A1F7-9EB2E48F2E68</key>
 		<dict>
 			<key>ypos</key>
-			<real>10</real>
+			<real>200</real>
 		</dict>
 		<key>DB73AB05-13C5-4ECC-B7BE-EEBF0E5A834F</key>
 		<dict>
