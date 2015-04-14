@@ -74,6 +74,7 @@ def run_query(sql):
     c.execute(sql)
     results = c.fetchall()
     log.debug("Found {0} results".format(len(results)))
+    c.close()
     return results
 
 
