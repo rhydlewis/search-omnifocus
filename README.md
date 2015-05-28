@@ -11,3 +11,41 @@ Well, I want it because I can't quickly search for, say, a task within OmniFocus
 ## How to install
 
 [Download the `.workflow` file from the Releases page](https://github.com/rhydlewis/search-omnifocus/releases/).
+
+## How to use
+
+### Searching for tasks
+
+Show Alfred then type:
+
+    .s <query>
+
+to search for tasks using <query> as the query string. For example, to search for tasks containing the word 'call', type:
+
+    .s call
+
+### Searching the inbox
+
+Show Alfred then type:
+
+    .i <query>
+
+to search for tasks within the OmniFocus inbox. To show all tasks within the Inbox, type:
+
+     .li
+
+### Narrowing results
+
+Show Alfred then type:
+
+    .sa <query>
+
+to search for *active* tasks only.
+
+### Searching for projects
+
+Show Alfred then type:
+
+    .p <query>
+
+
