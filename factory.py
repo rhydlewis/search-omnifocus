@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 
 OF_ICON_ROOT = '/Applications/OmniFocus.app/Contents/Resources'
 
@@ -19,7 +20,11 @@ def create_project(raw_data):
     name = raw_data[1]
     status = raw_data[2]
     folder = raw_data[6]
+    datetostart = raw_data[7]
     icon = PROJECT_ICONS[status]
+
+    if status == 'active' and is_deferred(datetostart):
+        icon = ICON_DEFERRED
 
     return Project(persistent_id=pid, name=name, status=status, icon=icon, subtitle=folder)
 
@@ -37,13 +42,23 @@ def create_task(raw_data):
 
     if blocked:
         icon = ICON_ON_HOLD
-    if datetostart is not None:
+    if is_deferred(datetostart):
         icon = ICON_DEFERRED
     if inbox:
         icon = ICON_INBOX
 
     return Task(persistent_id=pid, name=name, is_complete=completed, is_blocked=blocked,
                 context=raw_data[4], subtitle=project, in_inbox=inbox, icon=icon, datetostart=datetostart)
+
+
+def is_deferred(datetostart):
+    deferred = False
+    if datetostart is not None:
+        dts = datetime.fromtimestamp(datetostart + 978307200)
+        if dts > datetime.now():
+            deferred = True
+
+    return deferred
 
 
 class Project(object):
