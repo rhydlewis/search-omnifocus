@@ -20,7 +20,8 @@ def create_project(raw_data):
     name = raw_data[1]
     status = raw_data[2]
     folder = raw_data[6]
-    datetostart = raw_data[7]
+    datetostart = deferred_date(raw_data[7], raw_data[8])
+
     icon = PROJECT_ICONS[status]
 
     if status == 'active' and is_deferred(datetostart):
@@ -36,7 +37,7 @@ def create_task(raw_data):
     name = raw_data[1]
     project = raw_data[5]
     inbox = (raw_data[8] == 1 or raw_data[9] == 1)
-    datetostart = raw_data[7]
+    datetostart = deferred_date(raw_data[7], raw_data[10])
 
     icon = ICON_ACTIVE
 
@@ -49,6 +50,12 @@ def create_task(raw_data):
 
     return Task(persistent_id=pid, name=name, is_complete=completed, is_blocked=blocked,
                 context=raw_data[4], subtitle=project, in_inbox=inbox, icon=icon, datetostart=datetostart)
+
+def deferred_date(datetostart, effectivedatetostart):
+    d = effectivedatetostart
+    if d == 0:
+        d = datetostart
+    return d
 
 
 def is_deferred(datetostart):

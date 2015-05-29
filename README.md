@@ -16,36 +16,30 @@ Well, I want it because I can't quickly search for, say, a task within OmniFocus
 
 ### Searching for tasks
 
-Show Alfred then type:
+* Search for all tasks within OmniFocus (irrespective of status) with **.s**:
 
-    .s <query>
-
-to search for tasks using <query> as the query string. For example, to search for tasks containing the word 'call', type:
-
-    .s call
+![](search-for-tasks.png)
 
 ### Searching the inbox
 
-Show Alfred then type:
+* Search the OmniFocus inbox with **.i**:
 
-    .i <query>
+![](search-inbox.png)
 
-to search for tasks within the OmniFocus inbox. To show all tasks within the Inbox, type:
+* List everything in the Inbox with **.li**:
 
-     .li
+![](list-inbox-items.png)
 
 ### Narrowing results
 
-Show Alfred then type:
+* Search just for *active* tasks with **.sa**:
 
-    .sa <query>
-
-to search for *active* tasks only.
+![](search-for-active-tasks.png)
 
 ### Searching for projects
 
-Show Alfred then type:
+* Search for projects with **.p**:
 
-    .p <query>
+![](search-for-project.png)
 
 

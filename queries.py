@@ -1,6 +1,6 @@
 TASK_SELECT = ("t.persistentIdentifier, t.name, t.dateCompleted, "
                "t.blocked, c.name, p.name, t.flagged, t.dateToStart, "
-               "t.inInbox, t.effectiveInInbox ")
+               "t.inInbox, t.effectiveInInbox, t.effectiveDateToStart ")
 TASK_FROM = ("((task tt left join projectinfo pi on tt.containingprojectinfo=pi.pk) t left join "
              "task p on t.task=p.persistentIdentifier) left join "
              "context c on t.context = c.persistentIdentifier")
@@ -52,7 +52,7 @@ def all_inbox_tasks():
 
 def search_projects(query):
     stm_select = ("p.pk, t.name, p.status, p.numberOfAvailableTasks, "
-                  "p.numberOfRemainingTasks, p.containsSingletonActions, f.name, t.dateToStart")
+                  "p.numberOfRemainingTasks, p.containsSingletonActions, f.name, t.dateToStart, t.effectiveDateToStart")
     stm_from = ("(ProjectInfo p LEFT JOIN Task t ON p.task=t.persistentIdentifier) "
                 "LEFT JOIN Folder f ON p.folder=f.persistentIdentifier")
     # removed p.status = 'active' AND
