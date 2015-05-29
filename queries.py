@@ -52,7 +52,7 @@ def all_inbox_tasks():
 
 def search_projects(query):
     stm_select = ("p.pk, t.name, p.status, p.numberOfAvailableTasks, "
-                  "p.numberOfRemainingTasks, p.containsSingletonActions, f.name")
+                  "p.numberOfRemainingTasks, p.containsSingletonActions, f.name, t.dateToStart")
     stm_from = ("(ProjectInfo p LEFT JOIN Task t ON p.task=t.persistentIdentifier) "
                 "LEFT JOIN Folder f ON p.folder=f.persistentIdentifier")
     # removed p.status = 'active' AND
