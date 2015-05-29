@@ -1,5 +1,6 @@
 TASK_SELECT = ("t.persistentIdentifier, t.name, t.dateCompleted, "
-               "t.blocked, c.name, p.name, t.flagged, t.dateToStart, t.inInbox, t.effectiveInInbox ")
+               "t.blocked, c.name, p.name, t.flagged, t.dateToStart, "
+               "t.inInbox, t.effectiveInInbox ")
 TASK_FROM = ("((task tt left join projectinfo pi on tt.containingprojectinfo=pi.pk) t left join "
              "task p on t.task=p.persistentIdentifier) left join "
              "context c on t.context = c.persistentIdentifier")
