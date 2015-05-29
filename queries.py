@@ -25,7 +25,8 @@ def search_for_projects(args):
 def search_all_tasks(active_only, query):
     # Hat tip to markokaestner for this SQL... https://github.com/markokaestner/of-task-actions
 
-    stm_where = ("t.childrenCountAvailable = 0 AND t.blockedByFutureStartDate = 0 AND "
+    # stm_where = ("t.childrenCountAvailable = 0 AND t.blockedByFutureStartDate = 0 AND "
+    stm_where = ("t.childrenCountAvailable = 0 AND "
                  "(t.effectiveInInbox = 0 AND t.inInbox = 0) AND "
                  "t.dateCompleted IS NULL AND ")
     stm_where = (stm_where + TASK_NAME_WHERE).format(query)
