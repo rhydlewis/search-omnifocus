@@ -278,7 +278,38 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string></string>
+	<string># Search OmniFocus Alfred Workflow
+
+## What is this?
+
+This is a workflow for [Alfred 2](http://www.alfredapp.com/) that performs free text searches on [OmniFocus](http://www.omnigroup.com/omnifocus) data.
+
+## Why would I want such a thing?
+
+Well, I want it because I can't quickly search for, say, a task within OmniFocus using OmniFocus' search field. OmniFocus restricts search results to the current perspective or selection. [Other people have noticed this too](https://discourse.omnigroup.com/t/how-to-search-all-content-a-via-changed-perspective/366).
+
+## How to install
+
+[Download the `.workflow` file from the Releases page](https://github.com/rhydlewis/search-omnifocus/releases/).
+
+## How to use
+
+### Searching for tasks
+
+* Search for all tasks within OmniFocus (irrespective of status) with .s.
+
+### Searching the inbox
+
+* Search the OmniFocus inbox with .i
+* List everything in the Inbox with .li
+
+### Narrowing results
+
+* Search just for *active* tasks with .sa
+
+### Searching for projects
+
+* Search for projects with .p</string>
 	<key>uidata</key>
 	<dict>
 		<key>461FFE94-0E33-42ED-8022-74FB582C3AA7</key>
