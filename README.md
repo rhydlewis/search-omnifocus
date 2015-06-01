@@ -42,4 +42,9 @@ Well, I want it because I can't quickly search for, say, a task within OmniFocus
 
 ![](search-for-project.png)
 
+## Thanks to...
+
+* [Dean Jackson](https://github.com/deanishe): the [Python library for Alfred workflows](https://github.com/deanishe/alfred-workflow) does most of the heavy lifting. Excellent stuff, thank you.
+* [Marko Kaestner](https://github.com/markokaestner): I used the [in-depth workflow](https://github.com/markokaestner/of-task-actions) to provide some insight into how to search Omnifocus.
+
 
