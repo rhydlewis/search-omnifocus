@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 import sqlite3
 import sys
 import re
@@ -16,9 +18,8 @@ CONTEXT = "c"
 log = None
 
 
-def main(workflow):
+def main(wf):
     log.debug('Started workflow')
-
     args = parse_args()
 
     if args.type == PROJECT:
@@ -35,13 +36,12 @@ def main(workflow):
         else:
             item = factory.create_task(result)
         log.debug(item)
-        workflow.add_item(title=item.name, subtitle=item.subtitle, icon=item.icon, arg=item.persistent_id, valid=True)
+        wf.add_item(title=item.name, subtitle=item.subtitle, icon=item.icon, arg=item.persistent_id, valid=True)
 
     wf.send_feedback()
 
 
 def parse_args():
-
     # python search.py -t <task|project|context> -a Active tasks -i Inbox only
     parser = argparse.ArgumentParser(description="Search OmniFocus")
     # add query type parameter?
@@ -49,10 +49,10 @@ def parse_args():
     parser.add_argument('-a', '--active-only', action='store_true', help='search for active tasks only')
     parser.add_argument('-t', '--type', default=TASK, choices=[TASK, PROJECT], type=str,
                         help='What to search for ((t)ask, (p)roject or (c)ontext)?')
-    parser.add_argument('query', type=str, nargs=argparse.REMAINDER, help='query string')
+    parser.add_argument('query', type=unicode, nargs=argparse.REMAINDER, help='query string')
+
     log.debug(wf.args)
     args = parser.parse_args(wf.args)
-    log.debug(args)
     return args
 
 
@@ -78,7 +78,7 @@ def run_query(sql):
     return results
 
 
-if __name__ == u"__main__":
+if __name__ == '__main__':
     wf = Workflow()
     log = wf.logger
     sys.exit(wf.run(main))
