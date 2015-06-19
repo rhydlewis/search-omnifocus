@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 TASK_SELECT = ("t.persistentIdentifier, t.name, t.dateCompleted, "
                "t.blocked, c.name, p.name, t.flagged, t.dateToStart, "
                "t.inInbox, t.effectiveInInbox, t.effectiveDateToStart ")
@@ -8,13 +10,13 @@ TASK_NAME_WHERE = "lower(t.name) LIKE lower('%{0}%')"
 
 
 def search_for_tasks(args):
-    query = args.query
+    query = args.query[0]
     if len(query) == 0 and args.inbox_only:
         sql = all_inbox_tasks()
     elif args.inbox_only:
-        sql = search_inbox_tasks(query[0])
+        sql = search_inbox_tasks(query)
     else:
-        sql = search_all_tasks(args.active_only, query[0])
+        sql = search_all_tasks(args.active_only, query)
 
     return sql
 
