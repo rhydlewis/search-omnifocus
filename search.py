@@ -58,7 +58,7 @@ def parse_args():
 
 def find_omnifocus():
     home = os.path.expanduser("~")
-    location = "{0}/{1}".format(home, DB_LOCATION)
+    location = "{0}{1}".format(home, DB_LOCATION)
     if not os.path.isfile(location):
         location = re.sub(".OmniFocus2", ".OmniFocus2.MacAppStore", location)
 
