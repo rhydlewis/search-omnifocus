@@ -10,13 +10,13 @@ TASK_NAME_WHERE = "lower(t.name) LIKE lower('%{0}%')"
 
 
 def search_for_tasks(args):
-    query = args.query[0]
+    query = args.query
     if len(query) == 0 and args.inbox_only:
         sql = all_inbox_tasks()
     elif args.inbox_only:
-        sql = search_inbox_tasks(query)
+        sql = search_inbox_tasks(query[0])
     else:
-        sql = search_all_tasks(args.active_only, query)
+        sql = search_all_tasks(args.active_only, query[0])
 
     return sql
 
