@@ -8,18 +8,18 @@
 	<string>Productivity</string>
 	<key>connections</key>
 	<dict>
-		<key>461FFE94-0E33-42ED-8022-74FB582C3AA7</key>
+		<key>3D1CF477-C3FF-47F8-8C13-0BA23A2351A3</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>293EC668-41EA-4870-AFE2-202ECA102983</string>
+				<string>CBD7D965-D889-4B5D-BE22-D38DF994C945</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
 				<string></string>
 			</dict>
 		</array>
-		<key>8B5358DD-6001-425C-8C2C-0B5CD3B41ACD</key>
+		<key>461FFE94-0E33-42ED-8022-74FB582C3AA7</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
@@ -34,7 +34,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>D43529C9-5BC5-4DCA-A1F7-9EB2E48F2E68</string>
+				<string>CBD7D965-D889-4B5D-BE22-D38DF994C945</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -46,6 +46,17 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>D43529C9-5BC5-4DCA-A1F7-9EB2E48F2E68</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+		<key>E339EB8A-C004-45EA-B89C-B1DE6874103C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>3B55385B-7D73-4D79-9E5A-B8771A4312DD</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -210,7 +221,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>keyword</key>
-				<string>.i</string>
+				<string>.pa</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -222,11 +233,11 @@
 				<key>runningsubtext</key>
 				<string>Searching...</string>
 				<key>script</key>
-				<string>/usr/bin/python search.py -i "{query}"</string>
+				<string>/usr/bin/python search.py -t p -a "{query}"</string>
 				<key>subtext</key>
-				<string>Search OmniFocus Inbox for "{query}"</string>
+				<string>Search OmniFocus Projects for "{query}"</string>
 				<key>title</key>
-				<string>Search OmniFocus Inbox</string>
+				<string>Search OmniFocus for active Projects</string>
 				<key>type</key>
 				<integer>0</integer>
 				<key>withspace</key>
@@ -235,7 +246,78 @@
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>461FFE94-0E33-42ED-8022-74FB582C3AA7</string>
+			<string>3D1CF477-C3FF-47F8-8C13-0BA23A2351A3</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>plusspaces</key>
+				<false/>
+				<key>url</key>
+				<string>omnifocus:///task/{query}</string>
+				<key>utf8</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>CBD7D965-D889-4B5D-BE22-D38DF994C945</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>.c</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>1</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Searching...</string>
+				<key>script</key>
+				<string>/usr/bin/python search.py -t c "{query}"</string>
+				<key>subtext</key>
+				<string>Search OmniFocus Projects for "{query}"</string>
+				<key>title</key>
+				<string>Search OmniFocus for Contexts</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>E339EB8A-C004-45EA-B89C-B1DE6874103C</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>plusspaces</key>
+				<false/>
+				<key>url</key>
+				<string>omnifocus:///context/{query}</string>
+				<key>utf8</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>3B55385B-7D73-4D79-9E5A-B8771A4312DD</string>
 			<key>version</key>
 			<integer>0</integer>
 		</dict>
@@ -260,36 +342,36 @@
 			<key>config</key>
 			<dict>
 				<key>argumenttype</key>
-				<integer>2</integer>
+				<integer>0</integer>
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>keyword</key>
-				<string>.li</string>
+				<string>.i</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
 				<false/>
 				<key>queuedelaymode</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>queuemode</key>
 				<integer>1</integer>
 				<key>runningsubtext</key>
 				<string>Searching...</string>
 				<key>script</key>
-				<string>/usr/bin/python search.py -i</string>
+				<string>/usr/bin/python search.py -t i "{query}"</string>
 				<key>subtext</key>
-				<string>Show tasks in OmniFocus Inbox</string>
+				<string>Search OmniFocus Inbox for "{query}"</string>
 				<key>title</key>
-				<string>Show tasks in OmniFocus Inbox</string>
+				<string>Search OmniFocus Inbox</string>
 				<key>type</key>
 				<integer>0</integer>
 				<key>withspace</key>
-				<false/>
+				<true/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>8B5358DD-6001-425C-8C2C-0B5CD3B41ACD</string>
+			<string>461FFE94-0E33-42ED-8022-74FB582C3AA7</string>
 			<key>version</key>
 			<integer>0</integer>
 		</dict>
@@ -332,14 +414,24 @@ Well, I want it because I can't quickly search for, say, a task within OmniFocus
 		<key>293EC668-41EA-4870-AFE2-202ECA102983</key>
 		<dict>
 			<key>ypos</key>
-			<real>410</real>
+			<real>770</real>
+		</dict>
+		<key>3B55385B-7D73-4D79-9E5A-B8771A4312DD</key>
+		<dict>
+			<key>ypos</key>
+			<real>650</real>
+		</dict>
+		<key>3D1CF477-C3FF-47F8-8C13-0BA23A2351A3</key>
+		<dict>
+			<key>ypos</key>
+			<real>420</real>
 		</dict>
 		<key>461FFE94-0E33-42ED-8022-74FB582C3AA7</key>
 		<dict>
 			<key>ypos</key>
-			<real>360</real>
+			<real>770</real>
 		</dict>
-		<key>8B5358DD-6001-425C-8C2C-0B5CD3B41ACD</key>
+		<key>CBD7D965-D889-4B5D-BE22-D38DF994C945</key>
 		<dict>
 			<key>ypos</key>
 			<real>460</real>
@@ -347,7 +439,7 @@ Well, I want it because I can't quickly search for, say, a task within OmniFocus
 		<key>D109C0DE-4460-44B6-B8BF-488C51BE8823</key>
 		<dict>
 			<key>ypos</key>
-			<real>210</real>
+			<real>300</real>
 		</dict>
 		<key>D43529C9-5BC5-4DCA-A1F7-9EB2E48F2E68</key>
 		<dict>
@@ -358,6 +450,11 @@ Well, I want it because I can't quickly search for, say, a task within OmniFocus
 		<dict>
 			<key>ypos</key>
 			<real>110</real>
+		</dict>
+		<key>E339EB8A-C004-45EA-B89C-B1DE6874103C</key>
+		<dict>
+			<key>ypos</key>
+			<real>650</real>
 		</dict>
 		<key>F8E62EE2-D96A-4A26-8E39-EBBEFCE2DF97</key>
 		<dict>

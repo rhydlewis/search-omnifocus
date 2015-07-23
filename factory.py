@@ -14,6 +14,7 @@ ICON_INBOX = os.path.join(OF_ICON_ROOT, 'tab-inbox-selected@2x.png')
 ICON_DEFERRED = os.path.join('.', 'deferred.png')
 
 PROJECT_ICONS = {'active': ICON_ACTIVE, 'done': ICON_COMPLETED, 'dropped': ICON_DROPPED, 'inactive': ICON_ON_HOLD}
+CONTEXT_ICONS = {1: ICON_ACTIVE, 0: ICON_ON_HOLD}
 
 
 def create_project(raw_data):
@@ -52,6 +53,22 @@ def create_task(raw_data):
     return Task(persistent_id=pid, name=name, is_complete=completed, is_blocked=blocked,
                 context=raw_data[4], subtitle=project, in_inbox=inbox, icon=icon, datetostart=datetostart)
 
+
+def create_context(raw_data):
+    pid = raw_data[0]
+    name = raw_data[1]
+    allows_next_action = raw_data[2]
+    available_tasks = raw_data[4]
+    if available_tasks == 1:
+        subtitle = "1 task available"
+    else:
+        subtitle = "{0} tasks available".format(available_tasks)
+
+    icon = CONTEXT_ICONS[allows_next_action]
+
+    return Context(persistent_id=pid, name=name, status=allows_next_action, icon=icon, subtitle=subtitle)
+
+
 def deferred_date(datetostart, effectivedatetostart):
     d = effectivedatetostart
     if d == 0:
@@ -75,6 +92,14 @@ class Project(object):
 
     def __repr__(self):
         return "Project {0}, '{1}' [{2}]".format(self.persistent_id, self.name, self.status)
+
+
+class Context(object):
+    def __init__(self, **kwds):
+        self.__dict__.update(kwds)
+
+    def __repr__(self):
+        return "Context {0}, '{1}' [{2}]".format(self.persistent_id, self.name, self.status)
 
 
 class Task(object):
