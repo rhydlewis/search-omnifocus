@@ -13,6 +13,7 @@ import queries
 DB_LOCATION = ("/Library/Containers/com.omnigroup.OmniFocus2/"
                "Data/Library/Caches/com.omnigroup.OmniFocus2/OmniFocusDatabase2")
 TASK = "t"
+INBOX = "i"
 PROJECT = "p"
 CONTEXT = "c"
 log = None
@@ -21,34 +22,47 @@ log = None
 def main(wf):
     log.debug('Started workflow')
     args = parse_args()
+    sql = populate_query(args)
+    get_results(sql, args.type)
+    wf.send_feedback()
 
-    if args.type == PROJECT:
-        log.debug('Searching for projects...')
-        sql = queries.search_for_projects(args)
-    else:
-        log.debug('Searching for tasks...')
-        sql = queries.search_for_tasks(args)
 
+def get_results(sql, type):
     for result in run_query(sql):
         log.debug(result)
-        if args.type == PROJECT:
+        if type == PROJECT:
             item = factory.create_project(result)
+        elif type == CONTEXT:
+            item = factory.create_context(result)
         else:
             item = factory.create_task(result)
         log.debug(item)
         wf.add_item(title=item.name, subtitle=item.subtitle, icon=item.icon, arg=item.persistent_id, valid=True)
 
-    wf.send_feedback()
+
+def populate_query(args):
+    query = args.query[0]
+    active_only = args.active_only
+    if args.type == PROJECT:
+        log.debug('Searching projects')
+        sql = queries.search_projects(active_only, query)
+    elif args.type == CONTEXT:
+        log.debug('Searching contexts')
+        sql = queries.search_contexts(query)
+    elif args.type == INBOX:
+        log.debug('Searching inbox')
+        sql = queries.search_inbox(query)
+    else:
+        log.debug('Searching tasks')
+        sql = queries.search_tasks(active_only, query)
+    return sql
 
 
 def parse_args():
-    # python search.py -t <task|project|context> -a Active tasks -i Inbox only
     parser = argparse.ArgumentParser(description="Search OmniFocus")
-    # add query type parameter?
-    parser.add_argument('-i', '--inbox-only', action='store_true', help='search OmniFocus inbox only')
     parser.add_argument('-a', '--active-only', action='store_true', help='search for active tasks only')
-    parser.add_argument('-t', '--type', default=TASK, choices=[TASK, PROJECT], type=str,
-                        help='What to search for ((t)ask, (p)roject or (c)ontext)?')
+    parser.add_argument('-t', '--type', default=TASK, choices=[INBOX, TASK, PROJECT, CONTEXT], type=str,
+                        help='What to search for: (b)oth tasks and projects, (t)ask, (p)roject or (c)ontext?')
     parser.add_argument('query', type=unicode, nargs=argparse.REMAINDER, help='query string')
 
     log.debug(wf.args)
