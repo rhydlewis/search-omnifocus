@@ -30,6 +30,17 @@
 				<string></string>
 			</dict>
 		</array>
+		<key>66F43344-5EFC-4FAA-8B8A-7EEEE055565D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>3B55385B-7D73-4D79-9E5A-B8771A4312DD</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
 		<key>D109C0DE-4460-44B6-B8BF-488C51BE8823</key>
 		<array>
 			<dict>
@@ -271,6 +282,58 @@
 			<key>config</key>
 			<dict>
 				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>.lc</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>1</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Searching...</string>
+				<key>script</key>
+				<string>/usr/bin/python search.py -t c</string>
+				<key>title</key>
+				<string>List all OmniFocus Contexts</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>66F43344-5EFC-4FAA-8B8A-7EEEE055565D</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>plusspaces</key>
+				<false/>
+				<key>url</key>
+				<string>omnifocus:///context/{query}</string>
+				<key>utf8</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>3B55385B-7D73-4D79-9E5A-B8771A4312DD</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>escaping</key>
 				<integer>102</integer>
@@ -301,40 +364,6 @@
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>E339EB8A-C004-45EA-B89C-B1DE6874103C</string>
-			<key>version</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>plusspaces</key>
-				<false/>
-				<key>url</key>
-				<string>omnifocus:///context/{query}</string>
-				<key>utf8</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>3B55385B-7D73-4D79-9E5A-B8771A4312DD</string>
-			<key>version</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>plusspaces</key>
-				<false/>
-				<key>url</key>
-				<string>omnifocus:///perspective/Inbox</string>
-				<key>utf8</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>293EC668-41EA-4870-AFE2-202ECA102983</string>
 			<key>version</key>
 			<integer>0</integer>
 		</dict>
@@ -372,6 +401,23 @@
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>461FFE94-0E33-42ED-8022-74FB582C3AA7</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>plusspaces</key>
+				<false/>
+				<key>url</key>
+				<string>omnifocus:///perspective/Inbox</string>
+				<key>utf8</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>293EC668-41EA-4870-AFE2-202ECA102983</string>
 			<key>version</key>
 			<integer>0</integer>
 		</dict>
@@ -430,6 +476,11 @@ Well, I want it because I can't quickly search for, say, a task within OmniFocus
 		<dict>
 			<key>ypos</key>
 			<real>770</real>
+		</dict>
+		<key>66F43344-5EFC-4FAA-8B8A-7EEEE055565D</key>
+		<dict>
+			<key>ypos</key>
+			<real>540</real>
 		</dict>
 		<key>CBD7D965-D889-4B5D-BE22-D38DF994C945</key>
 		<dict>

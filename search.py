@@ -41,7 +41,9 @@ def get_results(sql, type):
 
 
 def populate_query(args):
-    query = args.query[0]
+    query = None
+    if args.query:
+        query = args.query[0]
     active_only = args.active_only
     if args.type == PROJECT:
         log.debug('Searching projects')

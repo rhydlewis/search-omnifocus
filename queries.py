@@ -8,7 +8,7 @@ TASK_FROM = ("((task tt left join projectinfo pi on tt.containingprojectinfo=pi.
              "context c on t.context = c.persistentIdentifier")
 TASK_NAME_WHERE = "lower(t.name) LIKE lower('%{0}%')"
 ACTIVE_CLAUSE = "t.blocked = 0 AND "
-
+CTX_SELECT = "persistentIdentifier, name, allowsNextAction, active, availableTaskCount"
 
 def search_tasks(active_only, query):
     stm_where = ("t.childrenCountAvailable = 0 AND "
@@ -47,7 +47,12 @@ def search_projects(active_only, query):
 def search_contexts(query):
     stm_select = "persistentIdentifier, name, allowsNextAction, active, availableTaskCount"
     stm_from = "Context"
-    stm_where = "active = 1 AND lower(name) LIKE lower('%{0}%')".format(query)
+    if query:
+        stm_where = " AND lower(name) LIKE lower('%{0}%')".format(query)
+    else:
+        stm_where = ''
     stm_order = "name ASC"
 
-    return "SELECT {0} FROM {1} WHERE {2} ORDER BY {3}".format(stm_select, stm_from, stm_where, stm_order)
+    return "SELECT {0} FROM {1} WHERE active = 1 {2} ORDER BY {3}".format(stm_select, stm_from, stm_where, stm_order)
+
+

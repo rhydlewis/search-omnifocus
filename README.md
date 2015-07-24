@@ -26,9 +26,21 @@ Well, I want it because I can't quickly search for, say, a task within OmniFocus
 
 ![](search-inbox.png)
 
-* List everything in the Inbox with **.li**:
+### Searching for projects
 
-![](list-inbox-items.png)
+* Search for projects with **.p**:
+
+![](search-for-project.png)
+
+### Searching for contexts
+
+* Search just for a specific context with **.c**:
+
+![](search-for-context.png)
+
+or just list all contexts with **.lc**:
+
+![](list-contexts.png)
 
 ### Narrowing results
 
@@ -36,11 +48,9 @@ Well, I want it because I can't quickly search for, say, a task within OmniFocus
 
 ![](search-for-active-tasks.png)
 
-### Searching for projects
+or just for *active* projects with **.pa**:
 
-* Search for projects with **.p**:
-
-![](search-for-project.png)
+![](search-for-active-projects.png)
 
 ## Thanks to...
 
