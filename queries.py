@@ -19,9 +19,10 @@ def search_tasks(active_only, query):
     stm_ignore_projects = "t.containingProjectInfo <> t.persistentIdentifier"
 
     if active_only:
-        stm_where = ("t.blocked = 0 AND " + stm_where)
+        stm_where = ("t.blockedByFutureStartDate = 0 AND " + stm_where)
 
-    return "SELECT {0} FROM {1} WHERE {2} AND {3}".format(TASK_SELECT, TASK_FROM, stm_where, stm_ignore_projects)
+    return "SELECT {0} FROM {1} WHERE {2} AND {3}".format(TASK_SELECT, TASK_FROM, stm_where,
+                                                          stm_ignore_projects)
 
 
 def search_inbox(query):
@@ -42,7 +43,8 @@ def search_projects(active_only, query):
     if active_only:
         stm_where = ("p.status = 'active' AND " + stm_where)
 
-    return "SELECT {0} FROM {1} WHERE {2} ORDER BY {3}".format(stm_select, stm_from, stm_where, stm_order)
+    return "SELECT {0} FROM {1} WHERE {2} ORDER BY {3}".format(stm_select, stm_from, stm_where,
+                                                               stm_order)
 
 
 def search_contexts(query):
@@ -54,6 +56,7 @@ def search_contexts(query):
         stm_where = ''
     stm_order = "name ASC"
 
-    return "SELECT {0} FROM {1} WHERE active = 1 {2} ORDER BY {3}".format(stm_select, stm_from, stm_where, stm_order)
+    return "SELECT {0} FROM {1} WHERE active = 1 {2} ORDER BY {3}".format(stm_select, stm_from,
+                                                                          stm_where, stm_order)
 
 
