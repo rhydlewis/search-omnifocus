@@ -1,8 +1,8 @@
 from __future__ import unicode_literals
 
 TASK_SELECT = ("t.persistentIdentifier, t.name, t.dateCompleted, "
-               "t.blocked, c.name, p.name, t.flagged, t.dateToStart, "
-               "t.inInbox, t.effectiveInInbox, t.effectiveDateToStart ")
+               "t.blockedByFutureStartDate, c.name, p.name, t.flagged, t.dateToStart, "
+               "t.inInbox, t.effectiveInInbox, t.effectiveDateToStart, t.childrenCountAvailable ")
 TASK_FROM = ("((task tt left join projectinfo pi on tt.containingprojectinfo=pi.pk) t left join "
              "task p on t.task=p.persistentIdentifier) left join "
              "context c on t.context = c.persistentIdentifier")
@@ -10,9 +10,10 @@ TASK_NAME_WHERE = "lower(t.name) LIKE lower('%{0}%')"
 ACTIVE_CLAUSE = "t.blocked = 0 AND "
 CTX_SELECT = "persistentIdentifier, name, allowsNextAction, active, availableTaskCount"
 
+
 def search_tasks(active_only, query):
-    stm_where = ("t.childrenCountAvailable = 0 AND "
-                 "(t.effectiveInInbox = 0 AND t.inInbox = 0) AND "
+    # stm_where = ("t.childrenCountAvailable = 0 AND "
+    stm_where = ("(t.effectiveInInbox = 0 AND t.inInbox = 0) AND "
                  "t.dateCompleted IS NULL AND ")
     stm_where = (stm_where + TASK_NAME_WHERE).format(query)
     stm_ignore_projects = "t.containingProjectInfo <> t.persistentIdentifier"
@@ -31,8 +32,8 @@ def search_inbox(query):
 
 
 def search_projects(active_only, query):
-    stm_select = ("p.pk, t.name, p.status, p.numberOfAvailableTasks, "
-                  "p.numberOfRemainingTasks, p.containsSingletonActions, f.name, t.dateToStart, t.effectiveDateToStart")
+    stm_select = ("p.pk, t.name, p.status, p.numberOfAvailableTasks, p.numberOfRemainingTasks, "
+                  "p.containsSingletonActions, f.name, t.dateToStart, t.effectiveDateToStart")
     stm_from = ("(ProjectInfo p LEFT JOIN Task t ON p.task=t.persistentIdentifier) "
                 "LEFT JOIN Folder f ON p.folder=f.persistentIdentifier")
     stm_where = "lower(t.name) LIKE lower('%{0}%')".format(query)
