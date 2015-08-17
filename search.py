@@ -6,7 +6,7 @@ import re
 import os
 import argparse
 
-from workflow import Workflow
+from workflow import Workflow, ICON_WARNING
 import factory
 import queries
 
@@ -28,16 +28,21 @@ def main(wf):
 
 
 def get_results(sql, type):
-    for result in run_query(sql):
-        log.debug(result)
-        if type == PROJECT:
-            item = factory.create_project(result)
-        elif type == CONTEXT:
-            item = factory.create_context(result)
-        else:
-            item = factory.create_task(result)
-        log.debug(item)
-        wf.add_item(title=item.name, subtitle=item.subtitle, icon=item.icon, arg=item.persistent_id, valid=True)
+    results = run_query(sql)
+
+    if not results:
+        wf.add_item('No items', icon=ICON_WARNING)
+    else:
+        for result in results:
+            log.debug(result)
+            if type == PROJECT:
+                item = factory.create_project(result)
+            elif type == CONTEXT:
+                item = factory.create_context(result)
+            else:
+                item = factory.create_task(result)
+            log.debug(item)
+            wf.add_item(title=item.name, subtitle=item.subtitle, icon=item.icon, arg=item.persistent_id, valid=True)
 
 
 def populate_query(args):
