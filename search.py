@@ -18,6 +18,9 @@ PROJECT = "p"
 CONTEXT = "c"
 log = None
 
+SINGLE_QUOTE = "'"
+ESC_SINGLE_QUOTE = "''"
+
 
 def main(wf):
     log.debug('Started workflow')
@@ -49,6 +52,10 @@ def populate_query(args):
     query = None
     if args.query:
         query = args.query[0]
+
+        if SINGLE_QUOTE in query:
+            query = re.sub(SINGLE_QUOTE, ESC_SINGLE_QUOTE, query)
+
     active_only = args.active_only
     if args.type == PROJECT:
         log.debug('Searching projects')
