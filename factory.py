@@ -13,7 +13,13 @@ ICON_CONTEXT = os.path.join(OF_ICON_ROOT, 'quickopen-context@2x.png')
 ICON_INBOX = os.path.join(OF_ICON_ROOT, 'tab-inbox-selected@2x.png')
 ICON_DEFERRED = os.path.join('.', 'deferred.png')
 
-PROJECT_ICONS = {'active': ICON_ACTIVE, 'done': ICON_COMPLETED, 'dropped': ICON_DROPPED, 'inactive': ICON_ON_HOLD}
+ACTIVE = 'active'
+DONE = 'done'
+DROPPED = 'dropped'
+INACTIVE = 'inactive'
+
+PROJECT_ICONS = {ACTIVE: ICON_ACTIVE, DONE: ICON_COMPLETED, DROPPED: ICON_DROPPED,
+                 INACTIVE: ICON_ON_HOLD}
 CONTEXT_ICONS = {1: ICON_ACTIVE, 0: ICON_ON_HOLD}
 
 
@@ -35,15 +41,19 @@ def create_project(raw_data):
 def create_task(raw_data):
     pid = raw_data[0]
     completed = raw_data[2] == 1
-    blocked = raw_data[3] == 1
+    blocked_by_future_date = raw_data[3] == 1
     name = raw_data[1]
     project = raw_data[5]
     inbox = (raw_data[8] == 1 or raw_data[9] == 1)
     datetostart = deferred_date(raw_data[7], raw_data[10])
 
+    blocked = raw_data[11] == 1
+    children = raw_data[12]
+    parent_status = raw_data[13]
+
     icon = ICON_ACTIVE
 
-    if blocked:
+    if blocked_by_future_date or (blocked and not children) or parent_status != ACTIVE:
         icon = ICON_ON_HOLD
     if is_deferred(datetostart):
         icon = ICON_DEFERRED
@@ -51,7 +61,8 @@ def create_task(raw_data):
         icon = ICON_INBOX
 
     return Task(persistent_id=pid, name=name, is_complete=completed, is_blocked=blocked,
-                context=raw_data[4], subtitle=project, in_inbox=inbox, icon=icon, datetostart=datetostart)
+                context=raw_data[4], subtitle=project, in_inbox=inbox, icon=icon,
+                datetostart=datetostart)
 
 
 def create_context(raw_data):
@@ -66,7 +77,8 @@ def create_context(raw_data):
 
     icon = CONTEXT_ICONS[allows_next_action]
 
-    return Context(persistent_id=pid, name=name, status=allows_next_action, icon=icon, subtitle=subtitle)
+    return Context(persistent_id=pid, name=name, status=allows_next_action, icon=icon,
+                   subtitle=subtitle)
 
 
 def deferred_date(datetostart, effectivedatetostart):
@@ -107,5 +119,5 @@ class Task(object):
         self.__dict__.update(kwds)
 
     def __repr__(self):
-        return "Task {0}, '{1}' (@{2}) in project '{3}' [{4}]".format(self.persistent_id, self.name, self.context,
-                                                                      self.subtitle, self.is_blocked)
+        return "Task {0}, '{1}' (@{2}) in project '{3}' [{4}]".\
+            format(self.persistent_id, self.name, self.context, self.subtitle, self.is_blocked)

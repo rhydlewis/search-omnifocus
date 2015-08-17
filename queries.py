@@ -2,7 +2,8 @@ from __future__ import unicode_literals
 
 TASK_SELECT = ("t.persistentIdentifier, t.name, t.dateCompleted, "
                "t.blockedByFutureStartDate, c.name, p.name, t.flagged, t.dateToStart, "
-               "t.inInbox, t.effectiveInInbox, t.effectiveDateToStart, t.childrenCountAvailable ")
+               "t.inInbox, t.effectiveInInbox, t.effectiveDateToStart, t.childrenCountAvailable, "
+               "t.blocked, pi.status ")
 TASK_FROM = ("((task tt left join projectinfo pi on tt.containingprojectinfo=pi.pk) t left join "
              "task p on t.task=p.persistentIdentifier) left join "
              "context c on t.context = c.persistentIdentifier")
