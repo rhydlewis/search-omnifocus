@@ -9,6 +9,7 @@ import argparse
 from workflow import Workflow, ICON_WARNING
 import factory
 import queries
+import omnifocus
 
 DB_LOCATION = ("/Library/Containers/com.omnigroup.OmniFocus2/"
                "Data/Library/Caches/com.omnigroup.OmniFocus2/OmniFocusDatabase2")
@@ -16,6 +17,7 @@ TASK = "t"
 INBOX = "i"
 PROJECT = "p"
 CONTEXT = "c"
+PERSPECTIVE = "v"
 log = None
 
 SINGLE_QUOTE = "'"
@@ -25,8 +27,13 @@ ESC_SINGLE_QUOTE = "''"
 def main(wf):
     log.debug('Started workflow')
     args = parse_args()
-    sql = populate_query(args)
-    get_results(sql, args.type)
+
+    if args.type != PERSPECTIVE:
+        sql = populate_query(args)
+        get_results(sql, args.type)
+    else:
+        get_perspectives(args)
+
     wf.send_feedback()
 
 
@@ -45,7 +52,28 @@ def get_results(sql, type):
             else:
                 item = factory.create_task(result)
             log.debug(item)
-            wf.add_item(title=item.name, subtitle=item.subtitle, icon=item.icon, arg=item.persistent_id, valid=True)
+            wf.add_item(title=item.name, subtitle=item.subtitle, icon=item.icon,
+                        arg=item.persistent_id, valid=True)
+
+
+def get_perspectives(args):
+    if args.query:
+        query = args.query[0]
+        log.debug("Searching perspectives for '{0}'".format(query))
+        perspectives = omnifocus.search_perspectives(query)
+    else:
+        log.debug("Finding all perspectives")
+        perspectives = omnifocus.list_perspectives()
+
+    if not perspectives:
+        wf.add_item('No items', icon=ICON_WARNING)
+    else:
+        for perspective in perspectives:
+            log.debug(perspective)
+            item = factory.create_perspective(perspective)
+            log.debug(item)
+            wf.add_item(title=item.name, subtitle=item.subtitle, icon=item.icon, arg=item.name,
+                        valid=True)
 
 
 def populate_query(args):
@@ -74,9 +102,12 @@ def populate_query(args):
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Search OmniFocus")
-    parser.add_argument('-a', '--active-only', action='store_true', help='search for active tasks only')
-    parser.add_argument('-t', '--type', default=TASK, choices=[INBOX, TASK, PROJECT, CONTEXT], type=str,
-                        help='What to search for: (b)oth tasks and projects, (t)ask, (p)roject or (c)ontext?')
+    parser.add_argument('-a', '--active-only', action='store_true',
+                        help='search for active tasks only')
+    parser.add_argument('-t', '--type', default=TASK,
+                        choices=[INBOX, TASK, PROJECT, CONTEXT, PERSPECTIVE], type=str,
+                        help='What to search for: (b)oth tasks and projects, (t)ask, (p)roject, '
+                             '(c)ontext or perspecti(v)e?')
     parser.add_argument('query', type=unicode, nargs=argparse.REMAINDER, help='query string')
 
     log.debug(wf.args)

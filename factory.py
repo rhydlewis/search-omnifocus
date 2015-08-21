@@ -11,6 +11,7 @@ ICON_ACTIVE = os.path.join(OF_ICON_ROOT, 'active-small@2x.png')
 ICON_COMPLETED = os.path.join(OF_ICON_ROOT, 'completed@2x.png')
 ICON_CONTEXT = os.path.join(OF_ICON_ROOT, 'quickopen-context@2x.png')
 ICON_INBOX = os.path.join(OF_ICON_ROOT, 'tab-inbox-selected@2x.png')
+ICON_PERSPECTIVE = os.path.join(OF_ICON_ROOT, 'Perspectives@2x.png')
 ICON_DEFERRED = os.path.join('.', 'deferred.png')
 
 ACTIVE = 'active'
@@ -81,6 +82,10 @@ def create_context(raw_data):
                    subtitle=subtitle)
 
 
+def create_perspective(name):
+    return Perspective(name=name, icon=ICON_PERSPECTIVE, subtitle="Omnifocus Perspective")
+
+
 def deferred_date(datetostart, effectivedatetostart):
     d = effectivedatetostart
     if d == 0:
@@ -121,3 +126,10 @@ class Task(object):
     def __repr__(self):
         return "Task {0}, '{1}' (@{2}) in project '{3}' [{4}]".\
             format(self.persistent_id, self.name, self.context, self.subtitle, self.is_blocked)
+
+class Perspective(object):
+    def __init__(self, **kwds):
+        self.__dict__.update(kwds)
+
+    def __repr__(self):
+        return "Perspective {0}".format(self.name)
