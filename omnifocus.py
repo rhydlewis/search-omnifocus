@@ -1,39 +1,31 @@
-import applescript
-import objc
+import subprocess
 
-INBOX = u'Inbox'
-PROJECTS = u'Projects'
-CONTEXTS = u'Contexts'
-FORECAST = u'Forecast'
-FLAGGED = u'Flagged'
-REVIEW = u'Review'
+INBOX = 'Inbox'
+PROJECTS = 'Projects'
+CONTEXTS = 'Contexts'
+FORECAST = 'Forecast'
+FLAGGED = 'Flagged'
+REVIEW = 'Review'
+
+DEFAULT_PERSPECTIVES = [INBOX, PROJECTS, CONTEXTS, FORECAST, FLAGGED, REVIEW]
 
 PERSPECTIVE_SEARCH_SCRIPT = '''
-        on search_for_perspectives()
-            tell application "OmniFocus"
-                try
-                    return every perspective's name
-                end try
-            end tell
-        end run
+        tell application "OmniFocus"
+            try
+                return every perspective's name
+            end try
+        end tell
     '''
 
 
 def list_perspectives():
-    scpt = applescript.AppleScript(PERSPECTIVE_SEARCH_SCRIPT)
-    results = scpt.call('search_for_perspectives')
-    names = [INBOX, PROJECTS, CONTEXTS, FORECAST, FLAGGED, REVIEW]
-
-    for result in results:
-        if type(result) == objc.pyobjc_unicode:
-            names.append(result)
-
+    osa = subprocess.Popen(['osascript', '-'], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+    results = osa.communicate(PERSPECTIVE_SEARCH_SCRIPT)[0].split(', ')
+    results = [result.rstrip("\n") for result in results if result != "missing value"]
+    names = [INBOX, PROJECTS, CONTEXTS, FORECAST, FLAGGED, REVIEW] + results
     return names
 
 
 def search_perspectives(query):
-    results = []
-    for perspective in list_perspectives():
-        if query in perspective:
-            results.append(perspective)
-    return results
+    return [perspective for perspective in list_perspectives()
+            if query.lower() in perspective.lower()]

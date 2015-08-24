@@ -1,6 +1,41 @@
 from __future__ import unicode_literals
 import os
 from datetime import datetime
+from omnifocus import DEFAULT_PERSPECTIVES, INBOX, PROJECTS, CONTEXTS, FORECAST, FLAGGED, REVIEW
+
+
+class Project(object):
+    def __init__(self, **kwds):
+        self.__dict__.update(kwds)
+
+    def __repr__(self):
+        return "Project {0}, '{1}' [{2}]".format(self.persistent_id, self.name, self.status)
+
+
+class Context(object):
+    def __init__(self, **kwds):
+        self.__dict__.update(kwds)
+
+    def __repr__(self):
+        return "Context {0}, '{1}' [{2}]".format(self.persistent_id, self.name, self.status)
+
+
+class Task(object):
+    def __init__(self, **kwds):
+        self.__dict__.update(kwds)
+
+    def __repr__(self):
+        return "Task {0}, '{1}' (@{2}) in project '{3}' [{4}]".\
+            format(self.persistent_id, self.name, self.context, self.subtitle, self.is_blocked)
+
+
+class Perspective(object):
+    def __init__(self, **kwds):
+        self.__dict__.update(kwds)
+
+    def __repr__(self):
+        return "Perspective {0}".format(self.name)
+
 
 OF_ICON_ROOT = '/Applications/OmniFocus.app/Contents/Resources'
 
@@ -13,6 +48,19 @@ ICON_CONTEXT = os.path.join(OF_ICON_ROOT, 'quickopen-context@2x.png')
 ICON_INBOX = os.path.join(OF_ICON_ROOT, 'tab-inbox-selected@2x.png')
 ICON_PERSPECTIVE = os.path.join(OF_ICON_ROOT, 'Perspectives@2x.png')
 ICON_DEFERRED = os.path.join('.', 'deferred.png')
+
+ICON_PERSPECTIVE_INBOX = os.path.join(OF_ICON_ROOT, 'tab-inbox-selected@2x.png')
+ICON_PERSPECTIVE_PROJECTS = os.path.join(OF_ICON_ROOT, 'tab-projects-selected@2x.png')
+ICON_PERSPECTIVE_CONTEXTS = os.path.join(OF_ICON_ROOT, 'tab-contexts-selected@2x.png')
+ICON_PERSPECTIVE_FORECAST = os.path.join(OF_ICON_ROOT, 'tab-forecast-selected@2x.png')
+ICON_PERSPECTIVE_FLAGGED = os.path.join(OF_ICON_ROOT, 'tab-flagged-selected@2x.png')
+ICON_PERSPECTIVE_REVIEW = os.path.join(OF_ICON_ROOT, 'tab-review-selected@2x.png')
+
+DEFAULT_PERSPECTIVE_ICONS = [ICON_PERSPECTIVE_INBOX, ICON_PERSPECTIVE_PROJECTS,
+                             ICON_PERSPECTIVE_CONTEXTS, ICON_PERSPECTIVE_FORECAST,
+                             ICON_PERSPECTIVE_FLAGGED, ICON_PERSPECTIVE_REVIEW]
+
+ICON_LOOKUP = dict(zip(DEFAULT_PERSPECTIVES, DEFAULT_PERSPECTIVE_ICONS))
 
 ACTIVE = 'active'
 DONE = 'done'
@@ -83,7 +131,14 @@ def create_context(raw_data):
 
 
 def create_perspective(name):
-    return Perspective(name=name, icon=ICON_PERSPECTIVE, subtitle="Omnifocus Perspective")
+    icon = ICON_PERSPECTIVE
+    perspective_type = 'Custom'
+    if name in DEFAULT_PERSPECTIVES:
+        icon = ICON_LOOKUP[name]
+        perspective_type = 'Default'
+
+    return Perspective(name=name, icon=icon, subtitle="Omnifocus {0} Perspective".
+                       format(perspective_type))
 
 
 def deferred_date(datetostart, effectivedatetostart):
@@ -102,34 +157,3 @@ def is_deferred(datetostart):
 
     return deferred
 
-
-class Project(object):
-    def __init__(self, **kwds):
-        self.__dict__.update(kwds)
-
-    def __repr__(self):
-        return "Project {0}, '{1}' [{2}]".format(self.persistent_id, self.name, self.status)
-
-
-class Context(object):
-    def __init__(self, **kwds):
-        self.__dict__.update(kwds)
-
-    def __repr__(self):
-        return "Context {0}, '{1}' [{2}]".format(self.persistent_id, self.name, self.status)
-
-
-class Task(object):
-    def __init__(self, **kwds):
-        self.__dict__.update(kwds)
-
-    def __repr__(self):
-        return "Task {0}, '{1}' (@{2}) in project '{3}' [{4}]".\
-            format(self.persistent_id, self.name, self.context, self.subtitle, self.is_blocked)
-
-class Perspective(object):
-    def __init__(self, **kwds):
-        self.__dict__.update(kwds)
-
-    def __repr__(self):
-        return "Perspective {0}".format(self.name)
