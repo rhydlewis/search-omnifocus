@@ -34,13 +34,23 @@ Well, I want it because I can't quickly search for, say, a task within OmniFocus
 
 ### Searching for contexts
 
-* Search just for a specific context with **.c**:
+* Search for a specific context with **.c**:
 
 ![](search-for-context.png)
 
 or just list all contexts with **.lc**:
 
 ![](list-contexts.png)
+
+### Searching for perspectives
+
+* Search for a specific perspective with **.v**:
+
+![](search-for-perspectives.png)
+
+or just list all perspectives with **.lv**:
+
+![](list-perspectives.png)
 
 ### Narrowing results
 
