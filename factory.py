@@ -37,6 +37,14 @@ class Perspective(object):
         return "Perspective {0}".format(self.name)
 
 
+class Folder(object):
+    def __init__(self, **kwds):
+        self.__dict__.update(kwds)
+
+    def __repr__(self):
+        return "Folder {0}, '{1}'".format(self.persistent_id, self.name)
+
+
 OF_ICON_ROOT = '/Applications/OmniFocus.app/Contents/Resources'
 
 ICON_DROPPED = os.path.join(OF_ICON_ROOT, 'dropped@2x.png')
@@ -48,6 +56,7 @@ ICON_CONTEXT = os.path.join(OF_ICON_ROOT, 'quickopen-context@2x.png')
 ICON_INBOX = os.path.join(OF_ICON_ROOT, 'tab-inbox-selected@2x.png')
 ICON_PERSPECTIVE = os.path.join(OF_ICON_ROOT, 'Perspectives@2x.png')
 ICON_DEFERRED = os.path.join('.', 'deferred.png')
+ICON_FOLDER = os.path.join(OF_ICON_ROOT, 'quickopen-folder@2x.png')
 
 ICON_PERSPECTIVE_INBOX = os.path.join(OF_ICON_ROOT, 'tab-inbox-selected@2x.png')
 ICON_PERSPECTIVE_PROJECTS = os.path.join(OF_ICON_ROOT, 'tab-projects-selected@2x.png')
@@ -139,6 +148,13 @@ def create_perspective(name):
 
     return Perspective(name=name, icon=icon, subtitle="Omnifocus {0} Perspective".
                        format(perspective_type))
+
+
+def create_folder(raw_data):
+    pid = raw_data[0]
+    name = raw_data[1]
+
+    return Folder(persistent_id=pid, name=name, icon=ICON_FOLDER, subtitle='')
 
 
 def deferred_date(datetostart, effectivedatetostart):

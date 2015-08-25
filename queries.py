@@ -61,3 +61,14 @@ def search_contexts(query):
                                                                           stm_where, stm_order)
 
 
+def search_folders(query):
+    stm_select = "persistentIdentifier, name, active, effectiveActive"
+    stm_from = "Folder"
+    if query:
+        stm_where = " AND lower(name) LIKE lower('%{0}%')".format(query)
+    else:
+        stm_where = ''
+    stm_order = "name ASC"
+
+    return "SELECT {0} FROM {1} WHERE (active = 1 OR effectiveActive = 1) {2} ORDER BY {3}".\
+        format(stm_select, stm_from, stm_where, stm_order)

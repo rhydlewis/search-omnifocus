@@ -18,6 +18,7 @@ INBOX = "i"
 PROJECT = "p"
 CONTEXT = "c"
 PERSPECTIVE = "v"
+FOLDER = "f"
 log = None
 
 SINGLE_QUOTE = "'"
@@ -49,6 +50,8 @@ def get_results(sql, type):
                 item = factory.create_project(result)
             elif type == CONTEXT:
                 item = factory.create_context(result)
+            elif type == FOLDER:
+                item = factory.create_folder(result)
             else:
                 item = factory.create_task(result)
             log.debug(item)
@@ -91,6 +94,9 @@ def populate_query(args):
     elif args.type == CONTEXT:
         log.debug('Searching contexts')
         sql = queries.search_contexts(query)
+    elif args.type == FOLDER:
+        log.debug('Searching folder')
+        sql = queries.search_folders(query)
     elif args.type == INBOX:
         log.debug('Searching inbox')
         sql = queries.search_inbox(query)
@@ -105,9 +111,9 @@ def parse_args():
     parser.add_argument('-a', '--active-only', action='store_true',
                         help='search for active tasks only')
     parser.add_argument('-t', '--type', default=TASK,
-                        choices=[INBOX, TASK, PROJECT, CONTEXT, PERSPECTIVE], type=str,
+                        choices=[INBOX, TASK, PROJECT, CONTEXT, PERSPECTIVE, FOLDER], type=str,
                         help='What to search for: (b)oth tasks and projects, (t)ask, (p)roject, '
-                             '(c)ontext or perspecti(v)e?')
+                             '(c)ontext, (f)older or perspecti(v)e?')
     parser.add_argument('query', type=unicode, nargs=argparse.REMAINDER, help='query string')
 
     log.debug(wf.args)

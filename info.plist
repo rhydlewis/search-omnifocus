@@ -41,6 +41,28 @@
 				<string></string>
 			</dict>
 		</array>
+		<key>47F32866-0DAD-43B2-B753-8E4B55655311</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>DE1DBB96-5A92-4348-A75C-B01E043E1A6F</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+		<key>4AA59390-5138-4FA4-AAD1-BCA0CD3FC8EE</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>DE1DBB96-5A92-4348-A75C-B01E043E1A6F</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
 		<key>66F43344-5EFC-4FAA-8B8A-7EEEE055565D</key>
 		<array>
 			<dict>
@@ -532,6 +554,95 @@
 			<key>version</key>
 			<integer>0</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>.f</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>1</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Searching...</string>
+				<key>script</key>
+				<string>/usr/bin/python search.py -t f "{query}"</string>
+				<key>subtext</key>
+				<string>Search OmniFocus Folders for "{query}"</string>
+				<key>title</key>
+				<string>Search OmniFocus for Folders</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>47F32866-0DAD-43B2-B753-8E4B55655311</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>plusspaces</key>
+				<false/>
+				<key>url</key>
+				<string>omnifocus:///folder/{query}</string>
+				<key>utf8</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>DE1DBB96-5A92-4348-A75C-B01E043E1A6F</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>.lf</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>1</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Searching...</string>
+				<key>script</key>
+				<string>/usr/bin/python search.py -t f</string>
+				<key>title</key>
+				<string>List all OmniFocus Folders</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>4AA59390-5138-4FA4-AAD1-BCA0CD3FC8EE</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string># Search OmniFocus Alfred Workflow
@@ -593,6 +704,16 @@ Well, I want it because I can't quickly search for, say, a task within OmniFocus
 			<key>ypos</key>
 			<real>770</real>
 		</dict>
+		<key>47F32866-0DAD-43B2-B753-8E4B55655311</key>
+		<dict>
+			<key>ypos</key>
+			<real>1170</real>
+		</dict>
+		<key>4AA59390-5138-4FA4-AAD1-BCA0CD3FC8EE</key>
+		<dict>
+			<key>ypos</key>
+			<real>1290</real>
+		</dict>
 		<key>66F43344-5EFC-4FAA-8B8A-7EEEE055565D</key>
 		<dict>
 			<key>ypos</key>
@@ -627,6 +748,11 @@ Well, I want it because I can't quickly search for, say, a task within OmniFocus
 		<dict>
 			<key>ypos</key>
 			<real>110</real>
+		</dict>
+		<key>DE1DBB96-5A92-4348-A75C-B01E043E1A6F</key>
+		<dict>
+			<key>ypos</key>
+			<real>1180</real>
 		</dict>
 		<key>E339EB8A-C004-45EA-B89C-B1DE6874103C</key>
 		<dict>
