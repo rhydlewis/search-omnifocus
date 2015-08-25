@@ -52,6 +52,16 @@ or just list all perspectives with **.lv**:
 
 ![](list-perspectives.png)
 
+### Searching for folders
+
+* Search for a specific folder with **.f**:
+
+![](search-for-folders.png)
+
+or just list all perspectives with **.lf**:
+
+![](list-folders.png)
+
 ### Narrowing results
 
 * Search just for *active* tasks with **.sa**:
