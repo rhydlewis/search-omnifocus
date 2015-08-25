@@ -20,7 +20,7 @@ def search_tasks(active_only, query):
     stm_ignore_projects = "t.containingProjectInfo <> t.persistentIdentifier"
 
     if active_only:
-        stm_where = ("t.blockedByFutureStartDate = 0 AND " + stm_where)
+        stm_where = ("(t.blocked = 0 AND t.blockedByFutureStartDate = 0) AND " + stm_where)
 
     return "SELECT {0} FROM {1} WHERE {2} AND {3}".format(TASK_SELECT, TASK_FROM, stm_where,
                                                           stm_ignore_projects)
