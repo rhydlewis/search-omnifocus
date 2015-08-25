@@ -35,28 +35,28 @@ def main(wf):
     else:
         get_perspectives(args)
 
-    wf.send_feedback()
+    workflow.send_feedback()
 
 
-def get_results(sql, type):
+def get_results(sql, query_type):
     results = run_query(sql)
 
     if not results:
-        wf.add_item('No items', icon=ICON_WARNING)
+        workflow.add_item('No items', icon=ICON_WARNING)
     else:
         for result in results:
             log.debug(result)
-            if type == PROJECT:
+            if query_type == PROJECT:
                 item = factory.create_project(result)
-            elif type == CONTEXT:
+            elif query_type == CONTEXT:
                 item = factory.create_context(result)
-            elif type == FOLDER:
+            elif query_type == FOLDER:
                 item = factory.create_folder(result)
             else:
                 item = factory.create_task(result)
             log.debug(item)
-            wf.add_item(title=item.name, subtitle=item.subtitle, icon=item.icon,
-                        arg=item.persistent_id, valid=True)
+            workflow.add_item(title=item.name, subtitle=item.subtitle, icon=item.icon,
+                              arg=item.persistent_id, valid=True)
 
 
 def get_perspectives(args):
@@ -69,14 +69,15 @@ def get_perspectives(args):
         perspectives = omnifocus.list_perspectives()
 
     if not perspectives:
-        wf.add_item('No items', icon=ICON_WARNING)
+        workflow.add_item('No items', icon=ICON_WARNING)
     else:
         for perspective in perspectives:
             log.debug(perspective)
             item = factory.create_perspective(perspective)
             log.debug(item)
-            wf.add_item(title=item.name, subtitle=item.subtitle, icon=item.icon, arg=item.name,
-                        valid=True)
+            workflow.add_item(title=item.name, subtitle=item.subtitle, icon=item.icon,
+                              arg=item.name,
+                              valid=True)
 
 
 def populate_query(args):
@@ -116,8 +117,8 @@ def parse_args():
                              '(c)ontext, (f)older or perspecti(v)e?')
     parser.add_argument('query', type=unicode, nargs=argparse.REMAINDER, help='query string')
 
-    log.debug(wf.args)
-    args = parser.parse_args(wf.args)
+    log.debug(workflow.args)
+    args = parser.parse_args(workflow.args)
     return args
 
 
@@ -134,16 +135,16 @@ def find_omnifocus():
 
 def run_query(sql):
     conn = sqlite3.connect(find_omnifocus())
-    c = conn.cursor()
+    cursor = conn.cursor()
     log.debug(sql)
-    c.execute(sql)
-    results = c.fetchall()
+    cursor.execute(sql)
+    results = cursor.fetchall()
     log.debug("Found {0} results".format(len(results)))
-    c.close()
+    cursor.close()
     return results
 
 
 if __name__ == '__main__':
-    wf = Workflow()
-    log = wf.logger
-    sys.exit(wf.run(main))
+    workflow = Workflow()
+    log = workflow.logger
+    sys.exit(workflow.run(main))
