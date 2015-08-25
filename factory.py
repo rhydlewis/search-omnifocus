@@ -1,48 +1,20 @@
 from __future__ import unicode_literals
 import os
 from datetime import datetime
-from omnifocus import DEFAULT_PERSPECTIVES, INBOX, PROJECTS, CONTEXTS, FORECAST, FLAGGED, REVIEW
+from omnifocus import DEFAULT_PERSPECTIVES
 
 
-class Project(object):
-    def __init__(self, **kwds):
-        self.__dict__.update(kwds)
-
-    def __repr__(self):
-        return "Project {0}, '{1}' [{2}]".format(self.persistent_id, self.name, self.status)
-
-
-class Context(object):
-    def __init__(self, **kwds):
-        self.__dict__.update(kwds)
+class Item(object):
+    def __init__(self, item_type, persistent_id, name, subtitle, icon):
+        self.item_type = item_type
+        self.name = name
+        self.persistent_id = persistent_id
+        self.subtitle = subtitle
+        self.icon = icon
 
     def __repr__(self):
-        return "Context {0}, '{1}' [{2}]".format(self.persistent_id, self.name, self.status)
-
-
-class Task(object):
-    def __init__(self, **kwds):
-        self.__dict__.update(kwds)
-
-    def __repr__(self):
-        return "Task {0}, '{1}' (@{2}) in project '{3}' [{4}]".\
-            format(self.persistent_id, self.name, self.context, self.subtitle, self.is_blocked)
-
-
-class Perspective(object):
-    def __init__(self, **kwds):
-        self.__dict__.update(kwds)
-
-    def __repr__(self):
-        return "Perspective {0}".format(self.name)
-
-
-class Folder(object):
-    def __init__(self, **kwds):
-        self.__dict__.update(kwds)
-
-    def __repr__(self):
-        return "Folder {0}, '{1}'".format(self.persistent_id, self.name)
+        return "{0}: {1}, ({2}), {3}, {4}".format(self.item_type, self.name, self.persistent_id,
+                                                  self.subtitle, self.icon)
 
 
 OF_ICON_ROOT = '/Applications/OmniFocus.app/Contents/Resources'
@@ -93,12 +65,12 @@ def create_project(raw_data):
     if status == 'active' and is_deferred(datetostart):
         icon = ICON_DEFERRED
 
-    return Project(persistent_id=pid, name=name, status=status, icon=icon, subtitle=folder)
+    return Item(item_type='Project', persistent_id=pid, name=name, icon=icon, subtitle=folder)
 
 
 def create_task(raw_data):
     pid = raw_data[0]
-    completed = raw_data[2] == 1
+    # completed = raw_data[2] == 1
     blocked_by_future_date = raw_data[3] == 1
     name = raw_data[1]
     project = raw_data[5]
@@ -118,9 +90,7 @@ def create_task(raw_data):
     if inbox:
         icon = ICON_INBOX
 
-    return Task(persistent_id=pid, name=name, is_complete=completed, is_blocked=blocked,
-                context=raw_data[4], subtitle=project, in_inbox=inbox, icon=icon,
-                datetostart=datetostart)
+    return Item(item_type='Task', persistent_id=pid, name=name, icon=icon, subtitle=project)
 
 
 def create_context(raw_data):
@@ -135,8 +105,7 @@ def create_context(raw_data):
 
     icon = CONTEXT_ICONS[allows_next_action]
 
-    return Context(persistent_id=pid, name=name, status=allows_next_action, icon=icon,
-                   subtitle=subtitle)
+    return Item(item_type='Context', persistent_id=pid, name=name, icon=icon, subtitle=subtitle)
 
 
 def create_perspective(name):
@@ -146,22 +115,20 @@ def create_perspective(name):
         icon = ICON_LOOKUP[name]
         perspective_type = 'Default'
 
-    return Perspective(name=name, icon=icon, subtitle="Omnifocus {0} Perspective".
-                       format(perspective_type))
+    return Item(item_type='Perspective', persistent_id='', name=name, icon=icon,
+                subtitle="Omnifocus {0} Perspective".format(perspective_type))
 
 
 def create_folder(raw_data):
     pid = raw_data[0]
     name = raw_data[1]
 
-    return Folder(persistent_id=pid, name=name, icon=ICON_FOLDER, subtitle='')
+    return Item(item_type='Folder', persistent_id=pid, name=name, icon=ICON_FOLDER, subtitle='')
 
 
 def deferred_date(datetostart, effectivedatetostart):
-    d = effectivedatetostart
-    if d == 0:
-        d = datetostart
-    return d
+    if effectivedatetostart == 0:
+        return datetostart
 
 
 def is_deferred(datetostart):
