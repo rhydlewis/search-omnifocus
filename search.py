@@ -5,14 +5,18 @@ import sys
 import re
 import os
 import argparse
+import datetime
 
 from workflow import Workflow, ICON_WARNING
 import factory
 import queries
 import omnifocus
 
+DB_KEY = 'db_path'
 DB_LOCATION = ("/Library/Containers/com.omnigroup.OmniFocus2/"
                "Data/Library/Caches/com.omnigroup.OmniFocus2/OmniFocusDatabase2")
+MAS_DB_LOCATION = re.sub('.OmniFocus2', '.OmniFocus2.MacAppStore', DB_LOCATION)
+
 TASK = "t"
 INBOX = "i"
 PROJECT = "p"
@@ -124,17 +128,38 @@ def parse_args():
 
 def find_omnifocus():
     home = os.path.expanduser("~")
-    location = "{0}{1}".format(home, DB_LOCATION)
-    if not os.path.isfile(location):
-        location = re.sub(".OmniFocus2", ".OmniFocus2.MacAppStore", location)
+    db = "{0}{1}".format(home, DB_LOCATION)
+    mas = "{0}{1}".format(home, MAS_DB_LOCATION)
 
-    log.debug(location)
+    if not os.path.isfile(db):
+        log.debug("Omnifocus db not found at {0}; using {1} instead".format(db, mas))
+        db = mas
+    elif os.path.isfile(mas):
+        db_mod = mod_date(db)
+        mas_mod = mod_date(mas)
+        if db_mod < mas_mod:
+            db = mas
+        log.debug("Omnifocus direct and MAS db's found; using {0} as it's newer "
+                  "(Direct {1} vs. MAS {2})".format(db, db_mod, mas_mod))
 
-    return location
+    log.debug(db)
+    return db
+
+
+def mod_date(filename):
+    mtime = os.path.getmtime(filename)
+    return datetime.datetime.fromtimestamp(mtime)
 
 
 def run_query(sql):
-    conn = sqlite3.connect(find_omnifocus())
+    db_path = workflow.stored_data(DB_KEY)
+    if not db_path:
+        db_path = find_omnifocus()
+        workflow.store_data(DB_KEY, db_path)
+    else:
+        log.debug(db_path)
+
+    conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
     log.debug(sql)
     cursor.execute(sql)
