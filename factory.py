@@ -18,6 +18,9 @@ class Item(object):
 
 
 OF_ICON_ROOT = '/Applications/OmniFocus.app/Contents/Resources'
+if not os.path.isdir(OF_ICON_ROOT):
+    # see https://github.com/rhydlewis/search-omnifocus/issues/8
+    OF_ICON_ROOT = '/Applications/OmniFocus.localized/OmniFocus.app/Contents/Resources'
 
 ICON_DROPPED = os.path.join(OF_ICON_ROOT, 'dropped@2x.png')
 ICON_FLAGGED = os.path.join(OF_ICON_ROOT, 'flagged@2x.png')

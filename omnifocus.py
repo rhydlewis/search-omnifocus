@@ -23,7 +23,7 @@ def list_perspectives():
     osa = subprocess.Popen(['osascript', '-'], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
     results = osa.communicate(PERSPECTIVE_SEARCH_SCRIPT)[0].split(', ')
     results = [result.rstrip("\n") for result in results if result != "missing value"]
-    names = [INBOX, PROJECTS, CONTEXTS, FORECAST, FLAGGED, REVIEW] + results
+    names = DEFAULT_PERSPECTIVES + results
     return names
 
 
