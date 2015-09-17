@@ -2,12 +2,11 @@ from __future__ import unicode_literals
 
 import sqlite3
 import sys
-import re
 import os
 import argparse
 import datetime
 
-from workflow import Workflow, ICON_WARNING
+from workflow import Workflow, ICON_WARNING, ICON_SYNC
 import factory
 import queries
 import omnifocus
@@ -15,7 +14,11 @@ import omnifocus
 DB_KEY = 'db_path'
 DB_LOCATION = ("/Library/Containers/com.omnigroup.OmniFocus2/"
                "Data/Library/Caches/com.omnigroup.OmniFocus2/OmniFocusDatabase2")
-MAS_DB_LOCATION = re.sub('.OmniFocus2', '.OmniFocus2.MacAppStore', DB_LOCATION)
+MAS_DB_LOCATION = DB_LOCATION.replace('.OmniFocus2', '.OmniFocus2.MacAppStore')
+
+# Update workflow from GitHub repo
+UPDATE_SETTINGS = {'github_slug': 'rhydlewis/search-omnifocus'}
+SHOW_UPDATES = True
 
 TASK = "t"
 INBOX = "i"
@@ -32,6 +35,12 @@ ESC_SINGLE_QUOTE = "''"
 def main(wf):
     log.debug('Started workflow')
     args = parse_args()
+
+    if SHOW_UPDATES and workflow.update_available:
+        workflow.add_item('A new version is available',
+                          'Action this item to install the update',
+                          autocomplete='workflow:update',
+                          icon=ICON_SYNC)
 
     if args.type != PERSPECTIVE:
         sql = populate_query(args)
@@ -90,7 +99,7 @@ def populate_query(args):
         query = args.query[0]
 
         if SINGLE_QUOTE in query:
-            query = re.sub(SINGLE_QUOTE, ESC_SINGLE_QUOTE, query)
+            query = query.replace(SINGLE_QUOTE, ESC_SINGLE_QUOTE)
 
     active_only = args.active_only
     if args.type == PROJECT:
@@ -170,6 +179,6 @@ def run_query(sql):
 
 
 if __name__ == '__main__':
-    workflow = Workflow()
+    workflow = Workflow(update_settings=UPDATE_SETTINGS)
     log = workflow.logger
     sys.exit(workflow.run(main))
