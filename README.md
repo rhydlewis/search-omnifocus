@@ -58,7 +58,7 @@ or just list all perspectives with **.lv**:
 
 ![](search-for-folders.png)
 
-or just list all perspectives with **.lf**:
+or just list all folders with **.lf**:
 
 ![](list-folders.png)
 
