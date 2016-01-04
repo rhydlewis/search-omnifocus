@@ -26,6 +26,7 @@ PROJECT = "p"
 CONTEXT = "c"
 PERSPECTIVE = "v"
 FOLDER = "f"
+FLAGGED = "g"
 log = None
 
 SINGLE_QUOTE = "'"
@@ -102,6 +103,7 @@ def populate_query(args):
             query = query.replace(SINGLE_QUOTE, ESC_SINGLE_QUOTE)
 
     active_only = args.active_only
+    flagged_only = args.flagged_only
     if args.type == PROJECT:
         log.debug('Searching projects')
         sql = queries.search_projects(active_only, query)
@@ -116,7 +118,7 @@ def populate_query(args):
         sql = queries.search_inbox(query)
     else:
         log.debug('Searching tasks')
-        sql = queries.search_tasks(active_only, query)
+        sql = queries.search_tasks(active_only, flagged_only, query)
     return sql
 
 
@@ -124,6 +126,8 @@ def parse_args():
     parser = argparse.ArgumentParser(description="Search OmniFocus")
     parser.add_argument('-a', '--active-only', action='store_true',
                         help='search for active tasks only')
+    parser.add_argument('-g', '--flagged-only', action='store_true',
+                        help='search for flagged tasks only')
     parser.add_argument('-t', '--type', default=TASK,
                         choices=[INBOX, TASK, PROJECT, CONTEXT, PERSPECTIVE, FOLDER], type=str,
                         help='What to search for: (b)oth tasks and projects, (t)ask, (p)roject, '

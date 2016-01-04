@@ -5,7 +5,7 @@ NAME_SORT = "name ASC"
 TASK_SELECT = ("t.persistentIdentifier, t.name, t.dateCompleted, "
                "t.blockedByFutureStartDate, c.name, p.name, t.flagged, t.dateToStart, "
                "t.inInbox, t.effectiveInInbox, t.effectiveDateToStart, t.childrenCountAvailable, "
-               "t.blocked, pi.status ")
+               "t.blocked, pi.status, t.effectiveFlagged ")
 TASK_FROM = ("((task tt left join projectinfo pi on tt.containingprojectinfo=pi.pk) t left join "
              "task p on t.task=p.persistentIdentifier) left join "
              "context c on t.context = c.persistentIdentifier")
@@ -14,13 +14,16 @@ ACTIVE_CLAUSE = "t.blocked = 0 AND "
 CTX_SELECT = "persistentIdentifier, name, allowsNextAction, active, availableTaskCount"
 
 
-def search_tasks(active_only, query):
+def search_tasks(active_only, flagged, query):
     where = "AND (t.effectiveInInbox = 0 AND t.inInbox = 0) AND " \
             "t.containingProjectInfo <> t.persistentIdentifier "
     where = (TASK_NAME_WHERE + where).format(query)
 
     if active_only:
         where = "(t.blocked = 0 AND t.blockedByFutureStartDate = 0) AND " + where
+
+    if flagged:
+        where = "(t.flagged = 1 OR t.effectiveFlagged = 1) AND " + where
 
     return _generate_query(TASK_SELECT, TASK_FROM, where, "t." + NAME_SORT)
 
