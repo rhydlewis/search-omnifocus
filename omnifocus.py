@@ -22,7 +22,8 @@ def list_perspectives():
     # thanks Dr Drang: http://www.leancrew.com/all-this/2013/03/combining-python-and-applescript/
     osa = subprocess.Popen(['osascript', '-'], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
     results = osa.communicate(PERSPECTIVE_SEARCH_SCRIPT)[0].split(', ')
-    results = [result.rstrip("\n") for result in results if result != "missing value"]
+    results = [result.rstrip("\n").decode('utf-8', 'ignore') for result in results
+               if result != "missing value"]
     names = DEFAULT_PERSPECTIVES + results
     return names
 
