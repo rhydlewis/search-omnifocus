@@ -84,5 +84,6 @@ or for *flagged* and *active* tasks with **.ga**:
 
 * [Dean Jackson](https://github.com/deanishe): the [Python library for Alfred workflows](https://github.com/deanishe/alfred-workflow) does most of the heavy lifting. Excellent stuff, thank you.
 * [Marko Kaestner](https://github.com/markokaestner): I used the [in-depth workflow](https://github.com/markokaestner/of-task-actions) to provide some insight into how to search Omnifocus.
+* [Danny Smith](https://github.com/dannysmith): for providing a new, and quite frankly, much improved workflow icon.
 
 
