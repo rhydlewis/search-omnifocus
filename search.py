@@ -7,14 +7,17 @@ import argparse
 import datetime
 
 from workflow import Workflow, ICON_WARNING, ICON_SYNC
-import factory
+
+from factory import Factory
 import queries
 import omnifocus
 
 DB_KEY = 'db_path'
+ICON_ROOT = 'icon_path'
 DB_LOCATION = ("/Library/Containers/com.omnigroup.OmniFocus2/"
                "Data/Library/Caches/com.omnigroup.OmniFocus2/OmniFocusDatabase2")
 MAS_DB_LOCATION = DB_LOCATION.replace('.OmniFocus2', '.OmniFocus2.MacAppStore')
+OF_ICON_ROOT = '/Applications/OmniFocus.app1/Contents/Resources'
 
 # Update workflow from GitHub repo
 UPDATE_SETTINGS = {'github_slug': 'rhydlewis/search-omnifocus'}
@@ -35,6 +38,7 @@ ESC_SINGLE_QUOTE = "''"
 
 def main(wf):
     log.debug('Started workflow')
+    factory = Factory(find_omnifocus_icons())
     args = parse_args()
 
     if SHOW_UPDATES and workflow.update_available:
@@ -45,14 +49,14 @@ def main(wf):
 
     if args.type != PERSPECTIVE:
         sql = populate_query(args)
-        get_results(sql, args.type)
+        get_results(sql, args.type, factory)
     else:
-        get_perspectives(args)
+        get_perspectives(args, factory)
 
     workflow.send_feedback()
 
 
-def get_results(sql, query_type):
+def get_results(sql, query_type, factory):
     results = run_query(sql)
 
     if not results:
@@ -73,7 +77,7 @@ def get_results(sql, query_type):
                               arg=item.persistent_id, valid=True)
 
 
-def get_perspectives(args):
+def get_perspectives(args, factory):
     if args.query:
         query = args.query[0]
         log.debug("Searching perspectives for '{0}'".format(query))
@@ -139,7 +143,19 @@ def parse_args():
     return args
 
 
-def find_omnifocus():
+def find_omnifocus_icons():
+    icon_root = workflow.stored_data(ICON_ROOT)
+    if not icon_root:
+        icon_root = OF_ICON_ROOT
+        if not os.path.isdir(icon_root):
+            icon_root = omnifocus.find_install_location() + "Contents/Resources"
+        log.debug("Storing icon_root as '{0}'".format(icon_root))
+    else:
+        log.debug("Using stored icon_root:'{0}'".format(icon_root))
+    return icon_root
+
+
+def find_omnifocus_db():
     home = os.path.expanduser("~")
     db = "{0}{1}".format(home, DB_LOCATION)
     mas = "{0}{1}".format(home, MAS_DB_LOCATION)
@@ -167,7 +183,7 @@ def mod_date(filename):
 def run_query(sql):
     db_path = workflow.stored_data(DB_KEY)
     if not db_path:
-        db_path = find_omnifocus()
+        db_path = find_omnifocus_db()
         workflow.store_data(DB_KEY, db_path)
     else:
         log.debug(db_path)
