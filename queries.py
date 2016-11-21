@@ -68,3 +68,10 @@ def search_folders(query):
 
 def _generate_query(select, from_, where, order_by):
     return "SELECT {0} FROM {1} WHERE {2} ORDER BY {3}".format(select, from_, where, order_by)
+
+
+def search_notes(query):
+    select = TASK_SELECT + ", t.noteXMLData "
+    where = "lower(t.noteXMLData) LIKE lower('%{0}%')".format(query)
+
+    return _generate_query(select, TASK_FROM, where, "t." + NAME_SORT)
