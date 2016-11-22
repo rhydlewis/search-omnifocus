@@ -80,6 +80,10 @@ or for *flagged* and *active* tasks with **.ga**:
 
 ![](search-for-flagged-active-tasks.png)
 
+* Show last _x_ modified tasks with **.r**:
+
+![](show-recent-tasks.png)
+
 ## Thanks to...
 
 * [Dean Jackson](https://github.com/deanishe): the [Python library for Alfred workflows](https://github.com/deanishe/alfred-workflow) does most of the heavy lifting. Excellent stuff, thank you.

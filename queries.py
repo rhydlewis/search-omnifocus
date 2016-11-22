@@ -9,15 +9,15 @@ TASK_SELECT = ("t.persistentIdentifier, t.name, t.dateCompleted, "
 TASK_FROM = ("((task tt left join projectinfo pi on tt.containingprojectinfo=pi.pk) t left join "
              "task p on t.task=p.persistentIdentifier) left join "
              "context c on t.context = c.persistentIdentifier")
-TASK_NAME_WHERE = "t.dateCompleted IS NULL AND lower(t.name) LIKE lower('%{0}%') "
+TASK_WHERE = ("(t.effectiveInInbox = 0 AND t.inInbox = 0) AND "
+              "t.containingProjectInfo <> t.persistentIdentifier ")
+TASK_NAME_WHERE = "t.dateCompleted IS NULL AND lower(t.name) LIKE lower('%{0}%') AND "
 ACTIVE_CLAUSE = "t.blocked = 0 AND "
 CTX_SELECT = "persistentIdentifier, name, allowsNextAction, active, availableTaskCount"
 
 
 def search_tasks(active_only, flagged, query):
-    where = "AND (t.effectiveInInbox = 0 AND t.inInbox = 0) AND " \
-            "t.containingProjectInfo <> t.persistentIdentifier "
-    where = (TASK_NAME_WHERE + where).format(query)
+    where = (TASK_NAME_WHERE + TASK_WHERE).format(query)
 
     if active_only:
         where = "(t.blocked = 0 AND t.blockedByFutureStartDate = 0) AND " + where
@@ -29,7 +29,7 @@ def search_tasks(active_only, flagged, query):
 
 
 def search_inbox(query):
-    where = "AND (t.effectiveInInbox = 1 OR t.inInbox = 1)"
+    where = "(t.effectiveInInbox = 1 OR t.inInbox = 1)"
     where = (TASK_NAME_WHERE + where).format(query)
     return _generate_query(TASK_SELECT, TASK_FROM, where, "t." + NAME_SORT)
 
@@ -68,3 +68,13 @@ def search_folders(query):
 
 def _generate_query(select, from_, where, order_by):
     return "SELECT {0} FROM {1} WHERE {2} ORDER BY {3}".format(select, from_, where, order_by)
+
+
+def show_recent_tasks(count):
+    try:
+        count = int(count)
+    except TypeError:
+        count = 10
+
+    query = _generate_query(TASK_SELECT, TASK_FROM, TASK_WHERE, "t.dateModified DESC")
+    return query + " LIMIT {0}".format(count)

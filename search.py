@@ -30,6 +30,7 @@ CONTEXT = "c"
 PERSPECTIVE = "v"
 FOLDER = "f"
 FLAGGED = "g"
+RECENT = "r"
 log = None
 
 SINGLE_QUOTE = "'"
@@ -120,6 +121,9 @@ def populate_query(args):
     elif args.type == INBOX:
         log.debug('Searching inbox')
         sql = queries.search_inbox(query)
+    elif args.type == RECENT:
+        log.debug('Searching recent items')
+        sql = queries.show_recent_tasks(query)
     else:
         log.debug('Searching tasks')
         sql = queries.search_tasks(active_only, flagged_only, query)
@@ -133,9 +137,10 @@ def parse_args():
     parser.add_argument('-g', '--flagged-only', action='store_true',
                         help='search for flagged tasks only')
     parser.add_argument('-t', '--type', default=TASK,
-                        choices=[INBOX, TASK, PROJECT, CONTEXT, PERSPECTIVE, FOLDER], type=str,
-                        help='What to search for: (b)oth tasks and projects, (t)ask, (p)roject, '
-                             '(c)ontext, (f)older or perspecti(v)e?')
+                        choices=[INBOX, TASK, PROJECT, CONTEXT, PERSPECTIVE, FOLDER, RECENT],
+                        type=str, help='What to search for: (b)oth tasks and projects, (t)ask, '
+                                       '(p)roject, (c)ontext, (f)older, perspecti(v)e or '
+                                       '(r)ecent items?')
     parser.add_argument('query', type=unicode, nargs=argparse.REMAINDER, help='query string')
 
     log.debug(workflow.args)
