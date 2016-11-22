@@ -70,8 +70,14 @@ def _generate_query(select, from_, where, order_by):
     return "SELECT {0} FROM {1} WHERE {2} ORDER BY {3}".format(select, from_, where, order_by)
 
 
-def search_notes(query):
+def search_notes(active_only, flagged, query):
     select = TASK_SELECT + ", t.plainTextNote "
-    where = "lower(t.plainTextNote) LIKE lower('%{0}%')".format(query)
+    where = "t.dateCompleted IS NULL AND lower(t.plainTextNote) LIKE lower('%{0}%')".format(query)
+
+    if active_only:
+        where = where + " AND (t.blocked = 0 AND t.blockedByFutureStartDate = 0)"
+
+    if flagged:
+        where = where + " AND (t.flagged = 1 OR t.effectiveFlagged = 1)"
 
     return _generate_query(select, TASK_FROM, where, "t." + NAME_SORT)

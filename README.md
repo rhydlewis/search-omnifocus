@@ -2,7 +2,7 @@
 
 ## What is this?
 
-This is a workflow for [Alfred 2](http://www.alfredapp.com/) that performs free text searches on [OmniFocus](http://www.omnigroup.com/omnifocus) data.
+This is a workflow for [Alfred](http://www.alfredapp.com/) that performs free text searches on [OmniFocus](http://www.omnigroup.com/omnifocus) data.
 
 ## Why would I want such a thing?
 
@@ -67,6 +67,9 @@ or just list all folders with **.lf**:
 * Search for a specific note in a task or project with **.n**:
 
 ![](search-note.png)
+
+* Search for a specific note in a flagged task **.ng**
+* Search for a specific note in active task **.na**
 
 ### Narrowing results
 

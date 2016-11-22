@@ -123,7 +123,7 @@ def populate_query(args):
         sql = queries.search_inbox(query)
     elif args.type == NOTES:
         log.debug('Searching inbox')
-        sql = queries.search_notes(query)
+        sql = queries.search_notes(active_only, flagged_only, query)
     else:
         log.debug('Searching tasks')
         sql = queries.search_tasks(active_only, flagged_only, query)
