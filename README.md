@@ -68,10 +68,6 @@ or just list all folders with **.lf**:
 
 ![](search-note.png)
 
-**IMPORTANT DISCLAIMER**
-
-> This action performs a simple search of the Omnifocus note data (stored as XML). It doesn't strip out any XML beforehand unfortunately so searching for something like `"lit"` will return everything because the XML note data contains `<lit>` XML elements. Same goes for `"text"`, `"run"`, `"style"`, etc. This isn't great but if anyone can suggest how to improve this, I'm all ears.
-
 ### Narrowing results
 
 * Search just for *active* tasks with **.sa**:

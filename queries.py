@@ -71,7 +71,7 @@ def _generate_query(select, from_, where, order_by):
 
 
 def search_notes(query):
-    select = TASK_SELECT + ", t.noteXMLData "
-    where = "lower(t.noteXMLData) LIKE lower('%{0}%')".format(query)
+    select = TASK_SELECT + ", t.plainTextNote "
+    where = "lower(t.plainTextNote) LIKE lower('%{0}%')".format(query)
 
     return _generate_query(select, TASK_FROM, where, "t." + NAME_SORT)
