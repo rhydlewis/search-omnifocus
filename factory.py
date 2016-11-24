@@ -7,6 +7,7 @@ ACTIVE = 'active'
 DONE = 'done'
 DROPPED = 'dropped'
 INACTIVE = 'inactive'
+DATETIME_OFFSET = 978307200
 
 
 class Item(object):
@@ -121,7 +122,20 @@ class Factory:
         pid = raw_data[0]
         name = raw_data[1]
 
-        return Item(item_type='Folder', persistent_id=pid, name=name, icon=self.folder_icon, subtitle='')
+        return Item(item_type='Folder', persistent_id=pid, name=name, icon=self.folder_icon,
+                    subtitle='')
+
+    def create_recent_item(self, raw_data):
+        task = self.create_task(raw_data)
+
+        if raw_data[0] == raw_data[16]:
+            task.name = task.name + " (Project)"
+        else:
+            task.name = task.name + " (Task)"
+
+        modified_date = datetime.fromtimestamp(raw_data[15] + DATETIME_OFFSET).strftime("%c")
+        task.subtitle = modified_date
+        return task
 
 
 def deferred_date(datetostart, effectivedatetostart):
@@ -132,7 +146,7 @@ def deferred_date(datetostart, effectivedatetostart):
 def is_deferred(datetostart):
     deferred = False
     if datetostart is not None:
-        dts = datetime.fromtimestamp(datetostart + 978307200)
+        dts = datetime.fromtimestamp(datetostart + DATETIME_OFFSET)
         if dts > datetime.now():
             deferred = True
 

@@ -31,6 +31,7 @@ PERSPECTIVE = "v"
 FOLDER = "f"
 FLAGGED = "g"
 NOTES = "n"
+RECENT = "r"
 log = None
 
 SINGLE_QUOTE = "'"
@@ -71,6 +72,8 @@ def get_results(sql, query_type, factory):
                 item = factory.create_context(result)
             elif query_type == FOLDER:
                 item = factory.create_folder(result)
+            elif query_type == RECENT:
+                item = factory.create_recent_item(result)
             else:
                 item = factory.create_task(result)
             log.debug(item)
@@ -124,6 +127,9 @@ def populate_query(args):
     elif args.type == NOTES:
         log.debug('Searching inbox')
         sql = queries.search_notes(active_only, flagged_only, query)
+    elif args.type == RECENT:
+        log.debug('Searching recent items')
+        sql = queries.show_recent_tasks(active_only)
     else:
         log.debug('Searching tasks')
         sql = queries.search_tasks(active_only, flagged_only, query)
@@ -137,10 +143,10 @@ def parse_args():
     parser.add_argument('-g', '--flagged-only', action='store_true',
                         help='search for flagged tasks only')
     parser.add_argument('-t', '--type', default=TASK,
-                        choices=[INBOX, TASK, PROJECT, CONTEXT, PERSPECTIVE, FOLDER, NOTES],
+                        choices=[INBOX, TASK, PROJECT, CONTEXT, PERSPECTIVE, FOLDER, NOTES, RECENT],
                         type=str, help='What to search for: (b)oth tasks and projects, (t)ask, '
-                                       '(p)roject, (c)ontext, (f)older, perspecti(v)e or '
-                                       'task (n)otes?')
+                                       '(p)roject, (c)ontext, (f)older, perspecti(v)e, '
+                                       'task (n)otes or (r)ecent items?')
     parser.add_argument('query', type=unicode, nargs=argparse.REMAINDER, help='query string')
 
     log.debug(workflow.args)
@@ -194,6 +200,7 @@ def run_query(sql):
         log.debug(db_path)
 
     conn = sqlite3.connect(db_path)
+    # conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
     log.debug(sql)
     cursor.execute(sql)
