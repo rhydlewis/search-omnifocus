@@ -16,76 +16,76 @@ Well, I want it because I can't quickly search for, say, a task within OmniFocus
 
 ### Searching for tasks
 
-* Search for all tasks within OmniFocus (irrespective of status) with `s`:
+* Search for all tasks within OmniFocus (irrespective of status) with `.s`:
 
 ![](search-for-tasks.png)
 
 ### Searching the inbox
 
-* Search the OmniFocus inbox with `i`:
+* Search the OmniFocus inbox with `.i`:
 
 ![](search-inbox.png)
 
 ### Searching for projects
 
-* Search for projects with `p`:
+* Search for projects with `.p`:
 
 ![](search-for-project.png)
 
 ### Searching for contexts
 
-* Search for a specific context with `c`:
+* Search for a specific context with `.c`:
 
 ![](search-for-context.png)
 
-or just list all contexts with `lc`:
+or just list all contexts with `.lc`:
 
 ![](list-contexts.png)
 
 ### Searching for perspectives
 
-* Search for a specific perspective with `v`:
+* Search for a specific perspective with `.v`:
 
 ![](search-for-perspectives.png)
 
-or just list all perspectives with `lv`:
+or just list all perspectives with `.lv`:
 
 ![](list-perspectives.png)
 
 ### Searching for folders
 
-* Search for a specific folder with `f`:
+* Search for a specific folder with `.f`:
 
 ![](search-for-folders.png)
 
-or just list all folders with `lf`:
+or just list all folders with `.lf`:
 
 ![](list-folders.png)
 
 ### Searching for task or projects notes
  
-* Search for a specific note in a task or project with `n`:
+* Search for a specific note in a task or project with `.n`:
 
 ![](search-note.png)
 
-* Search for a specific note in a flagged task `ng**
-* Search for a specific note in active task `na**
+* Search for a specific note in a flagged task `.ng`
+* Search for a specific note in active task `.na`
 
 ### Narrowing results
 
-* Search just for *active* tasks with `sa`:
+* Search just for *active* tasks with `.sa`:
 
 ![](search-for-active-tasks.png)
 
-or just for *active* projects with `pa`:
+or just for *active* projects with `.pa`:
 
 ![](search-for-active-projects.png)
 
-* Search all *flagged* tasks with `g`:
+* Search all *flagged* tasks with `.g`:
  
 ![](search-for-flagged-tasks.png)
 
-or for *flagged* and *active* tasks with `ga`:
+or for *flagged* and *active* tasks with `.ga`:
 
 ![](search-for-flagged-active-tasks.png)
 
@@ -93,7 +93,7 @@ or for *flagged* and *active* tasks with `ga`:
 
 ![](show-recent-tasks.png)
 
-or show the 10 most recently modfified and non-completed tasks or projects with `ra`:
+or show the 10 most recently modfified and non-completed tasks or projects with `.ra`:
 
 ![](show-recent-active-tasks.png)
 
