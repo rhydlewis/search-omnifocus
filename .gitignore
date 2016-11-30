@@ -5,3 +5,4 @@
 Alfred_Workflow-1.11.1-py2.7.egg-info
 *.pyc
 workflow/*.pyc
+test/
