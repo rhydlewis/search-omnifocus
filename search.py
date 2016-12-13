@@ -112,6 +112,8 @@ def populate_query(args):
 
     active_only = args.active_only
     flagged_only = args.flagged_only
+    everything = args.everything
+
     if args.type == PROJECT:
         log.debug('Searching projects')
         sql = queries.search_projects(active_only, query)
@@ -132,7 +134,7 @@ def populate_query(args):
         sql = queries.show_recent_tasks(active_only)
     else:
         log.debug('Searching tasks')
-        sql = queries.search_tasks(active_only, flagged_only, query)
+        sql = queries.search_tasks(active_only, flagged_only, query, everything)
     return sql
 
 
@@ -142,6 +144,8 @@ def parse_args():
                         help='search for active tasks only')
     parser.add_argument('-g', '--flagged-only', action='store_true',
                         help='search for flagged tasks only')
+    parser.add_argument('-e', '--everything', action='store_true',
+                        help='search for tasks in the inbox as well as processed tasks')
     parser.add_argument('-t', '--type', default=TASK,
                         choices=[INBOX, TASK, PROJECT, CONTEXT, PERSPECTIVE, FOLDER, NOTES, RECENT],
                         type=str, help='What to search for: (b)oth tasks and projects, (t)ask, '

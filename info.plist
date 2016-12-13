@@ -164,6 +164,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>9AE65283-7430-42F9-9DE5-7331FB4ACF49</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>D43529C9-5BC5-4DCA-A1F7-9EB2E48F2E68</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>AEA7E1B6-D264-4723-ABE3-9A224C6232E0</key>
 		<array>
 			<dict>
@@ -546,6 +559,49 @@
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>DB73AB05-13C5-4ECC-B7BE-EEBF0E5A834F</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>.se</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>1</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Searching...</string>
+				<key>script</key>
+				<string>/usr/bin/python search.py -e "{query}"</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string>Search OmniFocus for "{query}"</string>
+				<key>title</key>
+				<string>Search OmniFocus for processed and inbox tasks</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>9AE65283-7430-42F9-9DE5-7331FB4ACF49</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -1281,6 +1337,13 @@ Well, I want it because I can't quickly search for, say, a task within OmniFocus
 			<integer>300</integer>
 			<key>ypos</key>
 			<integer>560</integer>
+		</dict>
+		<key>9AE65283-7430-42F9-9DE5-7331FB4ACF49</key>
+		<dict>
+			<key>xpos</key>
+			<integer>120</integer>
+			<key>ypos</key>
+			<integer>200</integer>
 		</dict>
 		<key>AEA7E1B6-D264-4723-ABE3-9A224C6232E0</key>
 		<dict>
