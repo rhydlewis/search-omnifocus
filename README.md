@@ -20,6 +20,10 @@ Well, I want it because I can't quickly search for, say, a task within OmniFocus
 
 ![](search-for-tasks.png)
 
+### Searching for tasks in the Inbox and the Library 
+
+* Search for all tasks within OmniFocus (whether you've processed them or not) with `.se`.
+
 ### Searching the inbox
 
 * Search the OmniFocus inbox with `.i`:
