@@ -17,7 +17,7 @@ ICON_ROOT = 'icon_path'
 DB_LOCATION = ("/Library/Containers/com.omnigroup.OmniFocus2/"
                "Data/Library/Caches/com.omnigroup.OmniFocus2/OmniFocusDatabase2")
 MAS_DB_LOCATION = DB_LOCATION.replace('.OmniFocus2', '.OmniFocus2.MacAppStore')
-OF_ICON_ROOT = '/Applications/OmniFocus.app1/Contents/Resources'
+OF_ICON_ROOT = '/Applications/OmniFocus.app/Contents/Resources'
 
 # Update workflow from GitHub repo
 UPDATE_SETTINGS = {'github_slug': 'rhydlewis/search-omnifocus'}
@@ -32,6 +32,7 @@ FOLDER = "f"
 FLAGGED = "g"
 NOTES = "n"
 RECENT = "r"
+DUE = "d"
 log = None
 
 SINGLE_QUOTE = "'"
@@ -59,6 +60,7 @@ def main(wf):
 
 
 def get_results(sql, query_type, factory):
+    workflow.logger.debug(sql)
     results = run_query(sql)
 
     if not results:
@@ -132,6 +134,9 @@ def populate_query(args):
     elif args.type == RECENT:
         log.debug('Searching recent items')
         sql = queries.show_recent_tasks(active_only)
+    elif args.due:
+        log.debug('Listing overdue or due items')
+        sql = queries.show_due_tasks()
     else:
         log.debug('Searching tasks')
         sql = queries.search_tasks(active_only, flagged_only, query, everything)
@@ -151,6 +156,7 @@ def parse_args():
                         type=str, help='What to search for: (b)oth tasks and projects, (t)ask, '
                                        '(p)roject, (c)ontext, (f)older, perspecti(v)e, '
                                        'task (n)otes or (r)ecent items?')
+    parser.add_argument('-d', '--due', action='store_true', help='show overdue or due items')
     parser.add_argument('query', type=unicode, nargs=argparse.REMAINDER, help='query string')
 
     log.debug(workflow.args)

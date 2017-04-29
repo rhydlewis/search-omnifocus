@@ -203,6 +203,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>C0202706-8F00-4EA7-9718-07EC7ADC22D1</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>D43529C9-5BC5-4DCA-A1F7-9EB2E48F2E68</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>D109C0DE-4460-44B6-B8BF-488C51BE8823</key>
 		<array>
 			<dict>
@@ -1074,6 +1087,49 @@
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>.d</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>1</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Searching...</string>
+				<key>script</key>
+				<string>/usr/bin/python search.py -d</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>List overdue and due OmniFocus tasks</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>C0202706-8F00-4EA7-9718-07EC7ADC22D1</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>escaping</key>
 				<integer>102</integer>
@@ -1358,6 +1414,13 @@ Well, I want it because I can't quickly search for, say, a task within OmniFocus
 			<integer>300</integer>
 			<key>ypos</key>
 			<integer>390</integer>
+		</dict>
+		<key>C0202706-8F00-4EA7-9718-07EC7ADC22D1</key>
+		<dict>
+			<key>xpos</key>
+			<integer>110</integer>
+			<key>ypos</key>
+			<integer>760</integer>
 		</dict>
 		<key>CBD7D965-D889-4B5D-BE22-D38DF994C945</key>
 		<dict>

@@ -101,6 +101,10 @@ or show the 10 most recently modfified and non-completed tasks or projects with 
 
 ![](show-recent-active-tasks.png)
 
+* Show overdue or due items with `.d`:
+
+![](overdue-tasks.png)
+
 ## Thanks to...
 
 * [Dean Jackson](https://github.com/deanishe): the [Python library for Alfred workflows](https://github.com/deanishe/alfred-workflow) does most of the heavy lifting. Excellent stuff, thank you.

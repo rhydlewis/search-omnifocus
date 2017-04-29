@@ -4,12 +4,13 @@ NAME_SORT = "name ASC"
 TASK_SELECT = ("t.persistentIdentifier, t.name, t.dateCompleted, "
                "t.blockedByFutureStartDate, c.name, p.name, t.flagged, t.dateToStart, "
                "t.inInbox, t.effectiveInInbox, t.effectiveDateToStart, t.childrenCountAvailable, "
-               "t.blocked, pi.status, t.effectiveFlagged, t.dateModified, t.containingProjectInfo")
+               "t.blocked, pi.status, t.effectiveFlagged, t.dateModified, t.containingProjectInfo, t.dateDue")
 TASK_FROM = ("((task tt left join projectinfo pi on tt.containingprojectinfo=pi.pk) t left join "
              "task p on t.task=p.persistentIdentifier) left join "
              "context c on t.context = c.persistentIdentifier")
 TASK_WHERE = "(t.containingProjectInfo <> t.persistentIdentifier OR t.containingProjectInfo is NULL) "
 TASK_NAME_WHERE = "t.dateCompleted IS NULL AND lower(t.name) LIKE lower('%{0}%') AND "
+NOT_COMPLETED_CLAUSE = "t.dateCompleted IS NULL"
 ACTIVE_CLAUSE = "t.blocked = 0 AND "
 CTX_SELECT = "persistentIdentifier, name, allowsNextAction, active, availableTaskCount"
 
@@ -82,11 +83,17 @@ def search_notes(active_only, flagged, query):
 
 def show_recent_tasks(active_only):
     if active_only:
-        return _generate_query(TASK_SELECT, TASK_FROM, "t.dateCompleted IS NULL",
+        return _generate_query(TASK_SELECT, TASK_FROM, NOT_COMPLETED_CLAUSE,
                                "t.dateModified DESC") + " LIMIT 10"
     else:
         return "SELECT {0} FROM {1} ORDER BY {2} LIMIT {3}".format(TASK_SELECT, TASK_FROM,
                                                                    "t.dateModified DESC", 10)
+
+
+def show_due_tasks():
+    return _generate_query(TASK_SELECT, TASK_FROM,
+                           NOT_COMPLETED_CLAUSE + " AND (t.isDueSoon or t.isOverdue)",
+                           "t.dateDue ASC") + " LIMIT 10"
 
 
 def _generate_query(select, from_, where, order_by):

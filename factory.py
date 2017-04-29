@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 import os
 from datetime import datetime
 from omnifocus import DEFAULT_PERSPECTIVES
+from workflow import ICON_WARNING
 
 ACTIVE = 'active'
 DONE = 'done'
@@ -82,7 +83,8 @@ class Factory:
         blocked = raw_data[11] == 1
         children = raw_data[12]
         parent_status = raw_data[13]
-    
+        due_date = None
+
         icon = self.active_icon
     
         if blocked_by_future_date or (blocked and not children) or parent_status != ACTIVE:
@@ -92,6 +94,17 @@ class Factory:
         if inbox:
             icon = self.inbox_icon
     
+        if raw_data[17]:
+            due_date = offset_date(raw_data[17])
+            now = datetime.now()
+            due_date_label = due_date.strftime("%c")
+
+            if now > due_date:
+                name = name + " (overdue: {0})".format(due_date_label)
+                icon = ICON_WARNING
+            else:
+                name = name + " (due: {0})".format(due_date_label)
+
         return Item(item_type='Task', persistent_id=pid, name=name, icon=icon, subtitle=project)
     
     def create_context(self, raw_data):
@@ -133,7 +146,7 @@ class Factory:
         else:
             task.name = task.name + " (Task)"
 
-        modified_date = datetime.fromtimestamp(raw_data[15] + DATETIME_OFFSET).strftime("%c")
+        modified_date = offset_date(raw_data[15]).strftime("%c")
         task.subtitle = modified_date
         return task
 
@@ -146,9 +159,11 @@ def deferred_date(datetostart, effectivedatetostart):
 def is_deferred(datetostart):
     deferred = False
     if datetostart is not None:
-        dts = datetime.fromtimestamp(datetostart + DATETIME_OFFSET)
+        dts = offset_date(datetostart)
         if dts > datetime.now():
             deferred = True
 
     return deferred
 
+def offset_date(value):
+    return datetime.fromtimestamp(value + DATETIME_OFFSET)
