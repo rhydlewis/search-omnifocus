@@ -129,6 +129,16 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>C425E2E9-95A8-4A9D-9E54-F873CE308F5B</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>Mark this task as complete</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>D43529C9-5BC5-4DCA-A1F7-9EB2E48F2E68</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -194,6 +204,16 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>C425E2E9-95A8-4A9D-9E54-F873CE308F5B</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>Mark this task as complete</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>D43529C9-5BC5-4DCA-A1F7-9EB2E48F2E68</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -205,6 +225,16 @@
 		</array>
 		<key>C0202706-8F00-4EA7-9718-07EC7ADC22D1</key>
 		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>C425E2E9-95A8-4A9D-9E54-F873CE308F5B</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>Mark this task as complete</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 			<dict>
 				<key>destinationuid</key>
 				<string>D43529C9-5BC5-4DCA-A1F7-9EB2E48F2E68</string>
@@ -233,6 +263,16 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>C425E2E9-95A8-4A9D-9E54-F873CE308F5B</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>Mark this task as complete</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>D43529C9-5BC5-4DCA-A1F7-9EB2E48F2E68</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -257,6 +297,16 @@
 		</array>
 		<key>F8E62EE2-D96A-4A26-8E39-EBBEFCE2DF97</key>
 		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>C425E2E9-95A8-4A9D-9E54-F873CE308F5B</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>Mark this task as complete</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 			<dict>
 				<key>destinationuid</key>
 				<string>D43529C9-5BC5-4DCA-A1F7-9EB2E48F2E68</string>
@@ -284,49 +334,10 @@
 			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>keyword</key>
-				<string>.lc</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<false/>
-				<key>queuedelaymode</key>
-				<integer>1</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>Searching...</string>
-				<key>script</key>
-				<string>/usr/bin/python search.py -t c</string>
-				<key>scriptargtype</key>
+				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>List all OmniFocus Contexts</string>
-				<key>type</key>
+				<key>argumenttrimmode</key>
 				<integer>0</integer>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>66F43344-5EFC-4FAA-8B8A-7EEEE055565D</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<false/>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>escaping</key>
@@ -370,6 +381,57 @@
 			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>.lc</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>1</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Searching...</string>
+				<key>script</key>
+				<string>/usr/bin/python search.py -t c</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>List all OmniFocus Contexts</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>66F43344-5EFC-4FAA-8B8A-7EEEE055565D</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>escaping</key>
@@ -430,6 +492,53 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>.sa</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>1</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Searching...</string>
+				<key>script</key>
+				<string>/usr/bin/python search.py -a "{query}"</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string>Search OmniFocus for "{query}"</string>
+				<key>title</key>
+				<string>Search OmniFocus for active tasks only</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>DB73AB05-13C5-4ECC-B7BE-EEBF0E5A834F</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>spaces</key>
@@ -451,6 +560,10 @@
 			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>escaping</key>
@@ -494,6 +607,10 @@
 			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>escaping</key>
@@ -537,92 +654,10 @@
 			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
-				<key>argumenttype</key>
+				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>keyword</key>
-				<string>.sa</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<false/>
-				<key>queuedelaymode</key>
-				<integer>1</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>Searching...</string>
-				<key>script</key>
-				<string>/usr/bin/python search.py -a "{query}"</string>
-				<key>scriptargtype</key>
+				<key>argumenttrimmode</key>
 				<integer>0</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>subtext</key>
-				<string>Search OmniFocus for "{query}"</string>
-				<key>title</key>
-				<string>Search OmniFocus for active tasks only</string>
-				<key>type</key>
-				<integer>0</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>DB73AB05-13C5-4ECC-B7BE-EEBF0E5A834F</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<false/>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>keyword</key>
-				<string>.se</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<false/>
-				<key>queuedelaymode</key>
-				<integer>1</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>Searching...</string>
-				<key>script</key>
-				<string>/usr/bin/python search.py -e "{query}"</string>
-				<key>scriptargtype</key>
-				<integer>0</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>subtext</key>
-				<string>Search OmniFocus for "{query}"</string>
-				<key>title</key>
-				<string>Search OmniFocus for processed and inbox tasks</string>
-				<key>type</key>
-				<integer>0</integer>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>9AE65283-7430-42F9-9DE5-7331FB4ACF49</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<false/>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>escaping</key>
@@ -664,8 +699,38 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>on run
+  set theQuery to "{query}"
+  tell application "OmniFocus"    tell default document	  set _task to task id theQuery	  set _status to completed of _task	  if _status = false then		mark complete _task	  end if	end tell  end tell
+end run</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>6</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>C425E2E9-95A8-4A9D-9E54-F873CE308F5B</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>escaping</key>
@@ -728,6 +793,57 @@
 			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>.ga</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>1</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Searching...</string>
+				<key>script</key>
+				<string>/usr/bin/python search.py -a -g "{query}"</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string>Search OmniFocus flagged active tasks for "{query}"</string>
+				<key>title</key>
+				<string>Search OmniFocus for flagged active tasks only</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>BBC90874-214F-47EB-A98B-41631508AD28</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>escaping</key>
@@ -790,6 +906,10 @@
 			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>escaping</key>
@@ -833,12 +953,16 @@
 			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>keyword</key>
-				<string>.ga</string>
+				<string>.se</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -850,15 +974,15 @@
 				<key>runningsubtext</key>
 				<string>Searching...</string>
 				<key>script</key>
-				<string>/usr/bin/python search.py -a -g "{query}"</string>
+				<string>/usr/bin/python search.py -e "{query}"</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
 				<string></string>
 				<key>subtext</key>
-				<string>Search OmniFocus flagged active tasks for "{query}"</string>
+				<string>Search OmniFocus for "{query}"</string>
 				<key>title</key>
-				<string>Search OmniFocus for flagged active tasks only</string>
+				<string>Search OmniFocus for processed and inbox tasks</string>
 				<key>type</key>
 				<integer>0</integer>
 				<key>withspace</key>
@@ -867,34 +991,19 @@
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>BBC90874-214F-47EB-A98B-41631508AD28</string>
+			<string>9AE65283-7430-42F9-9DE5-7331FB4ACF49</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>omnifocus:///task/{query}</string>
-				<key>utf8</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>D43529C9-5BC5-4DCA-A1F7-9EB2E48F2E68</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>escaping</key>
@@ -957,49 +1066,10 @@
 			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>keyword</key>
-				<string>.lf</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<false/>
-				<key>queuedelaymode</key>
-				<integer>1</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>Searching...</string>
-				<key>script</key>
-				<string>/usr/bin/python search.py -t f</string>
-				<key>scriptargtype</key>
+				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>List all OmniFocus Folders</string>
-				<key>type</key>
+				<key>argumenttrimmode</key>
 				<integer>0</integer>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>4AA59390-5138-4FA4-AAD1-BCA0CD3FC8EE</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<false/>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>escaping</key>
@@ -1043,6 +1113,57 @@
 			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>.lf</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>1</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Searching...</string>
+				<key>script</key>
+				<string>/usr/bin/python search.py -t f</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>List all OmniFocus Folders</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>4AA59390-5138-4FA4-AAD1-BCA0CD3FC8EE</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>escaping</key>
@@ -1086,49 +1207,10 @@
 			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>keyword</key>
-				<string>.d</string>
-				<key>queuedelaycustom</key>
-				<integer>3</integer>
-				<key>queuedelayimmediatelyinitially</key>
-				<false/>
-				<key>queuedelaymode</key>
-				<integer>1</integer>
-				<key>queuemode</key>
-				<integer>1</integer>
-				<key>runningsubtext</key>
-				<string>Searching...</string>
-				<key>script</key>
-				<string>/usr/bin/python search.py -d</string>
-				<key>scriptargtype</key>
+				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>subtext</key>
-				<string></string>
-				<key>title</key>
-				<string>List overdue and due OmniFocus tasks</string>
-				<key>type</key>
+				<key>argumenttrimmode</key>
 				<integer>0</integer>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.scriptfilter</string>
-			<key>uid</key>
-			<string>C0202706-8F00-4EA7-9718-07EC7ADC22D1</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>alfredfiltersresults</key>
-				<false/>
 				<key>argumenttype</key>
 				<integer>0</integer>
 				<key>escaping</key>
@@ -1170,8 +1252,31 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>omnifocus:///task/{query}</string>
+				<key>utf8</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>D43529C9-5BC5-4DCA-A1F7-9EB2E48F2E68</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>escaping</key>
@@ -1215,6 +1320,10 @@
 			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>escaping</key>
@@ -1250,6 +1359,53 @@
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>34A8CEB4-9871-48A6-ADD2-B3841DEA50CE</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>.d</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>1</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Searching...</string>
+				<key>script</key>
+				<string>/usr/bin/python search.py -d</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string></string>
+				<key>title</key>
+				<string>List overdue and due OmniFocus tasks</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>C0202706-8F00-4EA7-9718-07EC7ADC22D1</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -1292,58 +1448,58 @@ Well, I want it because I can't quickly search for, say, a task within OmniFocus
 		<key>266413E3-CA7C-4A42-87F8-EFDAD6E27E27</key>
 		<dict>
 			<key>xpos</key>
-			<integer>1170</integer>
+			<integer>1600</integer>
 			<key>ypos</key>
-			<integer>280</integer>
+			<integer>320</integer>
 		</dict>
 		<key>293EC668-41EA-4870-AFE2-202ECA102983</key>
 		<dict>
 			<key>xpos</key>
-			<integer>950</integer>
+			<integer>1380</integer>
 			<key>ypos</key>
-			<integer>290</integer>
+			<integer>330</integer>
 		</dict>
 		<key>34A8CEB4-9871-48A6-ADD2-B3841DEA50CE</key>
 		<dict>
 			<key>xpos</key>
 			<integer>300</integer>
 			<key>ypos</key>
-			<integer>1060</integer>
+			<integer>1000</integer>
 		</dict>
 		<key>3B55385B-7D73-4D79-9E5A-B8771A4312DD</key>
 		<dict>
 			<key>xpos</key>
-			<integer>1370</integer>
+			<integer>1800</integer>
 			<key>ypos</key>
-			<integer>100</integer>
+			<integer>140</integer>
 		</dict>
 		<key>3D1CF477-C3FF-47F8-8C13-0BA23A2351A3</key>
 		<dict>
 			<key>xpos</key>
-			<integer>750</integer>
+			<integer>1180</integer>
 			<key>ypos</key>
-			<integer>120</integer>
+			<integer>160</integer>
 		</dict>
 		<key>461FFE94-0E33-42ED-8022-74FB582C3AA7</key>
 		<dict>
 			<key>xpos</key>
-			<integer>750</integer>
+			<integer>1180</integer>
 			<key>ypos</key>
-			<integer>300</integer>
+			<integer>340</integer>
 		</dict>
 		<key>47F32866-0DAD-43B2-B753-8E4B55655311</key>
 		<dict>
 			<key>xpos</key>
-			<integer>750</integer>
+			<integer>1180</integer>
 			<key>ypos</key>
-			<integer>460</integer>
+			<integer>500</integer>
 		</dict>
 		<key>4AA59390-5138-4FA4-AAD1-BCA0CD3FC8EE</key>
 		<dict>
 			<key>xpos</key>
-			<integer>750</integer>
+			<integer>1180</integer>
 			<key>ypos</key>
-			<integer>560</integer>
+			<integer>600</integer>
 		</dict>
 		<key>5B6F5381-8FA5-4F0F-8AE2-72759B703EA2</key>
 		<dict>
@@ -1355,37 +1511,37 @@ Well, I want it because I can't quickly search for, say, a task within OmniFocus
 		<key>66F43344-5EFC-4FAA-8B8A-7EEEE055565D</key>
 		<dict>
 			<key>xpos</key>
-			<integer>1170</integer>
+			<integer>1600</integer>
 			<key>ypos</key>
-			<integer>10</integer>
+			<integer>50</integer>
 		</dict>
 		<key>6AD395D1-0076-41CD-9AD4-450378E9FBA1</key>
 		<dict>
 			<key>xpos</key>
-			<integer>1170</integer>
+			<integer>1600</integer>
 			<key>ypos</key>
-			<integer>380</integer>
+			<integer>420</integer>
 		</dict>
 		<key>745D123A-0BCF-4E78-A186-3AD9F56640C4</key>
 		<dict>
 			<key>xpos</key>
-			<integer>1370</integer>
+			<integer>1800</integer>
 			<key>ypos</key>
-			<integer>330</integer>
+			<integer>370</integer>
 		</dict>
 		<key>7EB402A7-46CC-40D6-A5F0-0D74AC3ABA5D</key>
 		<dict>
 			<key>xpos</key>
 			<integer>300</integer>
 			<key>ypos</key>
-			<integer>280</integer>
+			<integer>230</integer>
 		</dict>
 		<key>80C3DF9B-A145-4A71-B33E-4C276A7FA5B7</key>
 		<dict>
 			<key>xpos</key>
 			<integer>300</integer>
 			<key>ypos</key>
-			<integer>950</integer>
+			<integer>890</integer>
 		</dict>
 		<key>95713023-D4AC-4052-9177-7AAF20BDE0B1</key>
 		<dict>
@@ -1397,9 +1553,9 @@ Well, I want it because I can't quickly search for, say, a task within OmniFocus
 		<key>9AE65283-7430-42F9-9DE5-7331FB4ACF49</key>
 		<dict>
 			<key>xpos</key>
-			<integer>120</integer>
+			<integer>300</integer>
 			<key>ypos</key>
-			<integer>200</integer>
+			<integer>450</integer>
 		</dict>
 		<key>AEA7E1B6-D264-4723-ABE3-9A224C6232E0</key>
 		<dict>
@@ -1413,35 +1569,42 @@ Well, I want it because I can't quickly search for, say, a task within OmniFocus
 			<key>xpos</key>
 			<integer>300</integer>
 			<key>ypos</key>
-			<integer>390</integer>
+			<integer>340</integer>
 		</dict>
 		<key>C0202706-8F00-4EA7-9718-07EC7ADC22D1</key>
 		<dict>
 			<key>xpos</key>
-			<integer>110</integer>
+			<integer>300</integer>
 			<key>ypos</key>
-			<integer>760</integer>
+			<integer>1110</integer>
+		</dict>
+		<key>C425E2E9-95A8-4A9D-9E54-F873CE308F5B</key>
+		<dict>
+			<key>xpos</key>
+			<integer>850</integer>
+			<key>ypos</key>
+			<integer>280</integer>
 		</dict>
 		<key>CBD7D965-D889-4B5D-BE22-D38DF994C945</key>
 		<dict>
 			<key>xpos</key>
-			<integer>950</integer>
+			<integer>1380</integer>
 			<key>ypos</key>
-			<integer>60</integer>
+			<integer>100</integer>
 		</dict>
 		<key>D109C0DE-4460-44B6-B8BF-488C51BE8823</key>
 		<dict>
 			<key>xpos</key>
-			<integer>750</integer>
+			<integer>1180</integer>
 			<key>ypos</key>
-			<integer>10</integer>
+			<integer>50</integer>
 		</dict>
 		<key>D43529C9-5BC5-4DCA-A1F7-9EB2E48F2E68</key>
 		<dict>
 			<key>xpos</key>
-			<integer>500</integer>
+			<integer>840</integer>
 			<key>ypos</key>
-			<integer>390</integer>
+			<integer>820</integer>
 		</dict>
 		<key>DB73AB05-13C5-4ECC-B7BE-EEBF0E5A834F</key>
 		<dict>
@@ -1453,16 +1616,16 @@ Well, I want it because I can't quickly search for, say, a task within OmniFocus
 		<key>DE1DBB96-5A92-4348-A75C-B01E043E1A6F</key>
 		<dict>
 			<key>xpos</key>
-			<integer>950</integer>
+			<integer>1380</integer>
 			<key>ypos</key>
-			<integer>510</integer>
+			<integer>550</integer>
 		</dict>
 		<key>E339EB8A-C004-45EA-B89C-B1DE6874103C</key>
 		<dict>
 			<key>xpos</key>
-			<integer>1170</integer>
+			<integer>1600</integer>
 			<key>ypos</key>
-			<integer>120</integer>
+			<integer>160</integer>
 		</dict>
 		<key>F8E62EE2-D96A-4A26-8E39-EBBEFCE2DF97</key>
 		<dict>
