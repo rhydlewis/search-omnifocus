@@ -424,7 +424,15 @@
 				<key>escaping</key>
 				<integer>68</integer>
 				<key>script</key>
-				<string>on run	set theQuery to "{query}"	tell application "OmniFocus"		tell default document			set _task to task id theQuery			set flagged of _task to not flagged of _task		end tell	end tellend run</string>
+				<string>on run
+	set theQuery to "{query}"
+	tell application "OmniFocus"
+		tell default document
+			set _task to task id theQuery
+			set flagged of _task to not flagged of _task
+		end tell
+	end tell
+end run</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
@@ -769,7 +777,15 @@
 				<key>script</key>
 				<string>on run
   set theQuery to "{query}"
-  tell application "OmniFocus"    tell default document	  set _task to task id theQuery	  set _status to completed of _task	  if _status = false then		mark complete _task	  end if	end tell  end tell
+  tell application "OmniFocus"
+    tell default document
+	  set _task to task id theQuery
+	  set _status to completed of _task
+	  if _status = false then
+		mark complete _task
+	  end if
+	end tell
+  end tell
 end run</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
@@ -1706,7 +1722,7 @@ Well, I want it because I can't quickly search for, say, a task within OmniFocus
 		</dict>
 	</dict>
 	<key>version</key>
-	<string>1.2.4</string>
+	<string>1.2.6</string>
 	<key>webaddress</key>
 	<string>rhydlewis.net</string>
 </dict>
