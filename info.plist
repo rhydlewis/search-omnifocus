@@ -129,6 +129,16 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>45162350-BA59-4F1A-8A9E-D437997CA5BA</string>
+				<key>modifiers</key>
+				<integer>262144</integer>
+				<key>modifiersubtext</key>
+				<string>Flag or unflag the task</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>C425E2E9-95A8-4A9D-9E54-F873CE308F5B</string>
 				<key>modifiers</key>
 				<integer>1048576</integer>
@@ -204,6 +214,16 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>45162350-BA59-4F1A-8A9E-D437997CA5BA</string>
+				<key>modifiers</key>
+				<integer>262144</integer>
+				<key>modifiersubtext</key>
+				<string>Flag or unflag the task</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>C425E2E9-95A8-4A9D-9E54-F873CE308F5B</string>
 				<key>modifiers</key>
 				<integer>1048576</integer>
@@ -263,6 +283,16 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
+				<string>45162350-BA59-4F1A-8A9E-D437997CA5BA</string>
+				<key>modifiers</key>
+				<integer>262144</integer>
+				<key>modifiersubtext</key>
+				<string>Flag or unflag the task</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
 				<string>C425E2E9-95A8-4A9D-9E54-F873CE308F5B</string>
 				<key>modifiers</key>
 				<integer>1048576</integer>
@@ -297,6 +327,16 @@
 		</array>
 		<key>F8E62EE2-D96A-4A26-8E39-EBBEFCE2DF97</key>
 		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>45162350-BA59-4F1A-8A9E-D437997CA5BA</string>
+				<key>modifiers</key>
+				<integer>262144</integer>
+				<key>modifiersubtext</key>
+				<string>Flag or unflag the task</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
 			<dict>
 				<key>destinationuid</key>
 				<string>C425E2E9-95A8-4A9D-9E54-F873CE308F5B</string>
@@ -373,6 +413,29 @@
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>F8E62EE2-D96A-4A26-8E39-EBBEFCE2DF97</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>on run	set theQuery to "{query}"	tell application "OmniFocus"		tell default document			set _task to task id theQuery			set flagged of _task to not flagged of _task		end tell	end tellend run</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>6</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>45162350-BA59-4F1A-8A9E-D437997CA5BA</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -1479,6 +1542,13 @@ Well, I want it because I can't quickly search for, say, a task within OmniFocus
 			<integer>1180</integer>
 			<key>ypos</key>
 			<integer>160</integer>
+		</dict>
+		<key>45162350-BA59-4F1A-8A9E-D437997CA5BA</key>
+		<dict>
+			<key>xpos</key>
+			<integer>850</integer>
+			<key>ypos</key>
+			<integer>20</integer>
 		</dict>
 		<key>461FFE94-0E33-42ED-8022-74FB582C3AA7</key>
 		<dict>
