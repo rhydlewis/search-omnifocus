@@ -1,8 +1,8 @@
-# Search OmniFocus Alfred Workflow
+# Search OmniFocus 3 Alfred Workflow
 
 ## What is this?
 
-This is a workflow for [Alfred](http://www.alfredapp.com/) that performs free text searches on [OmniFocus](http://www.omnigroup.com/omnifocus) data.
+This is a workflow for [Alfred](http://www.alfredapp.com/) that performs free text searches on [OmniFocus 3](http://www.omnigroup.com/omnifocus) data.
 
 ## Why would I want such a thing?
 
@@ -36,15 +36,15 @@ Well, I want it because I can't quickly search for, say, a task within OmniFocus
 
 ![](search-for-project.png)
 
-### Searching for contexts
+### Searching for tags
 
-* Search for a specific context with `.c`:
+* Search for a specific tag with `.t`:
 
-![](search-for-context.png)
+![](search-for-tag.png)
 
-or just list all contexts with `.lc`:
+or just list all tags with `.lt`:
 
-![](list-contexts.png)
+![](list-tags.png)
 
 ### Searching for perspectives
 

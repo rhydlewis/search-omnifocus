@@ -2,10 +2,8 @@ from __future__ import unicode_literals
 
 ID = str("id")
 NAME = str("name")
-COMPLETED_DATE = str("completed_date")
 BLOCKED_BY_START_DATE = str("blocked_by_future_start_date")
 PROJECT_NAME = str("project_name")
-FLAGGED = str("flagged")
 START_DATE = str("start_date")
 IN_INBOX = str("in_inbox")
 EFFECTIVE_IN_INBOX = str("effective_in_inbox")
@@ -13,12 +11,8 @@ EFFECTIVE_START_DATE = str("effective_start_date")
 CHILD_COUNT = str("child_count")
 BLOCKED = str("blocked")
 STATUS = str("status")
-EFFECTIVE_FLAGGED = str("effective_flagged")
-MODIFY_DATE = str("modify_date")
-CONTAINING_PI = str("containing_project_info")
 DUE_DATE = str("due_date")
 ACTIVE = str("active")
-EFFECTIVE_ACTIVE = str("effective_active")
 AVAILABLE_TASK_COUNT = str("available_task_count")
 REMAINING_TASK_COUNT = str("remnaining_task_count")
 SINGLETON = str("singleton")
@@ -30,10 +24,10 @@ NAME_SORT = "name ASC"
 TASK_SELECT = ", ".join([
     "t.persistentIdentifier AS {0}".format(ID),
     "t.name AS {0}".format(NAME),
-    "t.dateCompleted AS {0}".format(COMPLETED_DATE),
+    "t.dateCompleted",
     "t.blockedByFutureStartDate AS {0}".format(BLOCKED_BY_START_DATE),
     "p.name AS {0}".format(PROJECT_NAME),
-    "t.flagged AS {0}".format(FLAGGED),
+    "t.flagged",
     "t.dateToStart AS {0}".format(START_DATE),
     "t.inInbox AS {0}".format(IN_INBOX),
     "t.effectiveInInbox AS {0}".format(EFFECTIVE_IN_INBOX),
@@ -41,9 +35,9 @@ TASK_SELECT = ", ".join([
     "t.childrenCountAvailable AS {0}".format(CHILD_COUNT),
     "t.blocked AS {0}".format(BLOCKED),
     "pi.status AS {0}".format(STATUS),
-    "t.effectiveFlagged AS {0}".format(EFFECTIVE_FLAGGED),
-    "t.dateModified AS {0}".format(MODIFY_DATE),
-    "t.containingProjectInfo AS {0}".format(CONTAINING_PI)
+    "t.effectiveFlagged",
+    "t.dateModified",
+    "t.containingProjectInfo"
     ]) + ", t.dateDue AS {0}".format(DUE_DATE)
 TASK_FROM = ("((task tt left join projectinfo pi on tt.containingprojectinfo=pi.pk) t left join "
              "task p on t.task=p.persistentIdentifier) ")
@@ -51,12 +45,11 @@ TASK_WHERE = "(t.containingProjectInfo <> t.persistentIdentifier OR t.containing
 TASK_NAME_WHERE = "t.dateCompleted IS NULL AND lower(t.name) LIKE lower('%{0}%') AND "
 NOT_COMPLETED_CLAUSE = "t.dateCompleted IS NULL"
 ACTIVE_CLAUSE = "t.blocked = 0 AND "
-CTX_SELECT = ", ".join([
+TAG_SELECT = ", ".join([
     "persistentIdentifier AS {0}".format(ID),
     "name AS {0}".format(NAME),
     "allowsNextAction AS {0}".format(ALLOWS_NEXT_ACTION),
     "active AS {0}".format(ACTIVE)]) + ", availableTaskCount AS {0}".format(AVAILABLE_TASK_COUNT)
-
 PROJECT_SELECT = ", ".join([
     "p.pk AS {0}".format(ID),
     "t.name AS {0}".format(NAME),
@@ -101,17 +94,16 @@ def search_projects(active_only, query):
     return _generate_query(PROJECT_SELECT, from_, where, order_by)
 
 
-def search_contexts(query):
+def search_tags(query):
     where = "active = 1"
     if query:
         where = where + " AND lower(name) LIKE lower('%{0}%')".format(query)
 
-    return _generate_query(CTX_SELECT, "Context", where, NAME_SORT)
+    return _generate_query(TAG_SELECT, "Context", where, NAME_SORT)
 
 
 def search_folders(query):
-    select = "persistentIdentifier AS {0}, name as {1}, active AS {2}, effectiveActive as {3}".format(ID, NAME, ACTIVE,
-                                                                                                      EFFECTIVE_ACTIVE)
+    select = "persistentIdentifier AS {0}, name as {1}, active AS {2}, effectiveActive".format(ID, NAME, ACTIVE)
     where = "(active = 1 OR effectiveActive = 1)"
     if query:
         where = where + " AND lower(name) LIKE lower('%{0}%')".format(query)
@@ -120,7 +112,7 @@ def search_folders(query):
 
 
 def search_notes(active_only, flagged, query):
-    select = TASK_SELECT + ", t.plainTextNote as {0}"
+    select = TASK_SELECT + ", t.plainTextNote"
     where = "t.dateCompleted IS NULL AND lower(t.plainTextNote) LIKE lower('%{0}%')".format(query)
 
     if active_only:

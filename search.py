@@ -120,7 +120,7 @@ def populate_query(args):
         sql = queries.search_projects(active_only, query)
     elif args.type == CONTEXT:
         log.debug('Searching contexts')
-        sql = queries.search_contexts(query)
+        sql = queries.search_tags(query)
     elif args.type == FOLDER:
         log.debug('Searching folder')
         sql = queries.search_folders(query)

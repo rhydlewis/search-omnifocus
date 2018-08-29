@@ -380,7 +380,7 @@
 	<key>createdby</key>
 	<string>Rhyd Lewis</string>
 	<key>description</key>
-	<string>Search for OmniFocus tasks from Alfred</string>
+	<string>Search OmniFocus 3 from Alfred</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -419,9 +419,9 @@
 				<key>scriptfile</key>
 				<string></string>
 				<key>subtext</key>
-				<string>Search OmniFocus for "{query}"</string>
+				<string>Search OmniFocus 3 for "{query}"</string>
 				<key>title</key>
-				<string>Search OmniFocus</string>
+				<string>Search OmniFocus 3</string>
 				<key>type</key>
 				<integer>0</integer>
 				<key>withspace</key>
@@ -499,7 +499,7 @@ end run</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
-				<string>List all OmniFocus Tags</string>
+				<string>List all OmniFocus 3 Tags</string>
 				<key>type</key>
 				<integer>0</integer>
 				<key>withspace</key>
@@ -544,9 +544,9 @@ end run</string>
 				<key>scriptfile</key>
 				<string></string>
 				<key>subtext</key>
-				<string>Search OmniFocus Projects for "{query}"</string>
+				<string>Search OmniFocus 3 projects for "{query}"</string>
 				<key>title</key>
-				<string>Search OmniFocus for Projects</string>
+				<string>Search OmniFocus 3 for Projects</string>
 				<key>type</key>
 				<integer>0</integer>
 				<key>withspace</key>
@@ -629,9 +629,9 @@ end run</string>
 				<key>scriptfile</key>
 				<string></string>
 				<key>subtext</key>
-				<string>Search OmniFocus for "{query}"</string>
+				<string>Search OmniFocus 3 for "{query}"</string>
 				<key>title</key>
-				<string>Search OmniFocus for active tasks only</string>
+				<string>Search OmniFocus 3 for active tasks only</string>
 				<key>type</key>
 				<integer>0</integer>
 				<key>withspace</key>
@@ -676,9 +676,9 @@ end run</string>
 				<key>scriptfile</key>
 				<string></string>
 				<key>subtext</key>
-				<string>Search OmniFocus Projects for "{query}"</string>
+				<string>Search OmniFocus 3 projects for "{query}"</string>
 				<key>title</key>
-				<string>Search OmniFocus for active Projects</string>
+				<string>Search OmniFocus 3 for active Projects</string>
 				<key>type</key>
 				<integer>0</integer>
 				<key>withspace</key>
@@ -723,9 +723,9 @@ end run</string>
 				<key>scriptfile</key>
 				<string></string>
 				<key>subtext</key>
-				<string>Search OmniFocus Tags for "{query}"</string>
+				<string>Search OmniFocus 3 tags for "{query}"</string>
 				<key>title</key>
-				<string>Search OmniFocus for Tags</string>
+				<string>Search OmniFocus 3 tags</string>
 				<key>type</key>
 				<integer>0</integer>
 				<key>withspace</key>
@@ -770,9 +770,9 @@ end run</string>
 				<key>scriptfile</key>
 				<string></string>
 				<key>subtext</key>
-				<string>Search OmniFocus flagged tasks for "{query}"</string>
+				<string>Search OmniFocus 3 flagged tasks for "{query}"</string>
 				<key>title</key>
-				<string>Search OmniFocus for flagged tasks only</string>
+				<string>Search OmniFocus 3 flagged tasks only</string>
 				<key>type</key>
 				<integer>0</integer>
 				<key>withspace</key>
@@ -851,9 +851,9 @@ end run</string>
 				<key>scriptfile</key>
 				<string></string>
 				<key>subtext</key>
-				<string>Search OmniFocus Perspectives for "{query}"</string>
+				<string>Search OmniFocus 3 perspectives for "{query}"</string>
 				<key>title</key>
-				<string>Search OmniFocus for Perspectives</string>
+				<string>Search OmniFocus 3 perspectives</string>
 				<key>type</key>
 				<integer>0</integer>
 				<key>withspace</key>
@@ -917,9 +917,9 @@ end run</string>
 				<key>scriptfile</key>
 				<string></string>
 				<key>subtext</key>
-				<string>Search OmniFocus flagged active tasks for "{query}"</string>
+				<string>Search OmniFocus 3 flagged active tasks for "{query}"</string>
 				<key>title</key>
-				<string>Search OmniFocus for flagged active tasks only</string>
+				<string>Search OmniFocus 3 flagged active tasks only</string>
 				<key>type</key>
 				<integer>0</integer>
 				<key>withspace</key>
@@ -964,9 +964,9 @@ end run</string>
 				<key>scriptfile</key>
 				<string></string>
 				<key>subtext</key>
-				<string>Search OmniFocus Inbox for "{query}"</string>
+				<string>Search OmniFocus 3 Inbox for "{query}"</string>
 				<key>title</key>
-				<string>Search OmniFocus Inbox</string>
+				<string>Search OmniFocus 3 Inbox</string>
 				<key>type</key>
 				<integer>0</integer>
 				<key>withspace</key>
@@ -1032,7 +1032,7 @@ end run</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
-				<string>List all OmniFocus Perspectives</string>
+				<string>List all perspectives in OmniFocus 3</string>
 				<key>type</key>
 				<integer>0</integer>
 				<key>withspace</key>
@@ -1077,9 +1077,9 @@ end run</string>
 				<key>scriptfile</key>
 				<string></string>
 				<key>subtext</key>
-				<string>Search OmniFocus for "{query}"</string>
+				<string>Search OmniFocus 3 for "{query}"</string>
 				<key>title</key>
-				<string>Search OmniFocus for processed and inbox tasks</string>
+				<string>Search OmniFocus 3 for processed and inbox tasks</string>
 				<key>type</key>
 				<integer>0</integer>
 				<key>withspace</key>
@@ -1143,9 +1143,9 @@ end run</string>
 				<key>scriptfile</key>
 				<string></string>
 				<key>subtext</key>
-				<string>Search OmniFocus task notes for "{query}"</string>
+				<string>Search notes in OmniFocus 3 tasks for "{query}"</string>
 				<key>title</key>
-				<string>Search OmniFocus for tasks via note contents</string>
+				<string>Search notes in OmniFocus 3 tasks</string>
 				<key>type</key>
 				<integer>0</integer>
 				<key>withspace</key>
@@ -1192,7 +1192,7 @@ end run</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
-				<string>List all OmniFocus Folders</string>
+				<string>List all folders in OmniFocus 3</string>
 				<key>type</key>
 				<integer>0</integer>
 				<key>withspace</key>
@@ -1237,9 +1237,9 @@ end run</string>
 				<key>scriptfile</key>
 				<string></string>
 				<key>subtext</key>
-				<string>Search OmniFocus active task notes for "{query}"</string>
+				<string>Search active task notes in OmniFocus 3 for "{query}"</string>
 				<key>title</key>
-				<string>Search OmniFocus for active tasks via note contents</string>
+				<string>Search notes in OmniFocus 3 active tasks</string>
 				<key>type</key>
 				<integer>0</integer>
 				<key>withspace</key>
@@ -1268,7 +1268,7 @@ end run</string>
 				click menu item "Projects" of menu "Perspectives" of menu bar 1
 			end tell
 		end tell
-		
+
 		set theQuery to "{query}"
 		tell application "OmniFocus" to tell the default document
 			set folderList to flattened folders whose id is theQuery
@@ -1323,9 +1323,9 @@ end run</string>
 				<key>scriptfile</key>
 				<string></string>
 				<key>subtext</key>
-				<string>Search OmniFocus Folders for "{query}"</string>
+				<string>Search folders in OmniFocus 3 for "{query}"</string>
 				<key>title</key>
-				<string>Search OmniFocus for Folders</string>
+				<string>Search folders in OmniFocus 3</string>
 				<key>type</key>
 				<integer>0</integer>
 				<key>withspace</key>
@@ -1370,9 +1370,9 @@ end run</string>
 				<key>scriptfile</key>
 				<string></string>
 				<key>subtext</key>
-				<string>Search OmniFocus flagged task notes for "{query}"</string>
+				<string>Search flagged task notes in OmniFocus 3 for "{query}"</string>
 				<key>title</key>
-				<string>Search OmniFocus for flagged tasks via note contents</string>
+				<string>Search notes of OmniFocus 3 flagged tasks</string>
 				<key>type</key>
 				<integer>0</integer>
 				<key>withspace</key>
@@ -1438,7 +1438,7 @@ end run</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
-				<string>Show 10 most recently modified OmniFocus items</string>
+				<string>Show 10 most recently modified OmniFocus 3 items</string>
 				<key>type</key>
 				<integer>0</integer>
 				<key>withspace</key>
@@ -1485,7 +1485,7 @@ end run</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
-				<string>Show 10 most recently modified non-completed OmniFocus items</string>
+				<string>Show 10 most recently modified non-completed OmniFocus 3 items</string>
 				<key>type</key>
 				<integer>0</integer>
 				<key>withspace</key>
@@ -1532,7 +1532,7 @@ end run</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
-				<string>List overdue and due OmniFocus tasks</string>
+				<string>List overdue and due items in OmniFocus 3</string>
 				<key>type</key>
 				<integer>0</integer>
 				<key>withspace</key>
@@ -1547,7 +1547,7 @@ end run</string>
 		</dict>
 	</array>
 	<key>readme</key>
-	<string># Search OmniFocus Alfred Workflow
+	<string># Search OmniFocus 3 Alfred Workflow
 
 ## What is this?
 

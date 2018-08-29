@@ -4,8 +4,8 @@ from datetime import datetime
 from omnifocus import DEFAULT_PERSPECTIVES
 from workflow import ICON_WARNING
 from queries import ACTIVE, ALLOWS_NEXT_ACTION, AVAILABLE_TASK_COUNT, BLOCKED, BLOCKED_BY_START_DATE, CHILD_COUNT, \
-    COMPLETED_DATE, CONTAINING_PI, DUE_DATE, EFFECTIVE_ACTIVE, EFFECTIVE_FLAGGED, EFFECTIVE_IN_INBOX, \
-    EFFECTIVE_START_DATE, FOLDER_NAME, FLAGGED, ID, IN_INBOX, MODIFY_DATE, NAME, PROJECT_NAME, START_DATE, STATUS
+    DUE_DATE, EFFECTIVE_IN_INBOX, EFFECTIVE_START_DATE, FOLDER_NAME, ID, IN_INBOX, NAME, PROJECT_NAME, START_DATE, \
+    STATUS
 
 ACTIVE = 'active'
 DONE = 'done'
@@ -35,7 +35,7 @@ class Factory:
         self.active_icon = os.path.join(icon_root, 'active-small@2x.png')
         self.completed_icon = os.path.join(icon_root, 'completed@2x.png')
         self.context_icon = os.path.join(icon_root, 'quickopen-context@2x.png')
-        self.inbox_icon = os.path.join(icon_root, 'tab-inbox-selected@2x.png')
+        self.inbox_icon = os.path.join(icon_root, 'Inbox@2x.png')
         self.perspective_icon = os.path.join(icon_root, 'Perspectives@2x.png')
         self.deferred_icon = os.path.join('.', 'deferred.png')
         self.folder_icon = os.path.join(icon_root, 'quickopen-folder@2x.png')
