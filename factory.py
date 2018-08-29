@@ -3,6 +3,9 @@ import os
 from datetime import datetime
 from omnifocus import DEFAULT_PERSPECTIVES
 from workflow import ICON_WARNING
+from queries import ACTIVE, ALLOWS_NEXT_ACTION, AVAILABLE_TASK_COUNT, BLOCKED, BLOCKED_BY_START_DATE, CHILD_COUNT, \
+    COMPLETED_DATE, CONTAINING_PI, DUE_DATE, EFFECTIVE_ACTIVE, EFFECTIVE_FLAGGED, EFFECTIVE_IN_INBOX, \
+    EFFECTIVE_START_DATE, FOLDER_NAME, FLAGGED, ID, IN_INBOX, MODIFY_DATE, NAME, PROJECT_NAME, START_DATE, STATUS
 
 ACTIVE = 'active'
 DONE = 'done'
@@ -57,12 +60,12 @@ class Factory:
                               DROPPED: self.dropped_icon, INACTIVE: self.on_hold_icon}
         self.context_icons = {1: self.active_icon, 0: self.on_hold_icon}
     
-    def create_project(self, raw_data):
-        pid = raw_data[0]
-        name = raw_data[1]
-        status = raw_data[2]
-        folder = raw_data[6]
-        datetostart = deferred_date(raw_data[7], raw_data[8])
+    def create_project(self, row):
+        pid = row[ID]
+        name = row[NAME]
+        status = row[STATUS]
+        folder = row[FOLDER_NAME]
+        datetostart = deferred_date(row[START_DATE], row[EFFECTIVE_START_DATE])
     
         icon = self.project_icons[status]
     
@@ -71,18 +74,17 @@ class Factory:
     
         return Item(item_type='Project', persistent_id=pid, name=name, icon=icon, subtitle=folder)
     
-    def create_task(self, raw_data):
-        pid = raw_data[0]
-        # completed = raw_data[2] == 1
-        blocked_by_future_date = raw_data[3] == 1
-        name = raw_data[1]
-        project = raw_data[5]
-        inbox = (raw_data[8] == 1 or raw_data[9] == 1)
-        datetostart = deferred_date(raw_data[7], raw_data[10])
+    def create_task(self, row):
+        pid = row[ID]
+        blocked_by_future_date = row[BLOCKED_BY_START_DATE] == 1
+        name = row[NAME]
+        project = row[PROJECT_NAME]
+        inbox = (row[IN_INBOX] == 1 or row[EFFECTIVE_IN_INBOX] == 1)
+        datetostart = deferred_date(row[START_DATE], row[EFFECTIVE_START_DATE])
     
-        blocked = raw_data[11] == 1
-        children = raw_data[12]
-        parent_status = raw_data[13]
+        blocked = row[BLOCKED] == 1
+        children = row[CHILD_COUNT]
+        parent_status = row[STATUS]
         due_date = None
 
         icon = self.active_icon
@@ -94,8 +96,8 @@ class Factory:
         if inbox:
             icon = self.inbox_icon
     
-        if raw_data[17]:
-            due_date = offset_date(raw_data[17])
+        if row[DUE_DATE]:
+            due_date = offset_date(row[DUE_DATE])
             now = datetime.now()
             due_date_label = due_date.strftime("%c")
 
@@ -108,10 +110,10 @@ class Factory:
         return Item(item_type='Task', persistent_id=pid, name=name, icon=icon, subtitle=project)
     
     def create_context(self, raw_data):
-        pid = raw_data[0]
-        name = raw_data[1]
-        allows_next_action = raw_data[2]
-        available_tasks = raw_data[4]
+        pid = raw_data[ID]
+        name = raw_data[NAME]
+        allows_next_action = raw_data[ALLOWS_NEXT_ACTION]
+        available_tasks = raw_data[AVAILABLE_TASK_COUNT]
         if available_tasks == 1:
             subtitle = "1 task available"
         else:
@@ -131,9 +133,9 @@ class Factory:
         return Item(item_type='Perspective', persistent_id='', name=name, icon=icon,
                     subtitle="Omnifocus {0} Perspective".format(perspective_type))
     
-    def create_folder(self, raw_data):
-        pid = raw_data[0]
-        name = raw_data[1]
+    def create_folder(self, row):
+        pid = row[ID]
+        name = row[NAME]
 
         return Item(item_type='Folder', persistent_id=pid, name=name, icon=self.folder_icon,
                     subtitle='')
@@ -146,7 +148,7 @@ class Factory:
         else:
             task.name = task.name + " (Task)"
 
-        modified_date = offset_date(raw_data[15]).strftime("%c")
+        modified_date = offset_date(raw_data[14]).strftime("%c")
         task.subtitle = modified_date
         return task
 

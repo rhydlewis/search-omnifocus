@@ -3,9 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string>net.rhydlewis.alfred.searchomnifocus</string>
-	<key>category</key>
-	<string>Productivity</string>
+	<string>net.rhydlewis.alfred.searchomnifocus3</string>
 	<key>connections</key>
 	<dict>
 		<key>266413E3-CA7C-4A42-87F8-EFDAD6E27E27</key>
@@ -386,7 +384,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Search OmniFocus</string>
+	<string>Search OmniFocus 3</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -481,7 +479,7 @@ end run</string>
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>keyword</key>
-				<string>.lc</string>
+				<string>.lt</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -501,7 +499,7 @@ end run</string>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>
-				<string>List all OmniFocus Contexts</string>
+				<string>List all OmniFocus Tags</string>
 				<key>type</key>
 				<integer>0</integer>
 				<key>withspace</key>
@@ -583,6 +581,25 @@ end run</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>omnifocus:///context/{query}</string>
+				<key>utf8</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>3B55385B-7D73-4D79-9E5A-B8771A4312DD</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -626,25 +643,6 @@ end run</string>
 			<string>DB73AB05-13C5-4ECC-B7BE-EEBF0E5A834F</string>
 			<key>version</key>
 			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>omnifocus:///context/{query}</string>
-				<key>utf8</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
-			<key>uid</key>
-			<string>3B55385B-7D73-4D79-9E5A-B8771A4312DD</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -707,7 +705,7 @@ end run</string>
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>keyword</key>
-				<string>.c</string>
+				<string>.t</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -725,9 +723,9 @@ end run</string>
 				<key>scriptfile</key>
 				<string></string>
 				<key>subtext</key>
-				<string>Search OmniFocus Projects for "{query}"</string>
+				<string>Search OmniFocus Tags for "{query}"</string>
 				<key>title</key>
-				<string>Search OmniFocus for Contexts</string>
+				<string>Search OmniFocus for Tags</string>
 				<key>type</key>
 				<integer>0</integer>
 				<key>withspace</key>
@@ -1609,7 +1607,7 @@ Well, I want it because I can't quickly search for, say, a task within OmniFocus
 			<key>xpos</key>
 			<integer>1800</integer>
 			<key>ypos</key>
-			<integer>140</integer>
+			<integer>110</integer>
 		</dict>
 		<key>3D1CF477-C3FF-47F8-8C13-0BA23A2351A3</key>
 		<dict>
@@ -1788,7 +1786,7 @@ Well, I want it because I can't quickly search for, say, a task within OmniFocus
 		</dict>
 	</dict>
 	<key>version</key>
-	<string>1.2.7</string>
+	<string>2.0.0</string>
 	<key>webaddress</key>
 	<string>rhydlewis.net</string>
 </dict>

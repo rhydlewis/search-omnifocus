@@ -14,10 +14,10 @@ import omnifocus
 
 DB_KEY = 'db_path'
 ICON_ROOT = 'icon_path'
-DB_LOCATION = ("/Library/Containers/com.omnigroup.OmniFocus2/"
-               "Data/Library/Caches/com.omnigroup.OmniFocus2/OmniFocusDatabase2")
-MAS_DB_LOCATION = DB_LOCATION.replace('.OmniFocus2', '.OmniFocus2.MacAppStore')
-OF_ICON_ROOT = '/Applications/OmniFocus.app/Contents/Resources'
+DB_LOCATION = ("/Library/Containers/com.omnigroup.OmniFocus3/Data/"
+               "Library/Application Support/OmniFocus/OmniFocus Caches/OmniFocusDatabase")
+MAS_DB_LOCATION = DB_LOCATION.replace('.OmniFocus3', '.OmniFocus3.MacAppStore')
+OF_ICON_ROOT = '~/Applications/OmniFocus.app/Contents/Resources'
 
 # Update workflow from GitHub repo
 UPDATE_SETTINGS = {'github_slug': 'rhydlewis/search-omnifocus'}
@@ -67,7 +67,6 @@ def get_results(sql, query_type, factory):
         workflow.add_item('No items', icon=ICON_WARNING)
     else:
         for result in results:
-            log.debug(result)
             if query_type == PROJECT:
                 item = factory.create_project(result)
             elif query_type == CONTEXT:
@@ -210,9 +209,8 @@ def run_query(sql):
         log.debug(db_path)
 
     conn = sqlite3.connect(db_path)
-    # conn.row_factory = sqlite3.Row
+    conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
-    log.debug(sql)
     cursor.execute(sql)
     results = cursor.fetchall()
     log.debug("Found {0} results".format(len(results)))
