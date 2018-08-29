@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 ID = str("id")
 NAME = str("name")
+COMPLETED_DATE = str("completed_date")
 BLOCKED_BY_START_DATE = str("blocked_by_future_start_date")
 PROJECT_NAME = str("project_name")
 FLAGGED = str("flagged")
@@ -29,6 +30,7 @@ NAME_SORT = "name ASC"
 TASK_SELECT = ", ".join([
     "t.persistentIdentifier AS {0}".format(ID),
     "t.name AS {0}".format(NAME),
+    "t.dateCompleted AS {0}".format(COMPLETED_DATE),
     "t.blockedByFutureStartDate AS {0}".format(BLOCKED_BY_START_DATE),
     "p.name AS {0}".format(PROJECT_NAME),
     "t.flagged AS {0}".format(FLAGGED),
