@@ -135,7 +135,7 @@ def show_recent_tasks(active_only):
 
 def show_due_tasks():
     return _generate_query(TASK_SELECT, TASK_FROM,
-                           NOT_COMPLETED_CLAUSE + " AND (t.isDueSoon or t.isOverdue)",
+                           NOT_COMPLETED_CLAUSE + " AND (t.dueSoon or t.overdue)",
                            "t.dateDue ASC") + " LIMIT 10"
 
 
