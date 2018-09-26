@@ -14,10 +14,12 @@ STATUS = str("status")
 DUE_DATE = str("due_date")
 ACTIVE = str("active")
 AVAILABLE_TASK_COUNT = str("available_task_count")
-REMAINING_TASK_COUNT = str("remnaining_task_count")
+REMAINING_TASK_COUNT = str("remaining_task_count")
 SINGLETON = str("singleton")
 FOLDER_NAME = str("folder_name")
 ALLOWS_NEXT_ACTION = str("allows_next_action")
+CONTAINING_PROJECT_INFO = str("parent")
+MODIFIED_DATE = str("modified")
 
 
 NAME_SORT = "name ASC"
@@ -36,8 +38,8 @@ TASK_SELECT = ", ".join([
     "t.blocked AS {0}".format(BLOCKED),
     "pi.status AS {0}".format(STATUS),
     "t.effectiveFlagged",
-    "t.dateModified",
-    "t.containingProjectInfo"
+    "t.dateModified AS {0}".format(MODIFIED_DATE),
+    "t.containingProjectInfo AS {0}".format(CONTAINING_PROJECT_INFO)
     ]) + ", t.dateDue AS {0}".format(DUE_DATE)
 TASK_FROM = ("((task tt left join projectinfo pi on tt.containingprojectinfo=pi.pk) t left join "
              "task p on t.task=p.persistentIdentifier) ")
@@ -131,7 +133,6 @@ def show_recent_tasks(active_only):
     else:
         return "SELECT {0} FROM {1} ORDER BY {2} LIMIT {3}".format(TASK_SELECT, TASK_FROM,
                                                                    "t.dateModified DESC", 10)
-
 
 def show_due_tasks():
     return _generate_query(TASK_SELECT, TASK_FROM,

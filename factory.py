@@ -5,7 +5,7 @@ from omnifocus import DEFAULT_PERSPECTIVES
 from workflow import ICON_WARNING
 from queries import ACTIVE, ALLOWS_NEXT_ACTION, AVAILABLE_TASK_COUNT, BLOCKED, BLOCKED_BY_START_DATE, CHILD_COUNT, \
     DUE_DATE, EFFECTIVE_IN_INBOX, EFFECTIVE_START_DATE, FOLDER_NAME, ID, IN_INBOX, NAME, PROJECT_NAME, START_DATE, \
-    STATUS
+    STATUS, CONTAINING_PROJECT_INFO, MODIFIED_DATE
 
 ACTIVE = 'active'
 DONE = 'done'
@@ -35,7 +35,7 @@ class Factory:
         self.active_icon = os.path.join(icon_root, 'active-small@2x.png')
         self.completed_icon = os.path.join(icon_root, 'completed@2x.png')
         self.context_icon = os.path.join(icon_root, 'quickopen-context@2x.png')
-        self.inbox_icon = os.path.join(icon_root, 'Inbox@2x.png')
+        self.inbox_icon = os.path.join(icon_root, 'inbox-sidebar@2x.png')
         self.perspective_icon = os.path.join(icon_root, 'Perspectives@2x.png')
         self.deferred_icon = os.path.join('.', 'deferred.png')
         self.folder_icon = os.path.join(icon_root, 'quickopen-folder@2x.png')
@@ -143,12 +143,12 @@ class Factory:
     def create_recent_item(self, raw_data):
         task = self.create_task(raw_data)
 
-        if raw_data[0] == raw_data[16]:
+        if raw_data[ID] == raw_data[CONTAINING_PROJECT_INFO]:
             task.name = task.name + " (Project)"
         else:
             task.name = task.name + " (Task)"
 
-        modified_date = offset_date(raw_data[14]).strftime("%c")
+        modified_date = offset_date(raw_data[MODIFIED_DATE]).strftime("%c")
         task.subtitle = modified_date
         return task
 
