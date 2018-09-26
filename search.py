@@ -9,17 +9,17 @@ import datetime
 from workflow import Workflow, ICON_WARNING, ICON_SYNC
 
 from factory import Factory
+from omnifocus import DEFAULT_OF_VERSION
 import queries
 import omnifocus
 
 DB_KEY = 'db_path'
-VERSION_KEY = 'version'
+VERSION_KEY = 'of_version'
 ICON_ROOT = 'icon_path'
 OF2_DB_LOCATION = "/Library/Containers/com.omnigroup.OmniFocus2/Data/Library/Caches/com.omnigroup.OmniFocus2/OmniFocusDatabase2"
 OF2_MAS_DB_LOCATION = OF2_DB_LOCATION.replace('.OmniFocus2', '.OmniFocus2.MacAppStore')
 OF3_DB_LOCATION = "/Library/Containers/com.omnigroup.OmniFocus3/Data/Library/Application Support/OmniFocus/OmniFocus Caches/OmniFocusDatabase"
 OF3_MAS_DB_LOCATION = OF3_DB_LOCATION.replace('.OmniFocus3', '.OmniFocus3.MacAppStore')
-DEFAULT_OF_VERSION = "2"
 
 OF_ICON_ROOT = '/Applications/OmniFocus.app/Contents/Resources'
 
@@ -46,36 +46,34 @@ ESC_SINGLE_QUOTE = "''"
 
 def main(wf):
     log.debug('Started workflow')
-    factory = Factory(find_omnifocus_icons())
     args = parse_args()
 
     if SHOW_UPDATES and workflow.update_available:
-        workflow.add_item('A new version is available',
-                          'Action this item to install the update',
-                          autocomplete='workflow:update',
-                          icon=ICON_SYNC)
+        wf.add_item('A new version is available', 'Action this item to install the update',
+                    autocomplete='workflow:update', icon=ICON_SYNC)
 
+    set_omnifocus_version(args)
+    omnifocus_version = wf.settings[VERSION_KEY]
+    log.info("Using OmniFocus version {0}".format(omnifocus_version))
+
+    factory = Factory(find_omnifocus_icons(), omnifocus_version)
+
+    if args.type != PERSPECTIVE:
+        sql = populate_query(args)
+        get_results(sql, args.type, factory)
+    else:
+        get_perspectives(args, factory)
+
+    wf.send_feedback()
+
+def set_omnifocus_version(args):
     set_version = args.switch_versions
     if set_version:
-        workflow.store_data(VERSION_KEY, set_version)
-        version = set_version
-        print('Now using OmniFocus v{0} for search results'.format(version))
-    else:
-        version = workflow.stored_data(VERSION_KEY)
-
-        if not version:
-            version = DEFAULT_OF_VERSION
-            workflow.store_data(VERSION_KEY, version)
-
-        log.debug("Using OmniFocus version {0}".format(version))
-
-        if args.type != PERSPECTIVE:
-            sql = populate_query(args)
-            get_results(sql, args.type, factory)
-        else:
-            get_perspectives(args, factory)
-
-        workflow.send_feedback()
+        workflow.settings[VERSION_KEY] = set_version
+        print('Now using OmniFocus v{0} for search results'.format(set_version))
+        exit(1)
+    elif not workflow.settings.has_key(VERSION_KEY):
+        workflow.settings[VERSION_KEY] = DEFAULT_OF_VERSION
 
 
 def get_results(sql, query_type, factory):
@@ -102,13 +100,15 @@ def get_results(sql, query_type, factory):
 
 
 def get_perspectives(args, factory):
+    version = workflow.settings[VERSION_KEY]
+
     if args.query:
         query = args.query[0]
         log.debug("Searching perspectives for '{0}'".format(query))
-        perspectives = omnifocus.search_perspectives(query)
+        perspectives = omnifocus.search_perspectives(query, version)
     else:
         log.debug("Finding all perspectives")
-        perspectives = omnifocus.list_perspectives()
+        perspectives = omnifocus.list_perspectives(version)
 
     if not perspectives:
         workflow.add_item('No items', icon=ICON_WARNING)
@@ -134,8 +134,6 @@ def populate_query(args):
     flagged_only = args.flagged_only
     everything = args.everything
 
-    version = workflow.stored_data(VERSION_KEY)
-
     if args.type == PROJECT:
         log.debug('Searching projects')
         sql = queries.search_projects(active_only, query)
@@ -156,7 +154,7 @@ def populate_query(args):
         sql = queries.show_recent_tasks(active_only)
     elif args.due:
         log.debug('Listing overdue or due items')
-        sql = queries.show_due_tasks(version == DEFAULT_OF_VERSION)
+        sql = queries.show_due_tasks(workflow.settings[VERSION_KEY])
     else:
         log.debug('Searching tasks')
         sql = queries.search_tasks(active_only, flagged_only, query, everything)
@@ -184,19 +182,21 @@ def parse_args():
 
 
 def find_omnifocus_icons():
-    icon_root = workflow.stored_data(ICON_ROOT)
-    if not icon_root:
+    if not workflow.settings.has_key(ICON_ROOT):
         icon_root = OF_ICON_ROOT
         if not os.path.isdir(icon_root):
             icon_root = omnifocus.find_install_location() + "Contents/Resources"
+        workflow.settings[ICON_ROOT] = icon_root
         log.debug("Storing icon_root as '{0}'".format(icon_root))
     else:
+        icon_root = workflow.settings[ICON_ROOT]
         log.debug("Using stored icon_root:'{0}'".format(icon_root))
+
     return icon_root
 
 
-def find_omnifocus_db(version):
-    if version == DEFAULT_OF_VERSION:
+def find_omnifocus_db():
+    if workflow.settings[VERSION_KEY] == DEFAULT_OF_VERSION:
         non_mas_location = OF2_DB_LOCATION
         mas_location = OF2_MAS_DB_LOCATION
     else:
@@ -228,8 +228,7 @@ def mod_date(filename):
 
 
 def run_query(sql):
-    version = workflow.stored_data(VERSION_KEY)
-    db_path = find_omnifocus_db(version)
+    db_path = find_omnifocus_db()
 
     conn = sqlite3.connect(db_path)
     conn.row_factory = sqlite3.Row

@@ -1,9 +1,9 @@
 from __future__ import unicode_literals
 import os
 from datetime import datetime
-from omnifocus import DEFAULT_PERSPECTIVES
+from omnifocus import DEFAULT_OF2_PERSPECTIVES, DEFAULT_OF3_PERSPECTIVES, DEFAULT_OF_VERSION
 from workflow import ICON_WARNING
-from queries import ACTIVE, ALLOWS_NEXT_ACTION, AVAILABLE_TASK_COUNT, BLOCKED, BLOCKED_BY_START_DATE, CHILD_COUNT, \
+from queries import ALLOWS_NEXT_ACTION, AVAILABLE_TASK_COUNT, BLOCKED, BLOCKED_BY_START_DATE, CHILD_COUNT, \
     DUE_DATE, EFFECTIVE_IN_INBOX, EFFECTIVE_START_DATE, FOLDER_NAME, ID, IN_INBOX, NAME, PROJECT_NAME, START_DATE, \
     STATUS, CONTAINING_PROJECT_INFO, MODIFIED_DATE
 
@@ -12,6 +12,8 @@ STATUS_DONE = 'done'
 STATUS_DROPPED = 'dropped'
 STATUS_INACTIVE = 'inactive'
 DATETIME_OFFSET = 978307200
+
+FOLDER_PREFIX = 'en.lproj/OmniFocus Help/art/'
 
 
 class Item(object):
@@ -23,43 +25,57 @@ class Item(object):
         self.icon = icon
 
     def __repr__(self):
-        return "{0}: {1}, ({2}), {3}, {4}".format(self.item_type, self.name, self.persistent_id,
-                                                  self.subtitle, self.icon)
+        return "{0}: {1}, ({2}), {3}, {4}".format(self.item_type, self.name, self.persistent_id, self.subtitle,
+                                                  self.icon)
 
 
 class Factory:
-    def __init__(self, icon_root):
+    def __init__(self, icon_root, version):
+        use_of_2 = version == DEFAULT_OF_VERSION
+
         self.dropped_icon = os.path.join(icon_root, 'dropped@2x.png')
         self.flagged_icon = os.path.join(icon_root, 'flagged@2x.png')
         self.on_hold_icon = os.path.join(icon_root, 'on-hold@2x.png')
         self.active_icon = os.path.join(icon_root, 'active-small@2x.png')
         self.completed_icon = os.path.join(icon_root, 'completed@2x.png')
-        self.context_icon = os.path.join(icon_root, 'quickopen-context@2x.png')
         self.inbox_icon = os.path.join(icon_root, 'inbox-sidebar@2x.png')
         self.perspective_icon = os.path.join(icon_root, 'Perspectives@2x.png')
         self.deferred_icon = os.path.join('.', 'deferred.png')
         self.folder_icon = os.path.join(icon_root, 'quickopen-folder@2x.png')
-        
-        self.inbox_perspective_icon = os.path.join(icon_root, 'tab-inbox-selected@2x.png')
-        self.projects_perspective_icon = os.path.join(icon_root, 'tab-projects-selected@2x.png')
-        self.contexts_perspective_icon = os.path.join(icon_root, 'tab-contexts-selected@2x.png')
-        self.forecast_perspective_icon = os.path.join(icon_root, 'tab-forecast-selected@2x.png')
-        self.flagged_perspective_icon = os.path.join(icon_root, 'tab-flagged-selected@2x.png')
-        self.review_perspective_icon = os.path.join(icon_root, 'tab-review-selected@2x.png')
-        
-        self.default_perspective_icons = [self.inbox_perspective_icon,
-                                          self.projects_perspective_icon,
-                                          self.contexts_perspective_icon,
-                                          self.forecast_perspective_icon,
-                                          self.flagged_perspective_icon,
-                                          self.review_perspective_icon]
-        
-        self.icon_lookup = dict(zip(DEFAULT_PERSPECTIVES, self.default_perspective_icons))
+
+        self.setup_perspective_icons(icon_root, use_of_2)
+
+        if use_of_2:
+            self.icon_lookup = dict(zip(DEFAULT_OF2_PERSPECTIVES, self.default_perspective_icons))
+        else:
+            self.icon_lookup = dict(zip(DEFAULT_OF3_PERSPECTIVES, self.default_perspective_icons))
 
         self.project_icons = {STATUS_ACTIVE: self.active_icon, STATUS_DONE: self.completed_icon,
                               STATUS_DROPPED: self.dropped_icon, STATUS_INACTIVE: self.on_hold_icon}
         self.context_icons = {1: self.active_icon, 0: self.on_hold_icon}
-    
+
+    def setup_perspective_icons(self, icon_root, use_of_2):
+        if use_of_2:
+            self.context_icon = os.path.join(icon_root, 'quickopen-context@2x.png')
+            self.inbox_perspective_icon = os.path.join(icon_root, 'tab-inbox-selected@2x.png')
+            self.projects_perspective_icon = os.path.join(icon_root, 'tab-projects-selected@2x.png')
+            self.contexts_perspective_icon = os.path.join(icon_root, 'tab-contexts-selected@2x.png')
+            self.forecast_perspective_icon = os.path.join(icon_root, 'tab-forecast-selected@2x.png')
+            self.flagged_perspective_icon = os.path.join(icon_root, 'tab-flagged-selected@2x.png')
+            self.review_perspective_icon = os.path.join(icon_root, 'tab-review-selected@2x.png')
+        else:
+            self.context_icon = os.path.join(icon_root, 'quickopen-tag@2x.png')
+            self.inbox_perspective_icon = os.path.join(icon_root, 'AppIcon-Credits.png')
+            self.projects_perspective_icon = os.path.join(icon_root, 'AppIcon-Credits.png')
+            self.contexts_perspective_icon = os.path.join(icon_root, 'AppIcon-Credits.png')
+            self.forecast_perspective_icon = os.path.join(icon_root, 'AppIcon-Credits.png')
+            self.flagged_perspective_icon = os.path.join(icon_root, 'AppIcon-Credits.png')
+            self.review_perspective_icon = os.path.join(icon_root, 'AppIcon-Credits.png')
+
+        self.default_perspective_icons = [self.inbox_perspective_icon, self.projects_perspective_icon,
+                                          self.contexts_perspective_icon, self.forecast_perspective_icon,
+                                          self.flagged_perspective_icon, self.review_perspective_icon]
+
     def create_project(self, row):
         pid = row[ID]
         name = row[NAME]
@@ -76,7 +92,6 @@ class Factory:
     
     def create_task(self, row):
         pid = row[ID]
-        # completed = raw_data[2] == 1
         blocked_by_future_date = row[BLOCKED_BY_START_DATE] == 1
         name = row[NAME]
         project = row[PROJECT_NAME]
@@ -127,7 +142,7 @@ class Factory:
     def create_perspective(self, name):
         icon = self.perspective_icon
         perspective_type = 'Custom'
-        if name in DEFAULT_PERSPECTIVES:
+        if name in DEFAULT_OF2_PERSPECTIVES or name in DEFAULT_OF3_PERSPECTIVES:
             icon = self.icon_lookup[name]
             perspective_type = 'Default'
     

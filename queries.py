@@ -1,5 +1,7 @@
 from __future__ import unicode_literals
 
+from omnifocus import DEFAULT_OF_VERSION
+
 ID = str("id")
 NAME = str("name")
 BLOCKED_BY_START_DATE = str("blocked_by_future_start_date")
@@ -135,9 +137,9 @@ def show_recent_tasks(active_only):
     else:
         return "SELECT {0} FROM {1} ORDER BY {2} LIMIT {3}".format(TASK_SELECT, TASK_FROM, "t.dateModified DESC", 10)
 
-def show_due_tasks(use_of_2):
+def show_due_tasks(version):
     constraint = OF3_DUE_SOON_CONSTRAINT
-    if use_of_2:
+    if version == DEFAULT_OF_VERSION:
         constraint = OF2_DUE_SOON_CONSTRAINT
 
     return _generate_query(TASK_SELECT, TASK_FROM, NOT_COMPLETED_CLAUSE + constraint, "t.dateDue ASC") + " LIMIT 10"
