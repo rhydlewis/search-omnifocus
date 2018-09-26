@@ -13,10 +13,14 @@ import queries
 import omnifocus
 
 DB_KEY = 'db_path'
+VERSION_KEY = 'version'
 ICON_ROOT = 'icon_path'
-DB_LOCATION = ("/Library/Containers/com.omnigroup.OmniFocus2/"
-               "Data/Library/Caches/com.omnigroup.OmniFocus2/OmniFocusDatabase2")
-MAS_DB_LOCATION = DB_LOCATION.replace('.OmniFocus2', '.OmniFocus2.MacAppStore')
+OF2_DB_LOCATION = "/Library/Containers/com.omnigroup.OmniFocus2/Data/Library/Caches/com.omnigroup.OmniFocus2/OmniFocusDatabase2"
+OF2_MAS_DB_LOCATION = OF2_DB_LOCATION.replace('.OmniFocus2', '.OmniFocus2.MacAppStore')
+OF3_DB_LOCATION = "/Library/Containers/com.omnigroup.OmniFocus3/Data/Library/Application Support/OmniFocus/OmniFocus Caches/OmniFocusDatabase"
+OF3_MAS_DB_LOCATION = OF3_DB_LOCATION.replace('.OmniFocus3', '.OmniFocus3.MacAppStore')
+DEFAULT_OF_VERSION = "2"
+
 OF_ICON_ROOT = '/Applications/OmniFocus.app/Contents/Resources'
 
 # Update workflow from GitHub repo
@@ -33,6 +37,7 @@ FLAGGED = "g"
 NOTES = "n"
 RECENT = "r"
 DUE = "d"
+VERSION_SWITCH = "s"
 log = None
 
 SINGLE_QUOTE = "'"
@@ -50,13 +55,27 @@ def main(wf):
                           autocomplete='workflow:update',
                           icon=ICON_SYNC)
 
-    if args.type != PERSPECTIVE:
-        sql = populate_query(args)
-        get_results(sql, args.type, factory)
+    set_version = args.switch_versions
+    if set_version:
+        workflow.store_data(VERSION_KEY, set_version)
+        version = set_version
+        print('Now using OmniFocus v{0} for search results'.format(version))
     else:
-        get_perspectives(args, factory)
+        version = workflow.stored_data(VERSION_KEY)
 
-    workflow.send_feedback()
+        if not version:
+            version = DEFAULT_OF_VERSION
+            workflow.store_data(VERSION_KEY, version)
+
+        log.debug("Using OmniFocus version {0}".format(version))
+
+        if args.type != PERSPECTIVE:
+            sql = populate_query(args)
+            get_results(sql, args.type, factory)
+        else:
+            get_perspectives(args, factory)
+
+        workflow.send_feedback()
 
 
 def get_results(sql, query_type, factory):
@@ -67,7 +86,6 @@ def get_results(sql, query_type, factory):
         workflow.add_item('No items', icon=ICON_WARNING)
     else:
         for result in results:
-            log.debug(result)
             if query_type == PROJECT:
                 item = factory.create_project(result)
             elif query_type == CONTEXT:
@@ -116,12 +134,14 @@ def populate_query(args):
     flagged_only = args.flagged_only
     everything = args.everything
 
+    version = workflow.stored_data(VERSION_KEY)
+
     if args.type == PROJECT:
         log.debug('Searching projects')
         sql = queries.search_projects(active_only, query)
     elif args.type == CONTEXT:
-        log.debug('Searching contexts')
-        sql = queries.search_contexts(query)
+        log.debug('Searching contexts/tags')
+        sql = queries.search_tags(query)
     elif args.type == FOLDER:
         log.debug('Searching folder')
         sql = queries.search_folders(query)
@@ -136,7 +156,7 @@ def populate_query(args):
         sql = queries.show_recent_tasks(active_only)
     elif args.due:
         log.debug('Listing overdue or due items')
-        sql = queries.show_due_tasks()
+        sql = queries.show_due_tasks(version == DEFAULT_OF_VERSION)
     else:
         log.debug('Searching tasks')
         sql = queries.search_tasks(active_only, flagged_only, query, everything)
@@ -145,10 +165,8 @@ def populate_query(args):
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Search OmniFocus")
-    parser.add_argument('-a', '--active-only', action='store_true',
-                        help='search for active tasks only')
-    parser.add_argument('-g', '--flagged-only', action='store_true',
-                        help='search for flagged tasks only')
+    parser.add_argument('-a', '--active-only', action='store_true', help='search for active tasks only')
+    parser.add_argument('-g', '--flagged-only', action='store_true', help='search for flagged tasks only')
     parser.add_argument('-e', '--everything', action='store_true',
                         help='search for tasks in the inbox as well as processed tasks')
     parser.add_argument('-t', '--type', default=TASK,
@@ -157,6 +175,7 @@ def parse_args():
                                        '(p)roject, (c)ontext, (f)older, perspecti(v)e, '
                                        'task (n)otes or (r)ecent items?')
     parser.add_argument('-d', '--due', action='store_true', help='show overdue or due items')
+    parser.add_argument('-s', '--switch-versions', choices=["2", "3"])
     parser.add_argument('query', type=unicode, nargs=argparse.REMAINDER, help='query string')
 
     log.debug(workflow.args)
@@ -176,20 +195,27 @@ def find_omnifocus_icons():
     return icon_root
 
 
-def find_omnifocus_db():
+def find_omnifocus_db(version):
+    if version == DEFAULT_OF_VERSION:
+        non_mas_location = OF2_DB_LOCATION
+        mas_location = OF2_MAS_DB_LOCATION
+    else:
+        non_mas_location = OF3_DB_LOCATION
+        mas_location = OF3_MAS_DB_LOCATION
+
     home = os.path.expanduser("~")
-    db = "{0}{1}".format(home, DB_LOCATION)
-    mas = "{0}{1}".format(home, MAS_DB_LOCATION)
+    db = "{0}{1}".format(home, non_mas_location)
+    mas = "{0}{1}".format(home, mas_location)
 
     if not os.path.isfile(db):
-        log.debug("Omnifocus db not found at {0}; using {1} instead".format(db, mas))
+        log.debug("OmniFocus db not found at {0}; using {1} instead".format(db, mas))
         db = mas
     elif os.path.isfile(mas):
         db_mod = mod_date(db)
         mas_mod = mod_date(mas)
         if db_mod < mas_mod:
             db = mas
-        log.debug("Omnifocus direct and MAS db's found; using {0} as it's newer "
+        log.debug("OmniFocus direct and MAS db's found; using {0} as it's newer "
                   "(Direct {1} vs. MAS {2})".format(db, db_mod, mas_mod))
 
     log.debug(db)
@@ -202,15 +228,11 @@ def mod_date(filename):
 
 
 def run_query(sql):
-    db_path = workflow.stored_data(DB_KEY)
-    if not db_path:
-        db_path = find_omnifocus_db()
-        workflow.store_data(DB_KEY, db_path)
-    else:
-        log.debug(db_path)
+    version = workflow.stored_data(VERSION_KEY)
+    db_path = find_omnifocus_db(version)
 
     conn = sqlite3.connect(db_path)
-    # conn.row_factory = sqlite3.Row
+    conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
     log.debug(sql)
     cursor.execute(sql)

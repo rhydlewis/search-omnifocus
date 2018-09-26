@@ -14,6 +14,16 @@ Well, I want it because I can't quickly search for, say, a task within OmniFocus
 
 ## How to use
 
+## Setting up
+
+To use OmniFocus 3:
+
+TBC
+
+Alternatively, to use OmniFocus 2:
+
+TBC
+
 ### Searching for tasks
 
 * Search for all tasks within OmniFocus (irrespective of status) with `.s`:
@@ -36,15 +46,18 @@ Well, I want it because I can't quickly search for, say, a task within OmniFocus
 
 ![](search-for-project.png)
 
-### Searching for contexts
+### Searching for tags or contexts
 
-* Search for a specific context with `.c`:
+* Search for a specific tag with `.t` or context with `.c`:
 
+![](search-for-tag.png)
 ![](search-for-context.png)
 
-or just list all contexts with `.lc`:
+or just list all tags with `.lt` or contexts with `.lc`:
 
-![](list-contexts.png)
+![](list-tags.png)
+
+* Search for a specific context with `.c`:
 
 ### Searching for perspectives
 
