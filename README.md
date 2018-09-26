@@ -16,13 +16,13 @@ Well, I want it because I can't quickly search for, say, a task within OmniFocus
 
 ## Setting up
 
-To use OmniFocus 3:
+The workflow assumes you're using OmniFocus 2 by default. To use OmniFocus 3 instead, run `use-of-3`:
 
-TBC
+![](./images/use-of-3.png)
 
-Alternatively, to use OmniFocus 2:
+To switch back to OmniFocus 2, run `use-of-2`:
 
-TBC
+![](./images/use-of-2.png)
 
 ### Searching for tasks
 
