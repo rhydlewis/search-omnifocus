@@ -28,7 +28,7 @@ TBC
 
 * Search for all tasks within OmniFocus (irrespective of status) with `.s`:
 
-![](search-for-tasks.png)
+![](./images/search-for-tasks.png)
 
 ### Searching for tasks in the Inbox and the Library 
 
@@ -38,24 +38,24 @@ TBC
 
 * Search the OmniFocus inbox with `.i`:
 
-![](search-inbox.png)
+![](./images/search-inbox.png)
 
 ### Searching for projects
 
 * Search for projects with `.p`:
 
-![](search-for-project.png)
+![](./images/search-for-project.png)
 
 ### Searching for tags or contexts
 
 * Search for a specific tag with `.t` or context with `.c`:
 
-![](search-for-tag.png)
-![](search-for-context.png)
+![](./images/search-for-tag.png)
+![](./images/search-for-context.png)
 
 or just list all tags with `.lt` or contexts with `.lc`:
 
-![](list-tags.png)
+![](./images/list-tags.png)
 
 * Search for a specific context with `.c`:
 
@@ -63,27 +63,27 @@ or just list all tags with `.lt` or contexts with `.lc`:
 
 * Search for a specific perspective with `.v`:
 
-![](search-for-perspectives.png)
+![](./images/search-for-perspectives.png)
 
 or just list all perspectives with `.lv`:
 
-![](list-perspectives.png)
+![](./images/list-perspectives.png)
 
 ### Searching for folders
 
 * Search for a specific folder with `.f`:
 
-![](search-for-folders.png)
+![](./images/search-for-folders.png)
 
 or just list all folders with `.lf`:
 
-![](list-folders.png)
+![](./images/list-folders.png)
 
 ### Searching for task or projects notes
  
 * Search for a specific note in a task or project with `.n`:
 
-![](search-note.png)
+![](./images/search-note.png)
 
 * Search for a specific note in a flagged task `.ng`
 * Search for a specific note in active task `.na`
@@ -92,31 +92,31 @@ or just list all folders with `.lf`:
 
 * Search just for *active* tasks with `.sa`:
 
-![](search-for-active-tasks.png)
+![](./images/search-for-active-tasks.png)
 
 or just for *active* projects with `.pa`:
 
-![](search-for-active-projects.png)
+![](./images/search-for-active-projects.png)
 
 * Search all *flagged* tasks with `.g`:
  
-![](search-for-flagged-tasks.png)
+![](./images/search-for-flagged-tasks.png)
 
 or for *flagged* and *active* tasks with `.ga`:
 
-![](search-for-flagged-active-tasks.png)
+![](./images/search-for-flagged-active-tasks.png)
 
 * Show the 10 most recently modified tasks with `.r`:
 
-![](show-recent-tasks.png)
+![](./images/show-recent-tasks.png)
 
 or show the 10 most recently modfified and non-completed tasks or projects with `.ra`:
 
-![](show-recent-active-tasks.png)
+![](./images/show-recent-active-tasks.png)
 
 * Show overdue or due items with `.d`:
 
-![](overdue-tasks.png)
+![](./images/overdue-tasks.png)
 
 ## Thanks to...
 
