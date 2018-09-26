@@ -7,10 +7,10 @@ from queries import ACTIVE, ALLOWS_NEXT_ACTION, AVAILABLE_TASK_COUNT, BLOCKED, B
     DUE_DATE, EFFECTIVE_IN_INBOX, EFFECTIVE_START_DATE, FOLDER_NAME, ID, IN_INBOX, NAME, PROJECT_NAME, START_DATE, \
     STATUS, CONTAINING_PROJECT_INFO, MODIFIED_DATE
 
-ACTIVE = 'active'
-DONE = 'done'
-DROPPED = 'dropped'
-INACTIVE = 'inactive'
+STATUS_ACTIVE = 'active'
+STATUS_DONE = 'done'
+STATUS_DROPPED = 'dropped'
+STATUS_INACTIVE = 'inactive'
 DATETIME_OFFSET = 978307200
 
 
@@ -56,8 +56,8 @@ class Factory:
         
         self.icon_lookup = dict(zip(DEFAULT_PERSPECTIVES, self.default_perspective_icons))
 
-        self.project_icons = {ACTIVE: self.active_icon, DONE: self.completed_icon,
-                              DROPPED: self.dropped_icon, INACTIVE: self.on_hold_icon}
+        self.project_icons = {STATUS_ACTIVE: self.active_icon, STATUS_DONE: self.completed_icon,
+                              STATUS_DROPPED: self.dropped_icon, STATUS_INACTIVE: self.on_hold_icon}
         self.context_icons = {1: self.active_icon, 0: self.on_hold_icon}
     
     def create_project(self, row):
@@ -90,7 +90,7 @@ class Factory:
 
         icon = self.active_icon
     
-        if blocked_by_future_date or (blocked and not children) or parent_status != ACTIVE:
+        if blocked_by_future_date or (blocked and not children) or parent_status != STATUS_ACTIVE:
             icon = self.on_hold_icon
         if is_deferred(datetostart):
             icon = self.deferred_icon

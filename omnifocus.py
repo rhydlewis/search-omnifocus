@@ -23,7 +23,7 @@ def list_perspectives():
     results = run_script(PERSPECTIVE_SEARCH_SCRIPT)
     results = [result.rstrip("\n").decode('utf-8', 'ignore') for result in results
                if result != "missing value"]
-    names = results
+    names = DEFAULT_PERSPECTIVES + results
     return names
 
 
