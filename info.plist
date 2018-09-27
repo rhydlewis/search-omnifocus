@@ -3,7 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string>net.rhydlewis.alfred.searchomnifocustest</string>
+	<string>net.rhydlewis.alfred.searchomnifocus</string>
+	<key>category</key>
+	<string>Productivity</string>
 	<key>connections</key>
 	<dict>
 		<key>0C23C709-89CD-482B-B4FC-79F79A3AD6D3</key>
