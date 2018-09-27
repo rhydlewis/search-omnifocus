@@ -464,7 +464,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Search OmniFocus TEST</string>
+	<string>Search OmniFocus<string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -2118,7 +2118,7 @@ Well, I want it because I can't quickly search for, say, a task within OmniFocus
 		</dict>
 	</dict>
 	<key>version</key>
-	<string>2.0.1</string>
+	<string>2.0.2</string>
 	<key>webaddress</key>
 	<string>rhydlewis.net</string>
 </dict>
