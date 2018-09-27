@@ -464,7 +464,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Search OmniFocus<string>
+	<string>Search OmniFocus</string>
 	<key>objects</key>
 	<array>
 		<dict>
