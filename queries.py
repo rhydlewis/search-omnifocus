@@ -85,7 +85,8 @@ def search_tasks(active_only, flagged, query, everything=None):
 
 def search_inbox(query):
     where = "(t.effectiveInInbox = 1 OR t.inInbox = 1)"
-    where = (TASK_NAME_WHERE + where).format(query)
+    if query:
+        where = (TASK_NAME_WHERE + where).format(query)
     return _generate_query(TASK_SELECT, TASK_FROM, where, "t." + NAME_SORT)
 
 

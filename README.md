@@ -34,11 +34,13 @@ To switch back to OmniFocus 2, run `use-of-2`:
 
 * Search for all tasks within OmniFocus (whether you've processed them or not) with `.se`.
 
+![](./images/search-inbox.png)
+
+or just list all tasks in the inbox with `.li`.
+
 ### Searching the inbox
 
 * Search the OmniFocus inbox with `.i`:
-
-![](./images/search-inbox.png)
 
 ### Searching for projects
 
