@@ -8,7 +8,7 @@ FORECAST = 'Forecast'
 FLAGGED = 'Flagged'
 REVIEW = 'Review'
 
-DEFAULT_OF_VERSION = '2'
+DEFAULT_OF_VERSION = '3'
 
 DEFAULT_OF2_PERSPECTIVES = [INBOX, PROJECTS, CONTEXTS, FORECAST, FLAGGED, REVIEW]
 DEFAULT_OF3_PERSPECTIVES = [INBOX, PROJECTS, TAGS, FORECAST, FLAGGED, REVIEW]
@@ -28,9 +28,9 @@ def list_perspectives(version):
     results = [result.rstrip("\n").decode('utf-8', 'ignore') for result in results if result != "missing value"]
 
     if version == DEFAULT_OF_VERSION:
-        names = DEFAULT_OF2_PERSPECTIVES + results
-    else:
         names = DEFAULT_OF3_PERSPECTIVES + results
+    else:
+        names = DEFAULT_OF2_PERSPECTIVES + results
 
     return names
 

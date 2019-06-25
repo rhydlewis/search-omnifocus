@@ -31,7 +31,7 @@ class Item(object):
 
 class Factory:
     def __init__(self, icon_root, version):
-        use_of_2 = version == DEFAULT_OF_VERSION
+        use_of_2 = version != DEFAULT_OF_VERSION
 
         self.dropped_icon = os.path.join(icon_root, 'dropped@2x.png')
         self.flagged_icon = os.path.join(icon_root, 'flagged@2x.png')

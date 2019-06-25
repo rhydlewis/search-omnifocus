@@ -197,11 +197,11 @@ def find_omnifocus_icons():
 
 def find_omnifocus_db():
     if workflow.settings[VERSION_KEY] == DEFAULT_OF_VERSION:
-        non_mas_location = OF2_DB_LOCATION
-        mas_location = OF2_MAS_DB_LOCATION
-    else:
         non_mas_location = OF3_DB_LOCATION
         mas_location = OF3_MAS_DB_LOCATION
+    else:
+        non_mas_location = OF2_DB_LOCATION
+        mas_location = OF2_MAS_DB_LOCATION
 
     home = os.path.expanduser("~")
     db = "{0}{1}".format(home, non_mas_location)
