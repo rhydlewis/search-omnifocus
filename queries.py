@@ -14,7 +14,6 @@ CHILD_COUNT = str("child_count")
 BLOCKED = str("blocked")
 STATUS = str("status")
 DUE_DATE = str("due_date")
-ACTIVE = str("active")
 AVAILABLE_TASK_COUNT = str("available_task_count")
 REMAINING_TASK_COUNT = str("remaining_task_count")
 SINGLETON = str("singleton")
@@ -52,8 +51,7 @@ ACTIVE_CLAUSE = "t.blocked = 0 AND "
 TAG_SELECT = ", ".join([
     "persistentIdentifier AS {0}".format(ID),
     "name AS {0}".format(NAME),
-    "allowsNextAction AS {0}".format(ALLOWS_NEXT_ACTION),
-    "active AS {0}".format(ACTIVE)]) + ", availableTaskCount AS {0}".format(AVAILABLE_TASK_COUNT)
+    "allowsNextAction AS {0}".format(ALLOWS_NEXT_ACTION)]) + ", availableTaskCount AS {0}".format(AVAILABLE_TASK_COUNT)
 PROJECT_SELECT = ", ".join([
     "p.pk AS {0}".format(ID),
     "t.name AS {0}".format(NAME),
@@ -103,16 +101,16 @@ def search_projects(active_only, query):
 
 
 def search_tags(query):
-    where = "active = 1"
-    if query:
-        where = where + " AND lower(name) LIKE lower('%{0}%')".format(query)
-
-    return _generate_query(TAG_SELECT, "Context", where, NAME_SORT)
+    if not query:
+        return "SELECT {0} FROM {1} ORDER BY {2}".format(TAG_SELECT, "Context", NAME_SORT)
+    else:
+        where = "lower(name) LIKE lower('%{0}%')".format(query)
+        return _generate_query(TAG_SELECT, "Context", where, NAME_SORT)
 
 
 def search_folders(query):
-    select = "persistentIdentifier AS {0}, name as {1}, active AS {2}, effectiveActive".format(ID, NAME, ACTIVE)
-    where = "(active = 1 OR effectiveActive = 1)"
+    select = "persistentIdentifier AS {0}, name as {1}".format(ID, NAME)
+    where = "(dateHidden is null AND effectiveDateHidden is null)"
     if query:
         where = where + " AND lower(name) LIKE lower('%{0}%')".format(query)
 
@@ -139,9 +137,9 @@ def show_recent_tasks(active_only):
         return "SELECT {0} FROM {1} ORDER BY {2} LIMIT {3}".format(TASK_SELECT, TASK_FROM, "t.dateModified DESC", 10)
 
 def show_due_tasks(version):
-    constraint = OF3_DUE_SOON_CONSTRAINT
+    constraint = OF2_DUE_SOON_CONSTRAINT
     if version == DEFAULT_OF_VERSION:
-        constraint = OF2_DUE_SOON_CONSTRAINT
+        constraint = OF3_DUE_SOON_CONSTRAINT
 
     return _generate_query(TASK_SELECT, TASK_FROM, NOT_COMPLETED_CLAUSE + constraint, "t.dateDue ASC") + " LIMIT 10"
 
