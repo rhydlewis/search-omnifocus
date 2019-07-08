@@ -14,7 +14,6 @@ CHILD_COUNT = str("child_count")
 BLOCKED = str("blocked")
 STATUS = str("status")
 DUE_DATE = str("due_date")
-# ACTIVE = str("active")
 AVAILABLE_TASK_COUNT = str("available_task_count")
 REMAINING_TASK_COUNT = str("remaining_task_count")
 SINGLETON = str("singleton")
@@ -53,7 +52,6 @@ TAG_SELECT = ", ".join([
     "persistentIdentifier AS {0}".format(ID),
     "name AS {0}".format(NAME),
     "allowsNextAction AS {0}".format(ALLOWS_NEXT_ACTION)]) + ", availableTaskCount AS {0}".format(AVAILABLE_TASK_COUNT)
-    # "active AS {0}".format(ACTIVE)]) + ", availableTaskCount AS {0}".format(AVAILABLE_TASK_COUNT)
 PROJECT_SELECT = ", ".join([
     "p.pk AS {0}".format(ID),
     "t.name AS {0}".format(NAME),
@@ -112,7 +110,7 @@ def search_tags(query):
 
 def search_folders(query):
     select = "persistentIdentifier AS {0}, name as {1}".format(ID, NAME)
-    where = "(dateHidden is null OR effectiveDateHidden is null)"
+    where = "(dateHidden is null AND effectiveDateHidden is null)"
     if query:
         where = where + " AND lower(name) LIKE lower('%{0}%')".format(query)
 
