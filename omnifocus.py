@@ -23,20 +23,15 @@ PERSPECTIVE_SEARCH_SCRIPT = '''
 LOCATION_SCRIPT = 'tell application "Finder" to get (POSIX path of (path to application "OmniFocus"))'
 
 
-def list_perspectives(version):
+def list_perspectives():
     results = run_script(PERSPECTIVE_SEARCH_SCRIPT)
     results = [result.rstrip("\n").decode('utf-8', 'ignore') for result in results if result != "missing value"]
 
-    if version == DEFAULT_OF_VERSION:
-        names = DEFAULT_OF3_PERSPECTIVES + results
-    else:
-        names = DEFAULT_OF2_PERSPECTIVES + results
-
-    return names
+    return DEFAULT_OF3_PERSPECTIVES + results
 
 
-def search_perspectives(query, version):
-    return [perspective for perspective in list_perspectives(version) if query.lower() in perspective.lower()]
+def search_perspectives(query):
+    return [perspective for perspective in list_perspectives() if query.lower() in perspective.lower()]
 
 
 # see suggestion from deanishe at:
@@ -50,3 +45,5 @@ def run_script(query):
     # thanks Dr Drang: http://www.leancrew.com/all-this/2013/03/combining-python-and-applescript/
     osa = subprocess.Popen(['osascript', '-'], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
     return osa.communicate(query)[0].split(', ')
+
+

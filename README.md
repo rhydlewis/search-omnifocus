@@ -14,15 +14,9 @@ Well, I want it because I can't quickly search for, say, a task within OmniFocus
 
 ## How to use
 
-## Setting up
+## Note
 
-The workflow assumes you're using OmniFocus 3 by default. To use OmniFocus 2 instead, run `use-of-2`:
-
-![](./images/use-of-2.png)
-
-To switch back to OmniFocus 3, run `use-of-3`:
-
-![](./images/use-of-3.png)
+This workflow only works with OmniFocus 3.
 
 ### Searching for tasks
 
