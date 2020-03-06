@@ -9,17 +9,16 @@ import datetime
 from workflow import Workflow, ICON_WARNING, ICON_SYNC
 
 from factory import Factory
-from omnifocus import DEFAULT_OF_VERSION
 import queries
 import omnifocus
 
-DB_KEY = 'db_path'
 VERSION_KEY = 'of_version'
+DB_KEY = 'db_path'
 ICON_ROOT = 'icon_path'
-OF2_DB_LOCATION = "/Library/Containers/com.omnigroup.OmniFocus2/Data/Library/Caches/com.omnigroup.OmniFocus2/OmniFocusDatabase2"
-OF2_MAS_DB_LOCATION = OF2_DB_LOCATION.replace('.OmniFocus2', '.OmniFocus2.MacAppStore')
-OF3_DB_LOCATION = "/Library/Containers/com.omnigroup.OmniFocus3/Data/Library/Application Support/OmniFocus/OmniFocus Caches/OmniFocusDatabase"
+OF3_DB_LOCATION = "/Library/Group Containers/34YW5XSRB7.com.omnigroup.OmniFocus/com.omnigroup.OmniFocus3/" \
+                  "com.omnigroup.OmniFocusModel/OmniFocusDatabase.db"
 OF3_MAS_DB_LOCATION = OF3_DB_LOCATION.replace('.OmniFocus3', '.OmniFocus3.MacAppStore')
+
 
 OF_ICON_ROOT = '/Applications/OmniFocus.app/Contents/Resources'
 
@@ -37,7 +36,6 @@ FLAGGED = "g"
 NOTES = "n"
 RECENT = "r"
 DUE = "d"
-VERSION_SWITCH = "s"
 log = None
 
 SINGLE_QUOTE = "'"
@@ -52,11 +50,7 @@ def main(wf):
         wf.add_item('A new version is available', 'Action this item to install the update',
                     autocomplete='workflow:update', icon=ICON_SYNC)
 
-    set_omnifocus_version(args)
-    omnifocus_version = wf.settings[VERSION_KEY]
-    log.info("Using OmniFocus version {0}".format(omnifocus_version))
-
-    factory = Factory(find_omnifocus_icons(), omnifocus_version)
+    factory = Factory(find_omnifocus_icons())
 
     if args.type != PERSPECTIVE:
         sql = populate_query(args)
@@ -65,15 +59,6 @@ def main(wf):
         get_perspectives(args, factory)
 
     wf.send_feedback()
-
-def set_omnifocus_version(args):
-    set_version = args.switch_versions
-    if set_version:
-        workflow.settings[VERSION_KEY] = set_version
-        print('Now using OmniFocus v{0} for search results'.format(set_version))
-        exit(1)
-    elif not workflow.settings.has_key(VERSION_KEY):
-        workflow.settings[VERSION_KEY] = DEFAULT_OF_VERSION
 
 
 def get_results(sql, query_type, factory):
@@ -100,15 +85,13 @@ def get_results(sql, query_type, factory):
 
 
 def get_perspectives(args, factory):
-    version = workflow.settings[VERSION_KEY]
-
     if args.query:
         query = args.query[0]
         log.debug("Searching perspectives for '{0}'".format(query))
-        perspectives = omnifocus.search_perspectives(query, version)
+        perspectives = omnifocus.search_perspectives(query)
     else:
         log.debug("Finding all perspectives")
-        perspectives = omnifocus.list_perspectives(version)
+        perspectives = omnifocus.list_perspectives()
 
     if not perspectives:
         workflow.add_item('No items', icon=ICON_WARNING)
@@ -173,7 +156,6 @@ def parse_args():
                                        '(p)roject, (c)ontext, (f)older, perspecti(v)e, '
                                        'task (n)otes or (r)ecent items?')
     parser.add_argument('-d', '--due', action='store_true', help='show overdue or due items')
-    parser.add_argument('-s', '--switch-versions', choices=["2", "3"])
     parser.add_argument('query', type=unicode, nargs=argparse.REMAINDER, help='query string')
 
     log.debug(workflow.args)
@@ -182,7 +164,7 @@ def parse_args():
 
 
 def find_omnifocus_icons():
-    if not workflow.settings.has_key(ICON_ROOT):
+    if ICON_ROOT not in workflow.settings.keys():
         icon_root = OF_ICON_ROOT
         if not os.path.isdir(icon_root):
             icon_root = omnifocus.find_install_location() + "Contents/Resources"
@@ -196,16 +178,9 @@ def find_omnifocus_icons():
 
 
 def find_omnifocus_db():
-    if workflow.settings[VERSION_KEY] == DEFAULT_OF_VERSION:
-        non_mas_location = OF3_DB_LOCATION
-        mas_location = OF3_MAS_DB_LOCATION
-    else:
-        non_mas_location = OF2_DB_LOCATION
-        mas_location = OF2_MAS_DB_LOCATION
-
     home = os.path.expanduser("~")
-    db = "{0}{1}".format(home, non_mas_location)
-    mas = "{0}{1}".format(home, mas_location)
+    db = "{0}{1}".format(home, OF3_DB_LOCATION)
+    mas = "{0}{1}".format(home, OF3_MAS_DB_LOCATION)
 
     if not os.path.isfile(db):
         log.debug("OmniFocus db not found at {0}; using {1} instead".format(db, mas))

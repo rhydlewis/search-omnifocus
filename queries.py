@@ -136,6 +136,7 @@ def show_recent_tasks(active_only):
     else:
         return "SELECT {0} FROM {1} ORDER BY {2} LIMIT {3}".format(TASK_SELECT, TASK_FROM, "t.dateModified DESC", 10)
 
+
 def show_due_tasks(version):
     constraint = OF2_DUE_SOON_CONSTRAINT
     if version == DEFAULT_OF_VERSION:
