@@ -2233,7 +2233,7 @@ Well, I want it because I can't quickly search for, say, a task within OmniFocus
 	<key>variablesdontexport</key>
 	<array/>
 	<key>version</key>
-	<string>2.1.0</string>
+	<string>2.1.1</string>
 	<key>webaddress</key>
 	<string>rhydlewis.net</string>
 </dict>

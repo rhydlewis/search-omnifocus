@@ -12,6 +12,7 @@ STATUS_DONE = 'done'
 STATUS_DROPPED = 'dropped'
 STATUS_INACTIVE = 'inactive'
 DATETIME_FORMAT = '%Y-%m-%dT%H:%M:%S.%fZ'
+DATETIME_OFFSET = 978307200
 
 FOLDER_PREFIX = 'en.lproj/OmniFocus Help/art/'
 
@@ -96,20 +97,23 @@ class Factory:
             icon = self.deferred_icon
         if inbox:
             icon = self.inbox_icon
-    
-        if row[DUE_DATE]:
-            due_date = offset_date(row[DUE_DATE])
-            now = datetime.now()
-            due_date_label = due_date.strftime("%c")
 
-            if now > due_date:
-                name = name + " (overdue: {0})".format(due_date_label)
-                icon = ICON_WARNING
+        if row[DUE_DATE]:
+            due_date = parse_datetime(row[DUE_DATE])
+            if due_date is not None:
+                now = datetime.now()
+                due_date_label = due_date.strftime("%c")
+
+                if now > due_date:
+                    name = name + " (overdue: {0})".format(due_date_label)
+                    icon = ICON_WARNING
+                else:
+                    name = name + " (due: {0})".format(due_date_label)
             else:
-                name = name + " (due: {0})".format(due_date_label)
+                name = name + " (due date unknown)"
 
         return Item(item_type='Task', persistent_id=pid, name=name, icon=icon, subtitle=project)
-    
+
     def create_context(self, raw_data):
         pid = raw_data[ID]
         name = raw_data[NAME]
@@ -149,8 +153,14 @@ class Factory:
         else:
             task.name = task.name + " (Task)"
 
-        modified_date = offset_date(raw_data[MODIFIED_DATE]).strftime("%c")
-        task.subtitle = modified_date
+        mod_date = raw_data[MODIFIED_DATE]
+
+        try:
+            modified_date = datetime.fromtimestamp(mod_date + DATETIME_OFFSET).strftime("%c")
+            task.subtitle = modified_date
+        except:
+            task.subtitle = "Unable to determine a modified date for this task {0}".format(mod_date)
+
         return task
 
 
@@ -162,12 +172,14 @@ def deferred_date(datetostart, effectivedatetostart):
 def is_deferred(datetostart):
     deferred = False
     if datetostart is not None:
-        dts = offset_date(datetostart)
+        dts = parse_datetime(datetostart)
         if dts > datetime.now():
             deferred = True
 
     return deferred
 
-
-def offset_date(value):
-    return datetime.strptime(value, DATETIME_FORMAT)
+def parse_datetime(value):
+    try:
+        return datetime.strptime(value, DATETIME_FORMAT)
+    except:
+        return None
