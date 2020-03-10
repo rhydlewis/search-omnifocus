@@ -81,6 +81,23 @@ def search_tasks(active_only, flagged, query, everything=None):
     return _generate_query(TASK_SELECT, TASK_FROM, where, "t." + NAME_SORT)
 
 
+def fuzzy_search_tasks():
+    where = TASK_WHERE + "AND " + NOT_COMPLETED_CLAUSE + " AND (t.effectiveInInbox = 0 AND t.inInbox = 0) "
+    return _generate_query(TASK_SELECT, TASK_FROM, where, "t." + NAME_SORT)
+
+
+def fuzzy_search_projects(active_only):
+    from_ = ("(ProjectInfo p LEFT JOIN Task t ON p.task=t.persistentIdentifier) "
+             "LEFT JOIN Folder f ON p.folder=f.persistentIdentifier")
+    order_by = "p.containsSingletonActions DESC, t.name ASC"
+    where = "p.status in ('active', 'done', 'dropped', 'inactive') "
+
+    if active_only:
+        where = "p.status = 'active' "
+
+    return _generate_query(PROJECT_SELECT, from_, where, order_by)
+
+
 def search_inbox(query):
     where = "(t.effectiveInInbox = 1 OR t.inInbox = 1)"
     if query:
@@ -137,12 +154,9 @@ def show_recent_tasks(active_only):
         return "SELECT {0} FROM {1} ORDER BY {2} LIMIT {3}".format(TASK_SELECT, TASK_FROM, "t.dateModified DESC", 10)
 
 
-def show_due_tasks(version):
-    constraint = OF2_DUE_SOON_CONSTRAINT
-    if version == DEFAULT_OF_VERSION:
-        constraint = OF3_DUE_SOON_CONSTRAINT
-
-    return _generate_query(TASK_SELECT, TASK_FROM, NOT_COMPLETED_CLAUSE + constraint, "t.dateDue ASC") + " LIMIT 10"
+def show_due_tasks():
+    return _generate_query(TASK_SELECT, TASK_FROM, NOT_COMPLETED_CLAUSE + OF3_DUE_SOON_CONSTRAINT,
+                           "t.dateDue ASC") + " LIMIT 10"
 
 
 def _generate_query(select, from_, where, order_by):

@@ -19,7 +19,6 @@ OF3_DB_LOCATION = "/Library/Group Containers/34YW5XSRB7.com.omnigroup.OmniFocus/
                   "com.omnigroup.OmniFocusModel/OmniFocusDatabase.db"
 OF3_MAS_DB_LOCATION = OF3_DB_LOCATION.replace('.OmniFocus3', '.OmniFocus3.MacAppStore')
 
-
 OF_ICON_ROOT = '/Applications/OmniFocus.app/Contents/Resources'
 
 # Update workflow from GitHub repo
@@ -53,35 +52,61 @@ def main(wf):
     factory = Factory(find_omnifocus_icons())
 
     if args.type != PERSPECTIVE:
-        sql = populate_query(args)
-        get_results(sql, args.type, factory)
+        get_non_perspectives(args, factory)
     else:
         get_perspectives(args, factory)
 
     wf.send_feedback()
 
 
-def get_results(sql, query_type, factory):
+def get_non_perspectives(args, factory):
+    sql = populate_query(args)
     workflow.logger.debug(sql)
-    results = run_query(sql)
+
+    try:
+        results = run_query(sql)
+    except Exception, e:
+        log.error(e)
+        results = None
 
     if not results:
         workflow.add_item('No items', icon=ICON_WARNING)
+    elif args.fuzzy:
+        parse_fuzzy_results(results, args.query[0], args.type, factory)
     else:
-        for result in results:
-            if query_type == PROJECT:
-                item = factory.create_project(result)
-            elif query_type == CONTEXT:
-                item = factory.create_context(result)
-            elif query_type == FOLDER:
-                item = factory.create_folder(result)
-            elif query_type == RECENT:
-                item = factory.create_recent_item(result)
-            else:
-                item = factory.create_task(result)
+        parse_results(results, args.type, factory)
+
+
+def parse_results(results, query_type, factory):
+    for result in results:
+        item = create_item(result, query_type, factory)
+        log.debug(item)
+        workflow.add_item(title=item.name, subtitle=item.subtitle, icon=item.icon, arg=item.persistent_id, valid=True)
+
+
+def parse_fuzzy_results(results, query, query_type, factory):
+    tokens = query.split()
+    for result in results:
+        item = create_item(result, query_type, factory)
+        if [s for s in tokens if s in item.name]:
             log.debug(item)
-            workflow.add_item(title=item.name, subtitle=item.subtitle, icon=item.icon,
-                              arg=item.persistent_id, valid=True)
+            workflow.add_item(title=item.name, subtitle=item.subtitle, icon=item.icon, arg=item.persistent_id,
+                              valid=True)
+
+
+def create_item(result, query_type, factory):
+    if query_type == PROJECT:
+        item = factory.create_project(result)
+    elif query_type == CONTEXT:
+        item = factory.create_context(result)
+    elif query_type == FOLDER:
+        item = factory.create_folder(result)
+    elif query_type == RECENT:
+        item = factory.create_recent_item(result)
+    else:
+        item = factory.create_task(result)
+
+    return item
 
 
 def get_perspectives(args, factory):
@@ -100,9 +125,7 @@ def get_perspectives(args, factory):
             log.debug(perspective)
             item = factory.create_perspective(perspective)
             log.debug(item)
-            workflow.add_item(title=item.name, subtitle=item.subtitle, icon=item.icon,
-                              arg=item.name,
-                              valid=True)
+            workflow.add_item(title=item.name, subtitle=item.subtitle, icon=item.icon, arg=item.name, valid=True)
 
 
 def populate_query(args):
@@ -116,10 +139,14 @@ def populate_query(args):
     active_only = args.active_only
     flagged_only = args.flagged_only
     everything = args.everything
+    fuzzy = args.fuzzy
 
-    if args.type == PROJECT:
+    if args.type == PROJECT and not fuzzy:
         log.debug('Searching projects')
         sql = queries.search_projects(active_only, query)
+    elif args.type == PROJECT and fuzzy:
+        log.debug('Fuzzy searching projects')
+        sql = queries.fuzzy_search_projects(active_only)
     elif args.type == CONTEXT:
         log.debug('Searching contexts/tags')
         sql = queries.search_tags(query)
@@ -137,9 +164,11 @@ def populate_query(args):
         sql = queries.show_recent_tasks(active_only)
     elif args.due:
         log.debug('Listing overdue or due items')
-        sql = queries.show_due_tasks(workflow.settings[VERSION_KEY])
+        sql = queries.show_due_tasks()
+    elif fuzzy:
+        log.debug('Fuzzy searching tasks')
+        sql = queries.fuzzy_search_tasks()
     else:
-        log.debug('Searching tasks')
         sql = queries.search_tasks(active_only, flagged_only, query, everything)
     return sql
 
@@ -156,6 +185,7 @@ def parse_args():
                                        '(p)roject, (c)ontext, (f)older, perspecti(v)e, '
                                        'task (n)otes or (r)ecent items?')
     parser.add_argument('-d', '--due', action='store_true', help='show overdue or due items')
+    parser.add_argument('-f', '--fuzzy', action='store_true', help='do a fuzzy search')
     parser.add_argument('query', type=unicode, nargs=argparse.REMAINDER, help='query string')
 
     log.debug(workflow.args)
