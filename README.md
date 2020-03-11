@@ -42,6 +42,20 @@ or just list all tasks in the inbox with `.li`.
 
 ![](./images/search-for-project.png)
 
+### Fuzzy searching
+
+* Fuzzy search tasks with `.z` (remaining tasks) and `.za` (active tasks)
+* Fuzzy search projects with `.zp` (all projects) and `.zpa` (active projects)
+
+_Example_
+
+* Regular search using `investigate` as query - finds a match
+![](./images/fuzzy1.png)
+* Regular search using `investigate fuzz` as query - no match
+![](./images/fuzzy2.png)
+* Fuzzy search using `investigate fuzz` as query - finds a match
+![](./images/fuzzy3.png)
+
 ### Searching for tags or contexts
 
 * Search for a specific tag with `.t` or context with `.c`:

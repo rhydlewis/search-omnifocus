@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string>net.rhydlewis.alfred.searchomnifocus</string>
+	<string>net.rhydlewis.alfred.searchomnifocusbeta</string>
 	<key>category</key>
 	<string>Productivity</string>
 	<key>connections</key>
@@ -21,11 +21,11 @@
 				<false/>
 			</dict>
 		</array>
-		<key>1F04D878-09DD-4E3A-9EDB-30336B11198B</key>
+		<key>20C31CAC-B768-4365-AF8D-FB3DFAC031D3</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>82D6BD84-F52F-4085-8C56-A210906447BC</string>
+				<string>CBD7D965-D889-4B5D-BE22-D38DF994C945</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -78,19 +78,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>293EC668-41EA-4870-AFE2-202ECA102983</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>468236C3-DEDC-4BAC-B47A-4C6B07D96E59</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>FAF149FE-2AC3-4B62-B59B-809110108196</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -184,6 +171,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>76D2116F-FD0E-43DB-B76D-74A999C40CD6</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>45162350-BA59-4F1A-8A9E-D437997CA5BA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>7EB402A7-46CC-40D6-A5F0-0D74AC3ABA5D</key>
 		<array>
 			<dict>
@@ -222,19 +222,6 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>D43529C9-5BC5-4DCA-A1F7-9EB2E48F2E68</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>82D6BD84-F52F-4085-8C56-A210906447BC</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>7CED2B75-CC2D-447D-8B47-C7F2DE7C0102</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -351,6 +338,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>D35DA5EF-C79F-4B7C-94A7-23B2021EADFB</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>45162350-BA59-4F1A-8A9E-D437997CA5BA</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>DB73AB05-13C5-4ECC-B7BE-EEBF0E5A834F</key>
 		<array>
 			<dict>
@@ -389,6 +389,19 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>293EC668-41EA-4870-AFE2-202ECA102983</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>E1094DE9-23D1-4F09-95CF-0D7A9BB243DF</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>CBD7D965-D889-4B5D-BE22-D38DF994C945</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -456,19 +469,6 @@
 				<false/>
 			</dict>
 		</array>
-		<key>FAF149FE-2AC3-4B62-B59B-809110108196</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
-				<string>7CED2B75-CC2D-447D-8B47-C7F2DE7C0102</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Rhyd Lewis</string>
@@ -477,7 +477,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>Search OmniFocus</string>
+	<string>Search OmniFocus BETA</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -729,6 +729,55 @@ end run</string>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>.zp</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>1</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Searching...</string>
+				<key>script</key>
+				<string>/usr/bin/python search.py -f -t p "{query}"</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string>Fuzzy search OmniFocus projects for "{query}"</string>
+				<key>title</key>
+				<string>Fuzzy Search OmniFocus projects</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>E1094DE9-23D1-4F09-95CF-0D7A9BB243DF</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>spaces</key>
@@ -744,6 +793,55 @@ end run</string>
 			<string>3B55385B-7D73-4D79-9E5A-B8771A4312DD</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>.z</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>1</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Searching...</string>
+				<key>script</key>
+				<string>/usr/bin/python search.py -f "{query}"</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string>Fuzzy search OmniFocus for "{query}"</string>
+				<key>title</key>
+				<string>Fuzzy Search OmniFocus</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>76D2116F-FD0E-43DB-B76D-74A999C40CD6</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -944,36 +1042,100 @@ end run</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
+				<key>alfredfiltersresults</key>
 				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
 				<key>escaping</key>
-				<integer>68</integer>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>.za</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>1</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Searching...</string>
 				<key>script</key>
-				<string>on run
-  set theQuery to "{query}"
-  tell application "OmniFocus"
-    tell default document
-	  set _task to task id theQuery
-	  set _status to completed of _task
-	  if _status = false then
-		mark complete _task
-	  end if
-	end tell
-  end tell
-end run</string>
+				<string>/usr/bin/python search.py -f -a "{query}"</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
 				<string></string>
+				<key>subtext</key>
+				<string>Fuzzy search OmniFocus active tasks for "{query}"</string>
+				<key>title</key>
+				<string>Fuzzy Search OmniFocus for active tasks</string>
 				<key>type</key>
-				<integer>6</integer>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>C425E2E9-95A8-4A9D-9E54-F873CE308F5B</string>
+			<string>D35DA5EF-C79F-4B7C-94A7-23B2021EADFB</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>.zpa</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>1</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Searching...</string>
+				<key>script</key>
+				<string>/usr/bin/python search.py -f -t p -a "{query}"</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string>Fuzzy search OmniFocus active projects for "{query}"</string>
+				<key>title</key>
+				<string>Fuzzy Search OmniFocus active projects</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>20C31CAC-B768-4365-AF8D-FB3DFAC031D3</string>
+			<key>version</key>
+			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1140,6 +1302,40 @@ end run</string>
 			<string>F8453DC4-38F3-49C0-B43C-1D115BB9DDBB</string>
 			<key>version</key>
 			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>on run
+  set theQuery to "{query}"
+  tell application "OmniFocus"
+    tell default document
+	  set _task to task id theQuery
+	  set _status to completed of _task
+	  if _status = false then
+		mark complete _task
+	  end if
+	end tell
+  end tell
+end run</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>6</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>C425E2E9-95A8-4A9D-9E54-F873CE308F5B</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1730,71 +1926,6 @@ end run</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>lastpathcomponent</key>
-				<false/>
-				<key>onlyshowifquerypopulated</key>
-				<false/>
-				<key>removeextension</key>
-				<false/>
-				<key>text</key>
-				<string>{query}</string>
-				<key>title</key>
-				<string>Search OmniFocus</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.notification</string>
-			<key>uid</key>
-			<string>7CED2B75-CC2D-447D-8B47-C7F2DE7C0102</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>use-of-3</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Use OmniFocus 3 for search results</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>1F04D878-09DD-4E3A-9EDB-30336B11198B</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>/usr/bin/python search.py -s 3</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>82D6BD84-F52F-4085-8C56-A210906447BC</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<false/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -1840,50 +1971,6 @@ end run</string>
 			<string>34A8CEB4-9871-48A6-ADD2-B3841DEA50CE</string>
 			<key>version</key>
 			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>/usr/bin/python search.py -s 2</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>FAF149FE-2AC3-4B62-B59B-809110108196</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>1</integer>
-				<key>keyword</key>
-				<string>use-of-2</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Use OmniFocus 2 for search results</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>468236C3-DEDC-4BAC-B47A-4C6B07D96E59</string>
-			<key>version</key>
-			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -1967,7 +2054,12 @@ Well, I want it because I can't quickly search for, say, a task within OmniFocus
 
 ### Searching for projects
 
-* Search for projects with .p</string>
+* Search for projects with .p
+
+### Fuzzy searching
+
+* Fuzzy search tasks with .z (remaining tasks) and .za (active tasks)
+* Fuzzy search projects with .zp (all projects) and .zpa (active projects)</string>
 	<key>uidata</key>
 	<dict>
 		<key>0C23C709-89CD-482B-B4FC-79F79A3AD6D3</key>
@@ -1977,12 +2069,12 @@ Well, I want it because I can't quickly search for, say, a task within OmniFocus
 			<key>ypos</key>
 			<integer>270</integer>
 		</dict>
-		<key>1F04D878-09DD-4E3A-9EDB-30336B11198B</key>
+		<key>20C31CAC-B768-4365-AF8D-FB3DFAC031D3</key>
 		<dict>
 			<key>xpos</key>
-			<integer>1160</integer>
+			<integer>980</integer>
 			<key>ypos</key>
-			<integer>920</integer>
+			<integer>285</integer>
 		</dict>
 		<key>266413E3-CA7C-4A42-87F8-EFDAD6E27E27</key>
 		<dict>
@@ -2033,13 +2125,6 @@ Well, I want it because I can't quickly search for, say, a task within OmniFocus
 			<key>ypos</key>
 			<integer>340</integer>
 		</dict>
-		<key>468236C3-DEDC-4BAC-B47A-4C6B07D96E59</key>
-		<dict>
-			<key>xpos</key>
-			<integer>1160</integer>
-			<key>ypos</key>
-			<integer>1050</integer>
-		</dict>
 		<key>47F32866-0DAD-43B2-B753-8E4B55655311</key>
 		<dict>
 			<key>xpos</key>
@@ -2082,12 +2167,12 @@ Well, I want it because I can't quickly search for, say, a task within OmniFocus
 			<key>ypos</key>
 			<integer>590</integer>
 		</dict>
-		<key>7CED2B75-CC2D-447D-8B47-C7F2DE7C0102</key>
+		<key>76D2116F-FD0E-43DB-B76D-74A999C40CD6</key>
 		<dict>
 			<key>xpos</key>
-			<integer>1580</integer>
+			<integer>710</integer>
 			<key>ypos</key>
-			<integer>920</integer>
+			<integer>150</integer>
 		</dict>
 		<key>7EB402A7-46CC-40D6-A5F0-0D74AC3ABA5D</key>
 		<dict>
@@ -2102,13 +2187,6 @@ Well, I want it because I can't quickly search for, say, a task within OmniFocus
 			<integer>300</integer>
 			<key>ypos</key>
 			<integer>890</integer>
-		</dict>
-		<key>82D6BD84-F52F-4085-8C56-A210906447BC</key>
-		<dict>
-			<key>xpos</key>
-			<integer>1370</integer>
-			<key>ypos</key>
-			<integer>920</integer>
 		</dict>
 		<key>8ADB21DF-93B9-45C4-B426-C4F067279EA4</key>
 		<dict>
@@ -2155,9 +2233,9 @@ Well, I want it because I can't quickly search for, say, a task within OmniFocus
 		<key>C425E2E9-95A8-4A9D-9E54-F873CE308F5B</key>
 		<dict>
 			<key>xpos</key>
-			<integer>850</integer>
+			<integer>710</integer>
 			<key>ypos</key>
-			<integer>280</integer>
+			<integer>425</integer>
 		</dict>
 		<key>CBD7D965-D889-4B5D-BE22-D38DF994C945</key>
 		<dict>
@@ -2172,6 +2250,13 @@ Well, I want it because I can't quickly search for, say, a task within OmniFocus
 			<integer>1180</integer>
 			<key>ypos</key>
 			<integer>50</integer>
+		</dict>
+		<key>D35DA5EF-C79F-4B7C-94A7-23B2021EADFB</key>
+		<dict>
+			<key>xpos</key>
+			<integer>705</integer>
+			<key>ypos</key>
+			<integer>275</integer>
 		</dict>
 		<key>D43529C9-5BC5-4DCA-A1F7-9EB2E48F2E68</key>
 		<dict>
@@ -2201,6 +2286,13 @@ Well, I want it because I can't quickly search for, say, a task within OmniFocus
 			<key>ypos</key>
 			<integer>600</integer>
 		</dict>
+		<key>E1094DE9-23D1-4F09-95CF-0D7A9BB243DF</key>
+		<dict>
+			<key>xpos</key>
+			<integer>985</integer>
+			<key>ypos</key>
+			<integer>135</integer>
+		</dict>
 		<key>E339EB8A-C004-45EA-B89C-B1DE6874103C</key>
 		<dict>
 			<key>xpos</key>
@@ -2222,18 +2314,11 @@ Well, I want it because I can't quickly search for, say, a task within OmniFocus
 			<key>ypos</key>
 			<real>10</real>
 		</dict>
-		<key>FAF149FE-2AC3-4B62-B59B-809110108196</key>
-		<dict>
-			<key>xpos</key>
-			<integer>1380</integer>
-			<key>ypos</key>
-			<integer>1050</integer>
-		</dict>
 	</dict>
 	<key>variablesdontexport</key>
 	<array/>
 	<key>version</key>
-	<string>2.1.1</string>
+	<string>2.1.2</string>
 	<key>webaddress</key>
 	<string>rhydlewis.net</string>
 </dict>

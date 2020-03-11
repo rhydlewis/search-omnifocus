@@ -62,6 +62,7 @@ def main(wf):
 def get_non_perspectives(args, factory):
     sql = populate_query(args)
     workflow.logger.debug(sql)
+    # print(sql)
 
     try:
         results = run_query(sql)
@@ -85,13 +86,22 @@ def parse_results(results, query_type, factory):
 
 
 def parse_fuzzy_results(results, query, query_type, factory):
-    tokens = query.split()
+    from fuzzywuzzy import fuzz
+    matches_found = 0
     for result in results:
         item = create_item(result, query_type, factory)
-        if [s for s in tokens if s in item.name]:
+        token_score = fuzz.token_set_ratio(query, item.name)
+        partial_score = fuzz.partial_ratio(query, item.name)
+        score = token_score if token_score > partial_score else partial_score
+        # print("{0}: {1} in '{2}'".format(score, query, item.name))
+        if score > 70:
             log.debug(item)
             workflow.add_item(title=item.name, subtitle=item.subtitle, icon=item.icon, arg=item.persistent_id,
                               valid=True)
+            matches_found += 1
+
+    if matches_found == 0:
+        workflow.add_item('No items', icon=ICON_WARNING)
 
 
 def create_item(result, query_type, factory):
@@ -167,7 +177,7 @@ def populate_query(args):
         sql = queries.show_due_tasks()
     elif fuzzy:
         log.debug('Fuzzy searching tasks')
-        sql = queries.fuzzy_search_tasks()
+        sql = queries.fuzzy_search_tasks(active_only)
     else:
         sql = queries.search_tasks(active_only, flagged_only, query, everything)
     return sql
@@ -247,6 +257,7 @@ def run_query(sql):
 
 
 if __name__ == '__main__':
-    workflow = Workflow(update_settings=UPDATE_SETTINGS)
+    workflow = Workflow(update_settings=UPDATE_SETTINGS, libraries=['./lib'])
+
     log = workflow.logger
     sys.exit(workflow.run(main))
