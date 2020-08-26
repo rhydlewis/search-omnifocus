@@ -21,6 +21,7 @@ FOLDER_NAME = str("folder_name")
 ALLOWS_NEXT_ACTION = str("allows_next_action")
 CONTAINING_PROJECT_INFO = str("parent")
 MODIFIED_DATE = str("modified")
+PROJECT_IS_REMAINING = str("project_remaining")
 
 
 NAME_SORT = "name ASC"
@@ -40,13 +41,14 @@ TASK_SELECT = ", ".join([
     "pi.status AS {0}".format(STATUS),
     "t.effectiveFlagged",
     "t.dateModified AS {0}".format(MODIFIED_DATE),
-    "t.containingProjectInfo AS {0}".format(CONTAINING_PROJECT_INFO)
-    ]) + ", t.dateDue AS {0}".format(DUE_DATE)
+    "t.containingProjectInfo AS {0}".format(CONTAINING_PROJECT_INFO),
+    "t.dateDue AS {0}".format(DUE_DATE)
+    ]) + ", t.effectiveContainingProjectInfoRemaining AS {0}".format(PROJECT_IS_REMAINING)
 TASK_FROM = ("((task tt left join projectinfo pi on tt.containingprojectinfo=pi.pk) t left join "
              "task p on t.task=p.persistentIdentifier) ")
 TASK_WHERE = "(t.containingProjectInfo <> t.persistentIdentifier OR t.containingProjectInfo is NULL) "
 TASK_NAME_WHERE = "t.dateCompleted IS NULL AND lower(t.name) LIKE lower('%{0}%') AND "
-NOT_COMPLETED_CLAUSE = "t.dateCompleted IS NULL"
+NOT_COMPLETED_CLAUSE = "t.dateCompleted IS NULL AND t.effectiveContainingProjectInfoRemaining = 1"
 ACTIVE_CLAUSE = "t.blocked = 0 AND "
 TAG_SELECT = ", ".join([
     "persistentIdentifier AS {0}".format(ID),
@@ -137,12 +139,9 @@ def show_recent_tasks(active_only):
         return "SELECT {0} FROM {1} ORDER BY {2} LIMIT {3}".format(TASK_SELECT, TASK_FROM, "t.dateModified DESC", 10)
 
 
-def show_due_tasks(version):
-    constraint = OF2_DUE_SOON_CONSTRAINT
-    if version == DEFAULT_OF_VERSION:
-        constraint = OF3_DUE_SOON_CONSTRAINT
-
-    return _generate_query(TASK_SELECT, TASK_FROM, NOT_COMPLETED_CLAUSE + constraint, "t.dateDue ASC") + " LIMIT 10"
+def show_due_tasks():
+    return _generate_query(TASK_SELECT, TASK_FROM, NOT_COMPLETED_CLAUSE + OF3_DUE_SOON_CONSTRAINT,
+                           "t.dateDue ASC") + " LIMIT 10"
 
 
 def _generate_query(select, from_, where, order_by):

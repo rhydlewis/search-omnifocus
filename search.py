@@ -19,7 +19,6 @@ OF3_DB_LOCATION = "/Library/Group Containers/34YW5XSRB7.com.omnigroup.OmniFocus/
                   "com.omnigroup.OmniFocusModel/OmniFocusDatabase.db"
 OF3_MAS_DB_LOCATION = OF3_DB_LOCATION.replace('.OmniFocus3', '.OmniFocus3.MacAppStore')
 
-
 OF_ICON_ROOT = '/Applications/OmniFocus.app/Contents/Resources'
 
 # Update workflow from GitHub repo
@@ -137,7 +136,7 @@ def populate_query(args):
         sql = queries.show_recent_tasks(active_only)
     elif args.due:
         log.debug('Listing overdue or due items')
-        sql = queries.show_due_tasks(workflow.settings[VERSION_KEY])
+        sql = queries.show_due_tasks()
     else:
         log.debug('Searching tasks')
         sql = queries.search_tasks(active_only, flagged_only, query, everything)
