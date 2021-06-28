@@ -24,6 +24,10 @@ This workflow only works with OmniFocus 3.
 
 ![](./images/search-for-tasks.png)
 
+Note, use `.sc` to search for completed tasks only.
+
+![](./images/search-for-completed-tasks.png)
+
 ### Searching for tasks in the Inbox and the Library 
 
 * Search for all tasks within OmniFocus (whether you've processed them or not) with `.se`.

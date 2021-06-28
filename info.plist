@@ -282,6 +282,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>BA303A83-E7E1-4247-9A7E-C837A62475C4</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>D43529C9-5BC5-4DCA-A1F7-9EB2E48F2E68</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>BBC90874-214F-47EB-A98B-41631508AD28</key>
 		<array>
 			<dict>
@@ -840,6 +853,55 @@ end run</string>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>E339EB8A-C004-45EA-B89C-B1DE6874103C</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>.sc</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>1</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Searching...</string>
+				<key>script</key>
+				<string>/usr/bin/python search.py -c "{query}"</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string>Search OmniFocus for "{query}"</string>
+				<key>title</key>
+				<string>Search OmniFocus for completed tasks only</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>BA303A83-E7E1-4247-9A7E-C837A62475C4</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -2138,6 +2200,13 @@ Well, I want it because I can't quickly search for, say, a task within OmniFocus
 			<key>ypos</key>
 			<integer>670</integer>
 		</dict>
+		<key>BA303A83-E7E1-4247-9A7E-C837A62475C4</key>
+		<dict>
+			<key>xpos</key>
+			<integer>55</integer>
+			<key>ypos</key>
+			<integer>185</integer>
+		</dict>
 		<key>BBC90874-214F-47EB-A98B-41631508AD28</key>
 		<dict>
 			<key>xpos</key>
@@ -2233,7 +2302,7 @@ Well, I want it because I can't quickly search for, say, a task within OmniFocus
 	<key>variablesdontexport</key>
 	<array/>
 	<key>version</key>
-	<string>2.1.2</string>
+	<string>2.1.3</string>
 	<key>webaddress</key>
 	<string>rhydlewis.net</string>
 </dict>

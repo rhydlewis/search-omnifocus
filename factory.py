@@ -5,7 +5,7 @@ from omnifocus import DEFAULT_OF2_PERSPECTIVES, DEFAULT_OF3_PERSPECTIVES
 from workflow import ICON_WARNING
 from queries import ALLOWS_NEXT_ACTION, AVAILABLE_TASK_COUNT, BLOCKED, BLOCKED_BY_START_DATE, CHILD_COUNT, \
     DUE_DATE, EFFECTIVE_IN_INBOX, EFFECTIVE_START_DATE, FOLDER_NAME, ID, IN_INBOX, NAME, PROJECT_NAME, START_DATE, \
-    STATUS, CONTAINING_PROJECT_INFO, MODIFIED_DATE
+    STATUS, CONTAINING_PROJECT_INFO, MODIFIED_DATE, DATE_COMPLETED
 
 STATUS_ACTIVE = 'active'
 STATUS_DONE = 'done'
@@ -89,13 +89,17 @@ class Factory:
         children = row[CHILD_COUNT]
         parent_status = row[STATUS]
 
+        date_completed = row[DATE_COMPLETED]
+
         icon = self.active_icon
     
-        if blocked_by_future_date or (blocked and not children) or parent_status != STATUS_ACTIVE:
+        if date_completed:
+            icon = self.completed_icon
+        elif blocked_by_future_date or (blocked and not children) or parent_status != STATUS_ACTIVE:
             icon = self.on_hold_icon
-        if is_deferred(datetostart):
+        elif is_deferred(datetostart):
             icon = self.deferred_icon
-        if inbox:
+        elif inbox:
             icon = self.inbox_icon
 
         if row[DUE_DATE]:

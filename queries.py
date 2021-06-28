@@ -22,13 +22,14 @@ ALLOWS_NEXT_ACTION = str("allows_next_action")
 CONTAINING_PROJECT_INFO = str("parent")
 MODIFIED_DATE = str("modified")
 PROJECT_IS_REMAINING = str("project_remaining")
+DATE_COMPLETED = str("date_completed")
 
 
 NAME_SORT = "name ASC"
 TASK_SELECT = ", ".join([
     "t.persistentIdentifier AS {0}".format(ID),
     "t.name AS {0}".format(NAME),
-    "t.dateCompleted",
+    "t.dateCompleted as {0}".format(DATE_COMPLETED),
     "t.blockedByFutureStartDate AS {0}".format(BLOCKED_BY_START_DATE),
     "p.name AS {0}".format(PROJECT_NAME),
     "t.flagged",
@@ -48,6 +49,7 @@ TASK_FROM = ("((task tt left join projectinfo pi on tt.containingprojectinfo=pi.
              "task p on t.task=p.persistentIdentifier) ")
 TASK_WHERE = "(t.containingProjectInfo <> t.persistentIdentifier OR t.containingProjectInfo is NULL) "
 TASK_NAME_WHERE = "t.dateCompleted IS NULL AND lower(t.name) LIKE lower('%{0}%') AND "
+COMPLETED_TASK_NAME_WHERE = "t.dateCompleted IS NOT NULL AND lower(t.name) LIKE lower('%{0}%') AND "
 NOT_COMPLETED_CLAUSE = "t.dateCompleted IS NULL AND t.effectiveContainingProjectInfoRemaining = 1"
 ACTIVE_CLAUSE = "t.blocked = 0 AND "
 TAG_SELECT = ", ".join([
@@ -68,8 +70,11 @@ OF2_DUE_SOON_CONSTRAINT = " AND (t.isDueSoon or t.isOverdue)"
 OF3_DUE_SOON_CONSTRAINT = " AND (t.dueSoon or t.overdue)"
 
 
-def search_tasks(active_only, flagged, query, everything=None):
-    where = (TASK_NAME_WHERE + TASK_WHERE).format(query)
+def search_tasks(active_only, flagged, query, everything=None, completed_only=None):
+    if completed_only:
+        where = (COMPLETED_TASK_NAME_WHERE + TASK_WHERE).format(query)
+    else:
+        where = (TASK_NAME_WHERE + TASK_WHERE).format(query)
 
     if active_only:
         where = "(t.blocked = 0 AND t.blockedByFutureStartDate = 0) AND " + where
