@@ -1,3 +1,13 @@
+# 🚨 Workflow no longer supported 🚨
+
+* This workflow **no longer works with macOS 12.4** 'out of the box' ☹️
+* Therefore this repository is deprecated
+* Please use [alfred-search-omnifocus](https://github.com/rhydlewis/alfred-search-omnifocus) instead
+
+Thanks
+
+----
+
 # Search OmniFocus Alfred Workflow
 
 ## What is this?
